@@ -1,4 +1,4 @@
-package Colori;
+package Enum;
 
 public enum ColoreSegnalino {
 	

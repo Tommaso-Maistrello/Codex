@@ -1,6 +1,6 @@
 package Gioco;
 
-import Colori.ColoreSegnalino;
+import Enum.ColoreSegnalino;
 
 public class Giocatore {
 
