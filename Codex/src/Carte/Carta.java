@@ -5,17 +5,17 @@ import Enum.Risorsa;
 public abstract class Carta {
 
 
-	private String angoloFronteTopLeft;
-	private String angoloFronteTopRight;
-	private String angoloFronteBottomLeft;
-	private String angoloFronteBottomRight;
-	private String angoloRetroTopLeft;
-	private String angoloRetroTopRight;
-	private String angoloRetroBottomLeft;
-	private String angoloRetroBottomRight;
-	private Risorsa risorseRetroCentrali[];
+	public String angoloFronteTopLeft;
+	public String angoloFronteTopRight;
+	public String angoloFronteBottomLeft;
+	public String angoloFronteBottomRight;
+	public String angoloRetroTopLeft;
+	public String angoloRetroTopRight;
+	public String angoloRetroBottomLeft;
+	public String angoloRetroBottomRight;
+	public Risorsa risorseRetroCentrali[];
 
-	public Carta(String angoloFronteTopLeft, String angoloFronteTopRight, String angoloFronteBottomLeft,
+	public  Carta(String angoloFronteTopLeft, String angoloFronteTopRight, String angoloFronteBottomLeft,
 			String angoloFronteBottomRight, String angoloRetroTopLeft, String angoloRetroTopRight,
 			String angoloRetroBottomLeft, String angoloRetroBottomRight, Risorsa[] risorseRetroCentrali) {
 

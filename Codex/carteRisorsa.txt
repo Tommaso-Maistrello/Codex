@@ -1,0 +1,4 @@
+foglia,foglia,null,vuoto,foglia,verde,
+pergamena,null,foglia,foglia,fogila,verde,
+foglia,foglia,null,vuoto,foglia,verde,
+pergamena,null,foglia,foglia,fogila,verde

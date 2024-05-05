@@ -8,7 +8,7 @@ public class Main {
 
 		//Pannello pannello = new Pannello();
 		
-		
+		costruisciMazzo();
 		Scanner sc=new Scanner(System.in);
 		
 		int numGiocatori=0;
