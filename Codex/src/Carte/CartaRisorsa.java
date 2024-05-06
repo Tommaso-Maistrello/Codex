@@ -28,57 +28,37 @@ public class CartaRisorsa extends Carta {
 	public String getColore() {
 		return colore;
 	}
-	
-	
+		
 	public int getPunti() {
 		return punti;
 	}
 	
-public static  void costruisciMazzo() throws FileNotFoundException{
+public static  void costruisciCarteRisorsa() throws FileNotFoundException{
 		 int i=1;
-		 String angoloTopLeft, angoloTopRight, angoloBottomLeft, angoloBottomRight, colore, risorsa;
 		 int punti;
 	File fileRisorsa= new File ("carteRisorsa.txt");  
 	
 	Scanner leggi = new Scanner (fileRisorsa);  
 
-		leggi.useDelimiter(",");
-		
-		
+		leggi.useDelimiter(",");		
 		
 		CartaRisorsa[] cartaRisorsa= new CartaRisorsa[40];  
-		// il ciclo legge dal file ogni elemento diviso da una virgola e li carica nel vettore cartaRisorsa
+		// il ciclo legge dal file ogni elemento diviso da una virgola e li carica in cartaRisorsa
+		
 		while(leggi.hasNextLine()) {
 			
-			 angoloTopLeft=leggi.next();
-			 angoloTopRight=leggi.next();
-			 angoloBottomLeft=leggi.next();
-			 angoloBottomRight=leggi.next();
-			 risorsa= leggi.next();
-			 colore=leggi.next();
-			 punti=leggi.nextInt();
-			 
-		 cartaRisorsa[i]= new CartaRisorsa(angoloTopLeft,angoloTopRight,angoloBottomLeft,angoloBottomLeft,"vuoto","vuoto","vuoto","vuoto",risorsa,colore,punti);
-		 System.out.println(i + angoloTopLeft+angoloTopRight+angoloBottomLeft+angoloBottomLeft+risorsa+colore+punti);
-		 
-		 //System.out.println("il top left è " +cr[i].getAngoloFronteTopLeft());
-		// System.out.println("il top right è " + cr[i].getAngoloFronteTopRight());
-		i++;
- 
-		 
+		 //cartaRisorsa[i]= new CartaRisorsa(angoloTopLeft,angoloTopRight,angoloBottomLeft,angoloBottomLeft,"vuoto","vuoto","vuoto","vuoto",risorsa,colore,punti);
+		 cartaRisorsa[i]= new CartaRisorsa(leggi.next(),leggi.next(),leggi.next(),leggi.next(),"vuoto","vuoto","vuoto","vuoto",leggi.next(),leggi.next(),leggi.nextInt());
+		 System.out.println(cartaRisorsa[i].getAngoloFronteTopLeft());
+		 i++;
 		
 	}		
 	
-	
 	leggi.close();
- 
 	
 	}
 	public static void main(String[] args) throws FileNotFoundException {
-		
-	costruisciMazzo();
- 
-		//System.out.println( CartaRisorsa.angoloFronteTopLeft );
+		costruisciCarteRisorsa();
 		
 	}
 	
