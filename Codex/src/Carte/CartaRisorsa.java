@@ -16,11 +16,11 @@ public class CartaRisorsa extends Carta {
 	
 	public CartaRisorsa(String angoloFronteTopLeft, String angoloFronteTopRight, String angoloFronteBottomLeft,
 			String angoloFronteBottomRight, String angoloRetroTopLeft, String angoloRetroTopRight,
-			String angoloRetroBottomLeft, String angoloRetroBottomRight, String risorseRetroCentrali, String colore,
+			String angoloRetroBottomLeft, String angoloRetroBottomRight, String risorsaRetroCentrale, String colore,
 			int punti) {
 		super(angoloFronteTopLeft, angoloFronteTopRight, angoloFronteBottomLeft, angoloFronteBottomRight,
 				angoloRetroTopLeft, angoloRetroTopRight, angoloRetroBottomLeft, angoloRetroBottomRight,
-				risorseRetroCentrali);
+				risorsaRetroCentrale);
 		this.colore = colore;
 		this.punti = punti;
 	}
@@ -47,7 +47,7 @@ public static  void costruisciCarteRisorsa() throws FileNotFoundException{
 		
 		while(leggi.hasNextLine()) {
 			
-		 //cartaRisorsa[i]= new CartaRisorsa(angoloTopLeft,angoloTopRight,angoloBottomLeft,angoloBottomLeft,"vuoto","vuoto","vuoto","vuoto",risorsa,colore,punti);
+		 //cartaRisorsa[i]= new CartaRisorsa(angoloTopLeft,angoloTopRight,angoloBottomLeft,angoloBottomRight,"vuoto","vuoto","vuoto","vuoto",risorsa,colore,punti);
 		 cartaRisorsa[i]= new CartaRisorsa(leggi.next(),leggi.next(),leggi.next(),leggi.next(),"vuoto","vuoto","vuoto","vuoto",leggi.next(),leggi.next(),leggi.nextInt());
 		 System.out.println(cartaRisorsa[i].getAngoloFronteTopLeft());
 		 i++;

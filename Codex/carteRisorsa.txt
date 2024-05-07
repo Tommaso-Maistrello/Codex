@@ -1,5 +1,5 @@
 foglia,foglia,null,vuoto,foglia,verde,0,
-pergamena,null ,foglia,lupo,foglia,verde,0,
+pergamena,null,foglia,lupo,foglia,verde,0,
 vuoto,vuoto,foglia,null,foglia,verde,1,
 null,foglia,vuoto,vuoto,foglia,verde,1,
 vuoto,vuoto,null,foglia,foglia,verde,1,

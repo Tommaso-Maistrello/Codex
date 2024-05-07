@@ -13,11 +13,11 @@ public abstract class Carta {
 	public String angoloRetroTopRight;
 	public String angoloRetroBottomLeft;
 	public String angoloRetroBottomRight;
-	public String risorseRetroCentrali;
+	public String risorsaRetroCentrale;
 
 	public  Carta(String angoloFronteTopLeft, String angoloFronteTopRight, String angoloFronteBottomLeft,
 			String angoloFronteBottomRight, String angoloRetroTopLeft, String angoloRetroTopRight,
-			String angoloRetroBottomLeft, String angoloRetroBottomRight, String risorseRetroCentrali) {
+			String angoloRetroBottomLeft, String angoloRetroBottomRight, String risorsaRetroCentrale) {
 
 		this.angoloFronteTopLeft = angoloFronteTopLeft;
 		this.angoloFronteTopRight = angoloFronteTopRight;
@@ -27,7 +27,7 @@ public abstract class Carta {
 		this.angoloRetroTopRight = angoloRetroTopRight;
 		this.angoloRetroBottomLeft = angoloRetroBottomLeft;
 		this.angoloRetroBottomRight = angoloRetroBottomRight;
-		this.risorseRetroCentrali = risorseRetroCentrali;
+		this.risorsaRetroCentrale = risorsaRetroCentrale;
 	}
 
 	
@@ -95,11 +95,11 @@ public abstract class Carta {
 		this.angoloRetroBottomRight = angoloRetroBottomRight;
 	}
 	
-	public String getRisorseRetroCentrali() {
-		return risorseRetroCentrali;
+	public String getRisorsaRetroCentrale() {
+		return risorsaRetroCentrale;
 	}
 	
-	public void setRisorseRetroCentrali( String risorseRetroCentrali) {
-		this.risorseRetroCentrali = risorseRetroCentrali;
+	public void setRisorsaRetroCentrale( String risorsaRetroCentrale) {
+		this.risorsaRetroCentrale = risorsaRetroCentrale;
 	}
 }
