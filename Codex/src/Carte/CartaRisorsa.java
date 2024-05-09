@@ -3,6 +3,9 @@ package Carte;
 import java.io.File;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -79,18 +82,33 @@ public static  void costruisciCarteRisorsa() throws FileNotFoundException{
 			 
 			 cartaRisorsa[i]= new CartaRisorsa(id,topLeft,topRight,bottomLeft,bottomRight,"vuoto","vuoto","vuoto","vuoto",risorsa,colore,punti);
 		//System.out.println(id + topLeft+topRight+bottomLeft+bottomRight+"vuoto"+"vuoto"+"vuoto"+"vuoto"+risorsa+colore+punti );// codice di debug
-		 i++;
+			// System.out.println("il top left è " + cartaRisorsa[i].getId());
+			 i++;
+		 
 		
 	}		
 	
 	leggi.close();
 	
+	
+	  
 	}
 	public static void main(String[] args) throws FileNotFoundException {
 		costruisciCarteRisorsa();
+	
+	 
 		
 	}
-	
+	public static  void mescolaMazzo(){
+		List<CartaRisorsa> mazzo = new ArrayList<>();
+	      Collections.shuffle(mazzo);
+
+	//	  for (int j =1; j<10; j++) {
+			  
+	//		  System.out.println("il top left è " + cartaRisorsa[j].getId());
+			  
+	//	  }
+	}
 	
 }
 
