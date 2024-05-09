@@ -1,6 +1,6 @@
 package Carte;
 
-import Enum.Risorsa;
+//import Enum.Risorsa;
 
 public abstract class Carta {
 
