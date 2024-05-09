@@ -4,7 +4,7 @@ import Enum.Risorsa;
 
 public abstract class Carta {
 
-
+	public int id;
 	public String angoloFronteTopLeft;
 	public String angoloFronteTopRight;
 	public String angoloFronteBottomLeft;
@@ -15,10 +15,11 @@ public abstract class Carta {
 	public String angoloRetroBottomRight;
 	public String risorsaRetroCentrale;
 
-	public  Carta(String angoloFronteTopLeft, String angoloFronteTopRight, String angoloFronteBottomLeft,
+	public  Carta(int id, String angoloFronteTopLeft, String angoloFronteTopRight, String angoloFronteBottomLeft,
 			String angoloFronteBottomRight, String angoloRetroTopLeft, String angoloRetroTopRight,
 			String angoloRetroBottomLeft, String angoloRetroBottomRight, String risorsaRetroCentrale) {
 
+		this.id = id;
 		this.angoloFronteTopLeft = angoloFronteTopLeft;
 		this.angoloFronteTopRight = angoloFronteTopRight;
 		this.angoloFronteBottomLeft = angoloFronteBottomLeft;
@@ -30,6 +31,14 @@ public abstract class Carta {
 		this.risorsaRetroCentrale = risorsaRetroCentrale;
 	}
 
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public String getAngoloFronteTopLeft() {
 		return angoloFronteTopLeft;

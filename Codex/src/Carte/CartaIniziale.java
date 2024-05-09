@@ -10,11 +10,11 @@ public class CartaIniziale extends Carta {
 	public String risorsaRetroCentraleAggiuntiva2;
 
 	
-	public CartaIniziale(String angoloFronteTopLeft, String angoloFronteTopRight, String angoloFronteBottomLeft,
+	public CartaIniziale(int id, String angoloFronteTopLeft, String angoloFronteTopRight, String angoloFronteBottomLeft,
 			String angoloFronteBottomRight, String angoloRetroTopLeft, String angoloRetroTopRight,
 			String angoloRetroBottomLeft, String angoloRetroBottomRight, String risorsaRetroCentrale,
 			String risorsaRetroCentraleAggiuntiva1, String risorsaRetroCentraleAggiuntiva2) {
-		super(angoloFronteTopLeft, angoloFronteTopRight, angoloFronteBottomLeft, angoloFronteBottomRight,
+		super(id, angoloFronteTopLeft, angoloFronteTopRight, angoloFronteBottomLeft, angoloFronteBottomRight,
 				angoloRetroTopLeft, angoloRetroTopRight, angoloRetroBottomLeft, angoloRetroBottomRight,
 				risorsaRetroCentrale);
 		this.risorsaRetroCentraleAggiuntiva1 = risorsaRetroCentraleAggiuntiva1;
@@ -31,7 +31,7 @@ public static void costruisciCarteIniziali() throws FileNotFoundException {
 	// il ciclo legge dal file ogni elemento diviso da una virgola e li carica in cartaIniziale
 	while(leggi.hasNextLine()) {
 		//cartaIniziale[i]= new cartaIniziale(angoloFronteTopLeft,angoloFronteTopRight,angoloFronteBottomLeft,angoloFronteBottomRight,angoloRetroTopLeft,angoloRetroTopRight,angoloRetroBottomLeft,angoloRetroBottomRight,risorsaRetroCentrale,risorsaRetroCentraleAggiuntiva1,risorsaRetroCentraleAggiuntiva2);
-		cartaIniziale[i]= new CartaIniziale(leggi.next(),leggi.next(),leggi.next(),leggi.next(),leggi.next(),leggi.next(),leggi.next(),leggi.next(),leggi.next(),leggi.next(),leggi.next());
+		cartaIniziale[i]= new CartaIniziale(leggi.nextInt(), leggi.next(),leggi.next(),leggi.next(),leggi.next(),leggi.next(),leggi.next(),leggi.next(),leggi.next(),leggi.next(),leggi.next(),leggi.next());
 		i++;
 	}		
 	
