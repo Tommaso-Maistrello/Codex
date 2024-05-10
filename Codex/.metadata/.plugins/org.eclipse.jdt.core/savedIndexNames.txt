@@ -1,0 +1,3 @@
+INDEX VERSION 1.134+C:\Users\Antonio Carmona\OneDrive\Desktop\ProgettoPO\Codex\Codex\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+3205671411.index
