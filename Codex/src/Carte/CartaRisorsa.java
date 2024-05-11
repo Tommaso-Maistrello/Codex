@@ -14,8 +14,10 @@ public class CartaRisorsa extends Carta {
 
 	private final Colore colore;
 	private final int punti;
-	//private static String setAngoloFronteTopLeft;
-
+	
+	//private static String setAngoloFronteTopLeft;asf
+	
+ 
 	
 	public CartaRisorsa(int id, StatoAngolo angoloFronteTopLeft, StatoAngolo angoloFronteTopRight, StatoAngolo angoloFronteBottomLeft,
 			StatoAngolo angoloFronteBottomRight, StatoAngolo angoloRetroTopLeft, StatoAngolo angoloRetroTopRight,
@@ -38,7 +40,7 @@ public class CartaRisorsa extends Carta {
 	
 public static  CartaRisorsa[] costruisciCarteRisorsa() throws FileNotFoundException{
  
-	int i=1;
+	int i, e=1;
 	 
 	File fileRisorsa= new File ("carteRisorsa.txt");  
 	
