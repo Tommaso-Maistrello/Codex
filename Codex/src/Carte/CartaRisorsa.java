@@ -40,7 +40,7 @@ public class CartaRisorsa extends Carta {
 	
 public static  CartaRisorsa[] costruisciCarteRisorsa() throws FileNotFoundException{
  
-	int i, e=1;
+	int i=1;
 	 
 	File fileRisorsa= new File ("carteRisorsa.txt");  
 	
