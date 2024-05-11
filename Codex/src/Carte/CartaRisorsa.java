@@ -10,17 +10,20 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+import Enum.Colore;
+import Enum.StatoAngolo;
+
 
 public class CartaRisorsa extends Carta {
 
-	private static String colore;
-	private static int punti;
-	private static String setAngoloFronteTopLeft;
+	private final Colore colore;
+	private final int punti;
+	//private static String setAngoloFronteTopLeft;
 
 	
-	public CartaRisorsa(int id, String angoloFronteTopLeft, String angoloFronteTopRight, String angoloFronteBottomLeft,
-			String angoloFronteBottomRight, String angoloRetroTopLeft, String angoloRetroTopRight,
-			String angoloRetroBottomLeft, String angoloRetroBottomRight, String risorsaRetroCentrale, String colore,
+	public CartaRisorsa(int id, StatoAngolo angoloFronteTopLeft, StatoAngolo angoloFronteTopRight, StatoAngolo angoloFronteBottomLeft,
+			StatoAngolo angoloFronteBottomRight, StatoAngolo angoloRetroTopLeft, StatoAngolo angoloRetroTopRight,
+			StatoAngolo angoloRetroBottomLeft, StatoAngolo angoloRetroBottomRight, StatoAngolo risorsaRetroCentrale, Colore colore,
 			int punti) {
 		super(id, angoloFronteTopLeft, angoloFronteTopRight, angoloFronteBottomLeft, angoloFronteBottomRight,
 				angoloRetroTopLeft, angoloRetroTopRight, angoloRetroBottomLeft, angoloRetroBottomRight,
@@ -29,7 +32,7 @@ public class CartaRisorsa extends Carta {
 		this.punti = punti;
 	}
 
-	public String getColore() {
+	public Colore getColore() {
 		return colore;
 	}
 		
@@ -38,7 +41,9 @@ public class CartaRisorsa extends Carta {
 	}
 	
 public static  CartaRisorsa[] costruisciCarteRisorsa() throws FileNotFoundException{
-	 String topLeft, topRight, bottomLeft, bottomRight, colore, risorsa;
+	 StatoAngolo topLeft, topRight, bottomLeft, bottomRight;
+	 Colore colore;
+	 StatoAngolo risorsa;
 	 int punti, id;	 
 	
 	int i=1;
@@ -49,7 +54,7 @@ public static  CartaRisorsa[] costruisciCarteRisorsa() throws FileNotFoundExcept
 
 		leggi.useDelimiter(",");		
 		
-		CartaRisorsa[] cartaRisorsa= new CartaRisorsa[40];  
+		CartaRisorsa[] cartaRisorsa= new CartaRisorsa[41];  
 		// il ciclo legge dal file ogni elemento diviso da una virgola e li carica in cartaRisorsa
 		
 		
@@ -61,30 +66,16 @@ public static  CartaRisorsa[] costruisciCarteRisorsa() throws FileNotFoundExcept
 		 //cartaRisorsa[i]= new CartaRisorsa(angoloTopLeft,angoloTopRight,angoloBottomLeft,angoloBottomRight,"vuoto","vuoto","vuoto","vuoto",risorsa,colore,punti);
 		// cartaRisorsa[i]= new CartaRisorsa(leggi.nextInt(),leggi.next(),leggi.next(),leggi.next(),leggi.next(),"vuoto","vuoto","vuoto","vuoto",leggi.next(),leggi.next(),leggi.nextInt());
 			 id = leggi.nextInt();
-			 topLeft =leggi.next();
-			 topRight=leggi.next();
-			 bottomLeft=leggi.next();
-			 bottomRight=leggi.next();
-			 risorsa= leggi.next();
-			 colore=leggi.next();
+			 topLeft = StatoAngolo.valueOf(leggi.next());
+			 topRight= StatoAngolo.valueOf(leggi.next());
+			 bottomLeft= StatoAngolo.valueOf(leggi.next());
+			 bottomRight=StatoAngolo.valueOf(leggi.next());
+			 risorsa= StatoAngolo.valueOf(leggi.next());
+			 colore= Colore.valueOf(leggi.next());
 			 punti=leggi.nextInt();
 			 leggi.next();
 			 
-			 if ("".equals(topLeft)) {
-				 topLeft = null;
-				 
-			 }
-		
-			 if ("".equals(topRight)) {
-				 topRight = null;
-				 
-			 } if ("".equals(bottomLeft)) {
-				 bottomLeft = null;
-			 } if ("".equals(bottomRight)) {
-				 bottomRight = null;
-			 }
-			 
-			 cartaRisorsa[i]= new CartaRisorsa(id,topLeft,topRight,bottomLeft,bottomRight,"vuoto","vuoto","vuoto","vuoto",risorsa,colore,punti);
+			 cartaRisorsa[i]= new CartaRisorsa(id,topLeft,topRight,bottomLeft,bottomRight,StatoAngolo.VUOTO,StatoAngolo.VUOTO,StatoAngolo.VUOTO,StatoAngolo.VUOTO,risorsa,colore,punti);
 		//System.out.println(id + topLeft+topRight+bottomLeft+bottomRight+"vuoto"+"vuoto"+"vuoto"+"vuoto"+risorsa+colore+punti );// codice di debug
 			// System.out.println("il top left è " + cartaRisorsa[i].getId());
 			 
@@ -99,7 +90,7 @@ public static  CartaRisorsa[] costruisciCarteRisorsa() throws FileNotFoundExcept
 	  
 	}
 	public static void main(String[] args) throws FileNotFoundException {
-		CartaRisorsa[] mazzo = new CartaRisorsa[40];  
+		CartaRisorsa[] mazzo = new CartaRisorsa[41];  
 		mazzo= costruisciCarteRisorsa();
 		 mazzo= mescolaMazzo();
 		 System.out.println("fine");
@@ -110,8 +101,8 @@ public static  CartaRisorsa[] costruisciCarteRisorsa() throws FileNotFoundExcept
 		
 	}
 	public static  CartaRisorsa[] mescolaMazzo() throws FileNotFoundException{
-		CartaRisorsa[] mazzo = new CartaRisorsa[40];  
-		CartaRisorsa[] temp = new CartaRisorsa[40]; 
+		CartaRisorsa[] mazzo = new CartaRisorsa[41];  
+		CartaRisorsa[] temp = new CartaRisorsa[41]; 
 		mazzo= costruisciCarteRisorsa();
 		Random rnd = new Random();
 		int posizioneRandom;

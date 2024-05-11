@@ -1,23 +1,23 @@
 package Carte;
 
-//import Enum.Risorsa;
+import Enum.StatoAngolo;
 
 public abstract class Carta {
 
 	public int id;
-	public String angoloFronteTopLeft;
-	public String angoloFronteTopRight;
-	public String angoloFronteBottomLeft;
-	public String angoloFronteBottomRight;
-	public String angoloRetroTopLeft;
-	public String angoloRetroTopRight;
-	public String angoloRetroBottomLeft;
-	public String angoloRetroBottomRight;
-	public String risorsaRetroCentrale;
+	public StatoAngolo angoloFronteTopLeft;
+	public StatoAngolo angoloFronteTopRight;
+	public StatoAngolo angoloFronteBottomLeft;
+	public StatoAngolo angoloFronteBottomRight;
+	public StatoAngolo angoloRetroTopLeft;
+	public StatoAngolo angoloRetroTopRight;
+	public StatoAngolo angoloRetroBottomLeft;
+	public StatoAngolo angoloRetroBottomRight;
+	public StatoAngolo risorsaRetroCentrale;
 
-	public  Carta(int id, String angoloFronteTopLeft, String angoloFronteTopRight, String angoloFronteBottomLeft,
-			String angoloFronteBottomRight, String angoloRetroTopLeft, String angoloRetroTopRight,
-			String angoloRetroBottomLeft, String angoloRetroBottomRight, String risorsaRetroCentrale) {
+	public  Carta(int id, StatoAngolo angoloFronteTopLeft, StatoAngolo angoloFronteTopRight, StatoAngolo angoloFronteBottomLeft,
+			StatoAngolo angoloFronteBottomRight, StatoAngolo angoloRetroTopLeft, StatoAngolo angoloRetroTopRight,
+			StatoAngolo angoloRetroBottomLeft, StatoAngolo angoloRetroBottomRight, StatoAngolo risorsaRetroCentrale) {
 
 		this.id = id;
 		this.angoloFronteTopLeft = angoloFronteTopLeft;
@@ -40,75 +40,75 @@ public abstract class Carta {
 		this.id = id;
 	}
 	
-	public String getAngoloFronteTopLeft() {
+	public StatoAngolo getAngoloFronteTopLeft() {
 		return angoloFronteTopLeft;
 	}
 	
-	public void setAngoloFronteTopLeft(String angoloFronteTopLeft) {
+	public void setAngoloFronteTopLeft(StatoAngolo angoloFronteTopLeft) {
 		this.angoloFronteTopLeft = angoloFronteTopLeft;
 	}
 	
-	public String getAngoloFronteTopRight() {
+	public StatoAngolo getAngoloFronteTopRight() {
 		return angoloFronteTopRight;
 	}
 	
-	public void setAngoloFronteTopRight(String angoloFronteTopRight) {
+	public void setAngoloFronteTopRight(StatoAngolo angoloFronteTopRight) {
 		this.angoloFronteTopRight = angoloFronteTopRight;
 	}
 	
-	public String getAngoloFronteBottomLeft() {
+	public StatoAngolo getAngoloFronteBottomLeft() {
 		return angoloFronteBottomLeft;
 	}
 	
-	public void setAngoloFronteBottomLeft(String angoloFronteBottomLeft) {
+	public void setAngoloFronteBottomLeft(StatoAngolo angoloFronteBottomLeft) {
 		this.angoloFronteBottomLeft = angoloFronteBottomLeft;
 	}
 	
-	public String getAngoloFronteBottomRight() {
+	public StatoAngolo getAngoloFronteBottomRight() {
 		return angoloFronteBottomRight;
 	}
 	
-	public void setAngoloFronteBottomRight(String angoloFronteBottomRight) {
+	public void setAngoloFronteBottomRight(StatoAngolo angoloFronteBottomRight) {
 		this.angoloFronteBottomRight = angoloFronteBottomRight;
 	}
 	
-	public String getAngoloRetroTopLeft() {
+	public StatoAngolo getAngoloRetroTopLeft() {
 		return angoloRetroTopLeft;
 	}
 	
-	public void setAngoloRetroTopLeft(String angoloRetroTopLeft) {
+	public void setAngoloRetroTopLeft(StatoAngolo angoloRetroTopLeft) {
 		this.angoloRetroTopLeft = angoloRetroTopLeft;
 	}
 	
-	public String getAngoloRetroTopRight() {
+	public StatoAngolo getAngoloRetroTopRight() {
 		return angoloRetroTopRight;
 	}
 	
-	public void setAngoloRetroTopRight(String angoloRetroTopRight) {
+	public void setAngoloRetroTopRight(StatoAngolo angoloRetroTopRight) {
 		this.angoloRetroTopRight = angoloRetroTopRight;
 	}
 	
-	public String getAngoloRetroBottomLeft() {
+	public StatoAngolo getAngoloRetroBottomLeft() {
 		return angoloRetroBottomLeft;
 	}
 	
-	public void setAngoloRetroBottomLeft(String angoloRetroBottomLeft) {
+	public void setAngoloRetroBottomLeft(StatoAngolo angoloRetroBottomLeft) {
 		this.angoloRetroBottomLeft = angoloRetroBottomLeft;
 	}
 	
-	public String getAngoloRetroBottomRight() {
+	public StatoAngolo getAngoloRetroBottomRight() {
 		return angoloRetroBottomRight;
 	}
 	
-	public void setAngoloRetroBottomRight(String angoloRetroBottomRight) {
+	public void setAngoloRetroBottomRight(StatoAngolo angoloRetroBottomRight) {
 		this.angoloRetroBottomRight = angoloRetroBottomRight;
 	}
 	
-	public String getRisorsaRetroCentrale() {
+	public StatoAngolo getRisorsaRetroCentrale() {
 		return risorsaRetroCentrale;
 	}
 	
-	public void setRisorsaRetroCentrale( String risorsaRetroCentrale) {
+	public void setRisorsaRetroCentrale( StatoAngolo risorsaRetroCentrale) {
 		this.risorsaRetroCentrale = risorsaRetroCentrale;
 	}
 }
