@@ -16,20 +16,20 @@ public class CartaOro extends Carta {
 	
 	private final Colore colore;
 	private final int punti;
-	private final String condizioneA, condizioneF, condizioneI, condizioneV;
+	private final String condizioneA, condizioneF, condizioneI, condizioneV, obbiettivo;
 	private final int numeroAnimale, numeroFunghi, numeroInsetti, numeroVegetale;
 	
 	
 	
 	public CartaOro(int id, StatoAngolo angoloFronteTopLeft, StatoAngolo angoloFronteTopRight, StatoAngolo angoloFronteBottomLeft, StatoAngolo angoloFronteBottomRight, 
 			StatoAngolo angoloRetroTopLeft, StatoAngolo angoloRetroTopRight, StatoAngolo angoloRetroBottomLeft, StatoAngolo angoloRetroBottomRight, StatoAngolo risorsaRetroCentrale, 
-			Colore colore, int punti, String condizioneA, int numeroAnimale, String condizioneF, int numeroFunghi, String condizioneI, int numeroInsetti, String condizioneV, int numeroVegetale ) {
+			Colore colore,String obbiettivo, String condizioneA, int numeroAnimale, String condizioneF, int numeroFunghi, String condizioneI, int numeroInsetti, String condizioneV, int numeroVegetale ) {
 		super(id, angoloFronteTopLeft, angoloFronteTopRight, angoloFronteBottomLeft, angoloFronteBottomRight, 
 				angoloRetroTopLeft, angoloRetroTopRight, angoloRetroBottomLeft, angoloRetroBottomRight, risorsaRetroCentrale ); 
 			
 		
 		this.colore = colore;
-		this.punti = punti;
+		this.punti = 0;
 		this.condizioneA = condizioneA;
 		this.condizioneF = condizioneF;
 		this.condizioneI = condizioneI;
@@ -38,6 +38,7 @@ public class CartaOro extends Carta {
 		this.numeroFunghi = numeroFunghi;
 		this.numeroInsetti = numeroInsetti;
 		this.numeroVegetale = numeroVegetale;
+		this.obbiettivo = obbiettivo;
 		}
 		
 	
@@ -52,17 +53,33 @@ public class CartaOro extends Carta {
 	
 	
 	public static  CartaOro[] costruisciCarteRisorsa() throws FileNotFoundException {
-	    int i = 0; // Inizia da 0 anziché da 1
-	    File fileRisorsa = new File("carteRisorsa.txt");
+	    int i = 1; // Inizia da 0 anziché da 1
+	    File fileRisorsa = new File("carteOro.txt");
 	    Scanner leggi = new Scanner(fileRisorsa);
 	    leggi.useDelimiter(",");
 	    CartaOro[] cartaRisorsa = new CartaOro[41];
 	    while (leggi.hasNextLine()) {
+	    	
+	 
 	        cartaRisorsa[i] = new CartaOro(leggi.nextInt(), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), // id, fronteTopLeft, fronteTopRight, fronteBottomLeft, fronteBottomRight
-	                StatoAngolo.VUOTO, StatoAngolo.VUOTO, StatoAngolo.VUOTO, StatoAngolo.VUOTO, StatoAngolo.valueOf(leggi.next()), // retroTopLeft, retroTopRight, retroBottomLeft, retroBottomRight, risorsaRetroCentrale
-	                Colore.valueOf(leggi.next()), leggi.nextInt(), leggi.next(), leggi.nextInt(), leggi.next(), leggi.nextInt(), leggi.next(), leggi.nextInt(), leggi.next(), leggi.nextInt()); // colore, punti
+	        		//id, angoloFronteTopLeft, angoloFronteTopRight, angoloFronteBottomLeft, angoloFronteBottomRight, 
+	        		StatoAngolo.VUOTO, StatoAngolo.VUOTO, StatoAngolo.VUOTO, StatoAngolo.VUOTO, StatoAngolo.valueOf(leggi.next()), // retroTopLeft, retroTopRight, retroBottomLeft, retroBottomRight, risorsaRetroCentrale
+	        		 //"" "" "" "" risorsaRetroCentrale 
+	        		Colore.valueOf(leggi.next()), leggi.next(),
+	                //colore, obbiettivo
+	                leggi.next(),leggi.nextInt(), 
+	              //  String condizioneA, int numeroAnimale
+	                leggi.next(), leggi.nextInt(), 
+	                //String condizioneF, int numeroFunghi
+	                leggi.next(), leggi.nextInt(), 
+	                //String condizioneI, int numeroInsetti
+	                leggi.next(), leggi.nextInt()); 
+	      //  String condizioneV, int numeroVegetale 
+	        
 	        leggi.next();
+	    	System.out.println( cartaRisorsa[i].getId()+" "+cartaRisorsa[i].getAngoloFronteTopLeft()); 
 	        i++; // Incrementa subito dopo aver inserito un elemento nell'array
+	        
 	    }
 	    leggi.close();
 	    return cartaRisorsa;
