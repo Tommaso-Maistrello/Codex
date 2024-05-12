@@ -39,21 +39,22 @@ public class CartaRisorsa extends Carta {
 	
 	
 	public static CartaRisorsa[] costruisciCarteRisorsa() throws FileNotFoundException {
-		int i=1;
-		File fileRisorsa = new File ("carteRisorsa.txt");  
-		Scanner leggi = new Scanner (fileRisorsa);  
-		leggi.useDelimiter(",");		
-		CartaRisorsa[] cartaRisorsa= new CartaRisorsa[40];
-		while(leggi.hasNextLine()) {
-			cartaRisorsa[i] = new CartaRisorsa ( leggi.nextInt(), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), // id, fronteTopLeft, fronteTopRight, fronteBottomLeft, fronteBottomRight
-				 StatoAngolo.VUOTO, StatoAngolo.VUOTO, StatoAngolo.VUOTO, StatoAngolo.VUOTO, StatoAngolo.valueOf(leggi.next()), // retroTopLeft, retroTopRight, retroBottomLeft, retroBottomRight, risorsaRetroCentrale
-				 Colore.valueOf(leggi.next()), leggi.nextInt() ); // colore, punti
-			 	 leggi.next();
-			 i++;
-		}
-		leggi.close();
-		return cartaRisorsa;
+	    int i = 0; // Inizia da 0 anziché da 1
+	    File fileRisorsa = new File("carteRisorsa.txt");
+	    Scanner leggi = new Scanner(fileRisorsa);
+	    leggi.useDelimiter(",");
+	    CartaRisorsa[] cartaRisorsa = new CartaRisorsa[40];
+	    while (leggi.hasNextLine()) {
+	        cartaRisorsa[i] = new CartaRisorsa(leggi.nextInt(), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), // id, fronteTopLeft, fronteTopRight, fronteBottomLeft, fronteBottomRight
+	                StatoAngolo.VUOTO, StatoAngolo.VUOTO, StatoAngolo.VUOTO, StatoAngolo.VUOTO, StatoAngolo.valueOf(leggi.next()), // retroTopLeft, retroTopRight, retroBottomLeft, retroBottomRight, risorsaRetroCentrale
+	                Colore.valueOf(leggi.next()), leggi.nextInt()); // colore, punti
+	        leggi.next();
+	        i++; // Incrementa subito dopo aver inserito un elemento nell'array
+	    }
+	    leggi.close();
+	    return cartaRisorsa;
 	}
+
 	
 	
 	public static CartaRisorsa[] mescolaMazzo() throws FileNotFoundException {
@@ -74,7 +75,7 @@ public class CartaRisorsa extends Carta {
 	}
 	
 	
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void newMazzoRisorsa() throws FileNotFoundException {
 		CartaRisorsa[] mazzo = new CartaRisorsa[40];  
 		mazzo = mescolaMazzo();
 		

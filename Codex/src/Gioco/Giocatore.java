@@ -39,12 +39,15 @@ public class Giocatore {
 	public void setPosizione(int posizione) {
 		this.posizione = posizione;
 	}
+	
 	public String getUsername() {
 		return username;
 	}
+	
 	public ColoreSegnalino getColoreSegnalino() {
 		return coloreSegnalino;
 	}
+
 	public boolean isPedinaNera() {
 		return pedinaNera;
 	}
@@ -79,18 +82,17 @@ public class Giocatore {
 			return giocatori;
 			
 		}
-	public static void main(String[] args) {
+	public static void creaGiocatori() {
 		
-		Giocatore[] giocatori= new Giocatore[2];
-		giocatori= setGiocatori();
+		Giocatore[] giocatori= setGiocatori();
 		for(int i=0; i<giocatori.length; i++)
 		{
 	
-			 
-			 System.out.println("il giocatore "+i+1+" è "+giocatori[i].getClass()+giocatori[i].getUsername());
+			 int j=i+1;
+			 System.out.println("Il giocatore "+j+" è "+giocatori[i].getUsername()+" e ha segnalino "+ giocatori[i].getColoreSegnalino().toString().toLowerCase()+".");
 			 
 		}
-		}
+	}
 			
 	
 }
