@@ -43,7 +43,7 @@ public class CartaRisorsa extends Carta {
 		File fileRisorsa = new File ("carteRisorsa.txt");  
 		Scanner leggi = new Scanner (fileRisorsa);  
 		leggi.useDelimiter(",");		
-		CartaRisorsa[] cartaRisorsa= new CartaRisorsa[41];
+		CartaRisorsa[] cartaRisorsa= new CartaRisorsa[40];
 		while(leggi.hasNextLine()) {
 			cartaRisorsa[i] = new CartaRisorsa ( leggi.nextInt(), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), // id, fronteTopLeft, fronteTopRight, fronteBottomLeft, fronteBottomRight
 				 StatoAngolo.VUOTO, StatoAngolo.VUOTO, StatoAngolo.VUOTO, StatoAngolo.VUOTO, StatoAngolo.valueOf(leggi.next()), // retroTopLeft, retroTopRight, retroBottomLeft, retroBottomRight, risorsaRetroCentrale
@@ -57,8 +57,8 @@ public class CartaRisorsa extends Carta {
 	
 	
 	public static CartaRisorsa[] mescolaMazzo() throws FileNotFoundException {
-		CartaRisorsa[] mazzo = new CartaRisorsa[41];  
-		CartaRisorsa[] temp = new CartaRisorsa[41]; 
+		CartaRisorsa[] mazzo = new CartaRisorsa[40];  
+		CartaRisorsa[] temp = new CartaRisorsa[40]; 
 		mazzo = costruisciCarteRisorsa();
 		Random rnd = new Random();
 		int posizioneRandom;
@@ -75,7 +75,7 @@ public class CartaRisorsa extends Carta {
 	
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		CartaRisorsa[] mazzo = new CartaRisorsa[41];  
+		CartaRisorsa[] mazzo = new CartaRisorsa[40];  
 		mazzo = mescolaMazzo();
 		
 		for (int j = 1; j<mazzo.length-1; j++) {
