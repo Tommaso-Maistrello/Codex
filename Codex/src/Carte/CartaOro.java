@@ -52,7 +52,7 @@ public class CartaOro extends Carta {
 	}
 	
 	
-	public static  CartaOro[] costruisciCarteRisorsa() throws FileNotFoundException {
+	public static CartaOro[] costruisciCarteRisorsa() throws FileNotFoundException {
 	    int i = 1; // Inizia da 0 anziché da 1
 	    File fileRisorsa = new File("carteOro.txt");
 	    Scanner leggi = new Scanner(fileRisorsa);

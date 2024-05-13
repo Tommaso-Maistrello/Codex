@@ -5,16 +5,14 @@ import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Scanner;
 
-import Enum.Colore;
 import Enum.StatoAngolo;
-
 
 
 
 public class CartaIniziale extends Carta {
 	
-	public StatoAngolo risorsaRetroCentraleAggiuntiva1;
-	public StatoAngolo risorsaRetroCentraleAggiuntiva2;
+	public final StatoAngolo risorsaRetroCentraleAggiuntiva1;
+	public final StatoAngolo risorsaRetroCentraleAggiuntiva2;
 	
 	
 	
