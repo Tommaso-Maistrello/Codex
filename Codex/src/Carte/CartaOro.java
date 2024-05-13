@@ -57,11 +57,11 @@ public class CartaOro extends Carta {
 	    File fileRisorsa = new File("carteOro.txt");
 	    Scanner leggi = new Scanner(fileRisorsa);
 	    leggi.useDelimiter(",");
-	    CartaOro[] cartaRisorsa = new CartaOro[41];
+	    CartaOro[] CartaOro = new CartaOro[41];
 	    while (leggi.hasNextLine()) {
 	    	
 	 
-	        cartaRisorsa[i] = new CartaOro(leggi.nextInt(), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), // id, fronteTopLeft, fronteTopRight, fronteBottomLeft, fronteBottomRight
+	        CartaOro[i] = new CartaOro(leggi.nextInt(), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), // id, fronteTopLeft, fronteTopRight, fronteBottomLeft, fronteBottomRight
 	        		//id, angoloFronteTopLeft, angoloFronteTopRight, angoloFronteBottomLeft, angoloFronteBottomRight, 
 	        		StatoAngolo.VUOTO, StatoAngolo.VUOTO, StatoAngolo.VUOTO, StatoAngolo.VUOTO, StatoAngolo.valueOf(leggi.next()), // retroTopLeft, retroTopRight, retroBottomLeft, retroBottomRight, risorsaRetroCentrale
 	        		 //"" "" "" "" risorsaRetroCentrale 
@@ -77,12 +77,12 @@ public class CartaOro extends Carta {
 	      //  String condizioneV, int numeroVegetale 
 	        
 	        leggi.next();
-	    	System.out.println( cartaRisorsa[i].getId()+" "+cartaRisorsa[i].getAngoloFronteTopLeft()); 
+	    	System.out.println( CartaOro[i].getId()+" "+CartaOro[i].getAngoloFronteTopLeft()); 
 	        i++; // Incrementa subito dopo aver inserito un elemento nell'array
 	        
 	    }
 	    leggi.close();
-	    return cartaRisorsa;
+	    return CartaOro;
 	}
 
 	public static void main(String[] args) throws FileNotFoundException {
