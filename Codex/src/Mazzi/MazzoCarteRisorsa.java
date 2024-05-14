@@ -12,10 +12,10 @@ import Enum.Colore;
 import Enum.StatoAngolo;
 
 public class MazzoCarteRisorsa {
-	public  static List<CartaRisorsa> mazzoRisorse = new ArrayList<>();
+	public  static CartaRisorsa[] mazzoRisorse = new  CartaRisorsa[40];
 
 	public static  void costruisciMazzo() {
-		
+		int i=0;
 	        
 	        try {
 	            File fileRisorsa = new File("carteRisorsa.txt");
@@ -37,10 +37,10 @@ public class MazzoCarteRisorsa {
 	                int punti = leggi.nextInt();
 	                leggi.nextLine(); // Sposta alla riga successiva
 
-	                CartaRisorsa carta = new CartaRisorsa(id, fronteTopLeft, fronteTopRight, fronteBottomLeft, fronteBottomRight, 
+	                mazzoRisorse[i] = new CartaRisorsa(id, fronteTopLeft, fronteTopRight, fronteBottomLeft, fronteBottomRight, 
 	                                                     retroTopLeft, retroTopRight, retroBottomLeft, retroBottomRight, risorsaRetroCentrale, 
 	                                                     colore, punti);
-	                mazzoRisorse.add(carta);
+	                i++;
 	            }
 	            
 	            leggi.close();
@@ -53,21 +53,29 @@ public class MazzoCarteRisorsa {
 
 	}
 	
-	public static List<CartaRisorsa> getMazzoRisorsa() {
+	public static CartaRisorsa[]  getMazzoRisorsa() {
 		return mazzoRisorse;
 		
 	}
 	   public static void mischiaMazzo() {
-	        Collections.shuffle(mazzoRisorse);
+		   List<CartaRisorsa> listaMazzo = new ArrayList<>();
+	        Collections.addAll(listaMazzo, mazzoRisorse);
+
+	        // Mischia la lista
+	        Collections.shuffle(listaMazzo);
+
+	        // Converto la lista mischiata di nuovo in un array
+	        listaMazzo.toArray(mazzoRisorse);
 	    }
 	public static void main(String[] args) throws FileNotFoundException {
-	
+	 
 		//main di prova per vedere se funziona
 		costruisciMazzo();
-		List<CartaRisorsa> a = getMazzoRisorsa();
-		
-		    for (CartaRisorsa carta : a) {
-	            System.out.println(carta.getId() +"   - "+ carta.getAngoloFronteBottomLeft()+ "  .");
+	
+		mischiaMazzo() ;
+		CartaRisorsa[] a = getMazzoRisorsa(	);
+		    for (int i=0;i<a.length;i++) {
+	            System.out.println(i+"id "+a[i].getId() +"   - "+a[i].getAngoloFronteBottomLeft()+ "  .");
 	        }
 		    
 		  
