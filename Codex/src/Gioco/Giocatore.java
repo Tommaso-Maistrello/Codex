@@ -1,43 +1,41 @@
 package Gioco;
 
+import java.util.Random;
 import java.util.Scanner;
 
+import Carte.CartaIniziale;
 import Enum.ColoreSegnalino;
 
 public class Giocatore {
 
 	private final String username;
 	private final ColoreSegnalino coloreSegnalino;
-	private boolean pedinaNera;
-	private int posizione;
+	private int punteggio;
+
+	
 	
 	/***
 	 * Costruttore della classe Giocatore
 	 * 
 	 * @param username		->	parametro che passa lo username del nuovo giocatore
-	 * @param numGiocatore	->	parametro che passa il numero del giocatore 
-	 * 							(1o giocatore: 1, 2o giocatore: 2, ecc...)
-	 * 							così da sapere a quale giocatore assenare la pedina nera
+	 * 
 	 */
-	public Giocatore(String username, int numGiocatore){
+	public Giocatore(String username) {
 		this.username=username;
-		this.posizione=0;
 		coloreSegnalino=ColoreSegnalino.getColore();
-		if(numGiocatore==1) this.pedinaNera=true;
-		else this.pedinaNera=false;
+		this.punteggio=0;
 	}
 	
-	public int getPosizione() {
-		return posizione;
+	public int getPunteggio() {
+		return punteggio;
 	}
-	
 	
 	/**
-	 * Aggiorna la nuova posizione del giocatore
-	 * @param posizione
+	 * Aggiorna la nuova punteggio del giocatore
+	 * @param punteggio
 	 */
-	public void setPosizione(int posizione) {
-		this.posizione = posizione;
+	public void setPunteggio(int punteggio) {
+		this.punteggio = punteggio;
 	}
 	
 	public String getUsername() {
@@ -47,16 +45,10 @@ public class Giocatore {
 	public ColoreSegnalino getColoreSegnalino() {
 		return coloreSegnalino;
 	}
-
-	public boolean isPedinaNera() {
-		return pedinaNera;
-	}
 	
-	private static  Giocatore[] setGiocatori() {
-
-
-		
-
+	
+	
+	private static Giocatore[] setGiocatori() {
 		Scanner sc=new Scanner(System.in);
 		
 		int numGiocatori=0;
@@ -64,32 +56,57 @@ public class Giocatore {
 		do {
 			System.out.println("Inserisci il numero di giocatori: ");
 			numGiocatori=sc.nextInt();
+			if(numGiocatori<2 || numGiocatori>4) {
+				System.out.println("Numero dei giocatori inseriti non valido");
+			}
 		}while(numGiocatori<2 || numGiocatori>4);
 		
-		//libera il buffer
-		sc.nextLine();
+		sc.nextLine(); //libera il buffer
 		
-		Giocatore[] giocatori= new Giocatore[numGiocatori];
+		Giocatore[] giocatori = new Giocatore[numGiocatori];
 		
 		for(int i=0; i<giocatori.length; i++)
 		{
 			int j=i+1;
-			System.out.println("Inserisci l'username "+ j +"o giocatore: ");
-			String nome=sc.nextLine();
-			giocatori[i]=new Giocatore(nome, j);
+			//DO-WHILE ERRORE STATIC
+			//do {
+				System.out.println("Inserisci lo username del giocatore numero: "+ j);
+				String username=sc.nextLine();
+				if(username.trim().isEmpty()) {
+					System.out.println("Username inserito non valido");
+				}
+			//}while(username.trim().isEmpty());
+			giocatori[i]=new Giocatore(username);
+		}
+			return giocatori;
 		}
 	
-			return giocatori;
-			
+	
+	
+	private static Giocatore[] disordinaGiocatori() {
+		Giocatore[] giocatori = new Giocatore[4];
+		giocatori = setGiocatori();
+		
+		Random rnd = new Random();
+		for (int i = 0; i < giocatori.length; i++) {
+			int posizioneRandom = rnd.nextInt(giocatori.length);
+			Giocatore temp = giocatori[posizioneRandom];
+			giocatori[posizioneRandom] = giocatori[i];
+			giocatori[i] = temp;
 		}
+		System.out.println("Elaborazione dell'ordine casuale di gioco in corso...");
+		return giocatori;
+	}
+			
+	
+	
 	public static void creaGiocatori() {
 		
-		Giocatore[] giocatori= setGiocatori();
+		Giocatore[] giocatori = disordinaGiocatori();
 		for(int i=0; i<giocatori.length; i++)
 		{
-	
 			 int j=i+1;
-			 System.out.println("Il giocatore "+j+" è "+giocatori[i].getUsername()+" e ha segnalino "+ giocatori[i].getColoreSegnalino().toString().toLowerCase()+".");
+			 System.out.println("Il giocatore che giocherà per "+j+"° è "+giocatori[i].getUsername()+" e ha segnalino "+ giocatori[i].getColoreSegnalino().toString().toLowerCase()+".");
 			 
 		}
 	}

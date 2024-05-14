@@ -8,6 +8,6 @@ public class Partita {
 
 	public void newPartita( )throws FileNotFoundException {
 		Giocatore.creaGiocatori();
-		CartaRisorsa.newMazzoRisorsa();
+		//CartaRisorsa.newMazzoRisorsa();
 	}
 }
