@@ -1,7 +1,6 @@
 package Gioco;
 
 import java.util.List;
-
 import Carte.CartaOro;
 import Carte.CartaRisorsa;
 
@@ -14,7 +13,7 @@ public class Mano {
             giocatore.aggiungiCartaInMano(cartaRisorsa);
         }
         
-        // Aggiungi una carta oro alla mano del giocatore
+        // Aggiungi una carta oro alla mano del giocatore 
         CartaOro cartaOro = mazzoCarteOro.pescaCarta();
         giocatore.aggiungiCartaInMano(cartaOro);
     }
