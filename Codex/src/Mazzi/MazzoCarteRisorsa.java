@@ -67,6 +67,8 @@ public class MazzoCarteRisorsa {
 	        // Converto la lista mischiata di nuovo in un array
 	        listaMazzo.toArray(mazzoRisorse);
 	}
+	
+	/*
 	public static void main(String[] args) throws FileNotFoundException {
 	 
 		//main di prova per vedere se funziona
@@ -81,4 +83,5 @@ public class MazzoCarteRisorsa {
 		  
 		  
 	}
+	*/
 }

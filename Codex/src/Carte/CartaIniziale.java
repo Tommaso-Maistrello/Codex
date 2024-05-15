@@ -71,7 +71,7 @@ public class CartaIniziale extends Carta {
 		return mazzo;
 	}
 	
-	
+	/*
 	public static void main(String[] args) throws FileNotFoundException {
 		CartaIniziale[] mazzo = new CartaIniziale[7];  
 		mazzo = mescolaMazzo();
@@ -79,5 +79,5 @@ public class CartaIniziale extends Carta {
 		for (int j = 1; j<mazzo.length-1; j++) {
 			System.out.println( +mazzo[j].getId()+" "+mazzo[j].getAngoloFronteTopLeft());
 		}
-	}
+	}*/
 }

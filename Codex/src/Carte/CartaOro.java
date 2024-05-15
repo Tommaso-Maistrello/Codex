@@ -68,13 +68,13 @@ public class CartaOro extends Carta {
 	        		Colore.valueOf(leggi.next()), leggi.next(),
 	                //colore, obbiettivo
 	                leggi.next(),leggi.nextInt(), 
-	              //  String condizioneA, int numeroAnimale
+	                //String condizioneA, int numeroAnimale
 	                leggi.next(), leggi.nextInt(), 
 	                //String condizioneF, int numeroFunghi
 	                leggi.next(), leggi.nextInt(), 
 	                //String condizioneI, int numeroInsetti
 	                leggi.next(), leggi.nextInt()); 
-	      //  String condizioneV, int numeroVegetale 
+	        		//String condizioneV, int numeroVegetale 
 	        
 	        leggi.next();
 	    	System.out.println( CartaOro[i].getId()+" "+CartaOro[i].getAngoloFronteTopLeft()); 
@@ -84,7 +84,7 @@ public class CartaOro extends Carta {
 	    leggi.close();
 	    return CartaOro;
 	}
-
+/*
 	public static void main(String[] args) throws FileNotFoundException {
 		CartaOro[] mazzo = new CartaOro[41];  
 		mazzo = mescolaMazzo();
@@ -93,7 +93,7 @@ public class CartaOro extends Carta {
 			System.out.println( +mazzo[j].getId()+" "+mazzo[j].getAngoloFronteTopLeft()); }
 		
 	}
-	
+*/	
 	public static CartaOro[] mescolaMazzo() throws FileNotFoundException {
 		CartaOro[] mazzo = new CartaOro[41];  
 		CartaOro[] temp = new CartaOro[41]; 

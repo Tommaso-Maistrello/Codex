@@ -67,7 +67,7 @@ public class CartaObiettivo {
 		return mazzo;
 	}
 	
-	
+	/*
 	public static void main(String[] args) throws FileNotFoundException {
 		CartaObiettivo[] mazzo = new CartaObiettivo[17];  
 		mazzo = mescolaMazzo();
@@ -77,7 +77,7 @@ public class CartaObiettivo {
 		}
 		
 		
-	}
+	}*/
 	
 	public static CartaObiettivo[] carteObiettivoEstratte(CartaObiettivo[] mazzo) {
 		CartaObiettivo[] estratte=new CartaObiettivo[2];
