@@ -75,5 +75,17 @@ public class CartaObiettivo {
 		for (int j = 1; j<mazzo.length-1; j++) {
 			System.out.println( +mazzo[j].getId()+" "+mazzo[j].getRequisitiPunti());
 		}
+		
+		
 	}
+	
+	public static CartaObiettivo[] carteObiettivoEstratte(CartaObiettivo[] mazzo) {
+		CartaObiettivo[] estratte=new CartaObiettivo[2];
+		for(int i=0; i<2; i++)
+		{
+			estratte[i]=mazzo[i+1];
+		}
+		return estratte;
+	}
+	
 }

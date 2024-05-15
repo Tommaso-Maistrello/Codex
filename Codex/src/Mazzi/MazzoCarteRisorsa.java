@@ -57,7 +57,7 @@ public class MazzoCarteRisorsa {
 		return mazzoRisorse;
 		
 	}
-	   public static void mischiaMazzo() {
+	public static void mischiaMazzo() {
 		   List<CartaRisorsa> listaMazzo = new ArrayList<>();
 	        Collections.addAll(listaMazzo, mazzoRisorse);
 
@@ -66,7 +66,7 @@ public class MazzoCarteRisorsa {
 
 	        // Converto la lista mischiata di nuovo in un array
 	        listaMazzo.toArray(mazzoRisorse);
-	    }
+	}
 	public static void main(String[] args) throws FileNotFoundException {
 	 
 		//main di prova per vedere se funziona
