@@ -29,7 +29,7 @@ public class Tavolo {
 	            System.out.println("2 punti per ogni 2 inchiostri.");
 	            break;
 	        case 90:
-	            System.out.println("2 punti per ogni pergamena.");
+	            System.out.println("2 punti per ogni 2 pergamene.");
 	            break;
 	        case 91:
 	            System.out.println("2 punti per ogni 3 vegetali.");
