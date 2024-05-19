@@ -1,8 +1,5 @@
 package Gioco;
 
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 import Carte.CartaObiettivo;
 
 public class Tavolo {
@@ -11,7 +8,7 @@ public class Tavolo {
 	
 	public Tavolo(CartaObiettivo[] carteObiettivoEstratte) {
 		for(int i=0; i<2; i++) {
-			this.obiettiviComuni[i] = carteObiettivoEstratte[i];			
+			Tavolo.obiettiviComuni[i] = carteObiettivoEstratte[i];			
 		}
 	}
 	
@@ -91,11 +88,11 @@ public class Tavolo {
 	public static void visualizzaObiettiviComuni() {
         
         int id0 = obiettiviComuni[0].getId();
-        System.out.println("Primo obiettivo: ");
+        System.out.println("Primo obiettivo comune: ");
         visualizzaCaso(id0);
         System.out.println();
         int id1 = obiettiviComuni[1].getId();
-        System.out.println("Secondo obiettivo: ");
+        System.out.println("Secondo obiettivo comune: ");
         visualizzaCaso(id1);
         
         
