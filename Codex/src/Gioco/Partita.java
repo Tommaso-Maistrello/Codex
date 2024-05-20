@@ -18,8 +18,8 @@ public class Partita {
 		Tavolo tavolo = new Tavolo(estratte);
 		tavolo.visualizzaObiettiviComuni();
 		*/
+		
 		Campo campo = new Campo();
 		campo.visualizzaCampo();
-		//System.out.println(campo.toString());
 	}
 }

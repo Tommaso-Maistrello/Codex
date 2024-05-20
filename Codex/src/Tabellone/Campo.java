@@ -1,5 +1,9 @@
 package Tabellone;
 
+import java.io.FileNotFoundException;
+
+import Gioco.Partita;
+
 public class Campo {
 
 	// Se l'utente dovesse posizionare tutte le carte in diagonale, la grandezza
@@ -39,7 +43,6 @@ public class Campo {
 	}*/
 
 	public void visualizzaCampo() {
-		System.out.println("Prova");
 		tabella[1][1].visualizzaCasella();
 		
 	}
