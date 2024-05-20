@@ -75,10 +75,10 @@ public class Tavolo {
 	            System.out.println("2 punti ogni "+trisViola+".");
 	            break;
 	        case 102:
-	        	String unAnhimUnFung="\u001B[36m■\u001B[35m▄\u001B[0m";
-	        	String unAnhim="\u001B[35m▀\u001B[0m";
-	            System.out.println("3 punti ogni "+unAnhimUnFung);
-	            System.out.println("\t      "+unAnhim);
+	        	String unInsUnAnim="\u001B[36m■\u001B[35m▄\u001B[0m";
+	        	String unInset="\u001B[35m▀\u001B[0m";
+	            System.out.println("3 punti ogni "+unInsUnAnim);
+	            System.out.println("\t      "+unInset);
 	            break;
 	        default:
 	            System.out.println("Id0 non corrisponde a nessun caso");
