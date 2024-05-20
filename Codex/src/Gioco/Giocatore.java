@@ -1,5 +1,6 @@
 package Gioco;
 
+import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -11,6 +12,7 @@ public class Giocatore {
 	private final String username;
 	private final ColoreSegnalino coloreSegnalino;
 	private int punteggio;
+	public static int numGiocatore;
 
 	
 	
@@ -24,6 +26,7 @@ public class Giocatore {
 		this.username=username;
 		coloreSegnalino=ColoreSegnalino.getColore();
 		this.punteggio=0;
+		
 	}
 	
 	public int getPunteggio() {
@@ -84,7 +87,7 @@ public class Giocatore {
 	
 	
 	private static Giocatore[] disordinaGiocatori() {
-		Giocatore[] giocatori = new Giocatore[4];
+		Giocatore[] giocatori = new Giocatore[numGiocatore];
 		giocatori = setGiocatori();
 		
 		Random rnd = new Random();
@@ -97,7 +100,10 @@ public class Giocatore {
 		System.out.println("Elaborazione dell'ordine casuale di gioco in corso...");
 		return giocatori;
 	}
-			
+	
+	private static int numGiocatori() {
+		return numGiocatore;
+	}	
 	
 	
 	public static void creaGiocatori() {

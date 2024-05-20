@@ -48,13 +48,13 @@ public class Casella {
 		
 		switch(risorsaCentrale) {
 		
-		case StatoAngolo.VEGETALE: 	risorsaCentraleToString="\u001B[32m"+risorsaCentrale.toString()+"\u001B[0m";
+		case VEGETALE: 	risorsaCentraleToString="\u001B[32m"+risorsaCentrale.toString()+"\u001B[0m";
 									break;
-		case StatoAngolo.ANIMALE: 	risorsaCentraleToString="\u001B[36m"+risorsaCentrale.toString()+"\u001B[0m";
+		case ANIMALE: 	risorsaCentraleToString="\u001B[36m"+risorsaCentrale.toString()+"\u001B[0m";
 									break;
-		case StatoAngolo.INSETTI: 	risorsaCentraleToString="\u001B[31m"+risorsaCentrale.toString()+"\u001B[0m";
+		case INSETTI: 	risorsaCentraleToString="\u001B[31m"+risorsaCentrale.toString()+"\u001B[0m";
 									break;
-		case StatoAngolo.FUNGHI: 	risorsaCentraleToString="\u001B[35m"+risorsaCentrale.toString()+"\u001B[0m";
+		case FUNGHI: 	risorsaCentraleToString="\u001B[35m"+risorsaCentrale.toString()+"\u001B[0m";
 									break;
 		//MANCA CASO ORO
 		}
@@ -63,25 +63,25 @@ public class Casella {
 			if(i==0 || i==2 || i==4 || i==6) {
 				switch(angoli[i]) {
 				
-				case StatoAngolo.VEGETALE: 	angoliToString[i]="\u001B[32m"+angoli[i].toString()+"\u001B[0m";
+				case VEGETALE: 	angoliToString[i]="\u001B[32m"+angoli[i].toString()+"\u001B[0m";
 											break;
-				case StatoAngolo.ANIMALE: 	angoliToString[i]="\u001B[36m"+angoli[i].toString()+"\u001B[0m";
+				case ANIMALE: 	angoliToString[i]="\u001B[36m"+angoli[i].toString()+"\u001B[0m";
 											break;
-				case StatoAngolo.INSETTI: 	angoliToString[i]="\u001B[31m"+angoli[i].toString()+"\u001B[0m";
+				case INSETTI: 	angoliToString[i]="\u001B[31m"+angoli[i].toString()+"\u001B[0m";
 											break;
-				case StatoAngolo.FUNGHI: 	angoliToString[i]="\u001B[35m"+angoli[i].toString()+"\u001B[0m";
+				case FUNGHI: 	angoliToString[i]="\u001B[35m"+angoli[i].toString()+"\u001B[0m";
 											break;
-				case StatoAngolo.PIUMA: 	angoliToString[i]="\u001B[33m"+angoli[i].toString()+"\u001B[0m";
+				case PIUMA: 	angoliToString[i]="\u001B[33m"+angoli[i].toString()+"\u001B[0m";
 											break;
-				case StatoAngolo.INCHIOSTRO:angoliToString[i]="\u001B[33m"+angoli[i].toString()+"\u001B[0m";				
+				case INCHIOSTRO:angoliToString[i]="\u001B[33m"+angoli[i].toString()+"\u001B[0m";				
 											break;
-				case StatoAngolo.PERGAMENA: angoliToString[i]="\u001B[33m"+angoli[i].toString()+"\u001B[0m";
+				case PERGAMENA: angoliToString[i]="\u001B[33m"+angoli[i].toString()+"\u001B[0m";
 											break;
-				case StatoAngolo.NULL: 		angoliToString[i]="\t  ";
+				case NULL: 		angoliToString[i]="\t  ";
 											break;
-				case StatoAngolo.VUOTO: 	angoliToString[i]=angoli[i].toString();
+				case VUOTO: 	angoliToString[i]=angoli[i].toString();
 											break;
-				case StatoAngolo.COPERTO: 	angoliToString[i]=angoli[i].toString();
+				case COPERTO: 	angoliToString[i]=angoli[i].toString();
 											break;
 				}
 				angoliToString[i]=" "+angoliToString[i];
@@ -89,25 +89,25 @@ public class Casella {
 			else{
 				switch(angoli[i]) {
 				
-				case StatoAngolo.VEGETALE: 	angoliToString[i]="  \u001B[32m"+angoli[i].toString()+"\u001B[0m";
+				case VEGETALE: 	angoliToString[i]="  \u001B[32m"+angoli[i].toString()+"\u001B[0m";
 											break;
-				case StatoAngolo.ANIMALE: 	angoliToString[i]="   \u001B[36m"+angoli[i].toString()+"\u001B[0m";
+				case ANIMALE: 	angoliToString[i]="   \u001B[36m"+angoli[i].toString()+"\u001B[0m";
 											break;
-				case StatoAngolo.INSETTI: 	angoliToString[i]="   \u001B[31m"+angoli[i].toString()+"\u001B[0m";
+				case INSETTI: 	angoliToString[i]="   \u001B[31m"+angoli[i].toString()+"\u001B[0m";
 											break;
-				case StatoAngolo.FUNGHI: 	angoliToString[i]="    \u001B[35m"+angoli[i].toString()+"\u001B[0m";
+				case FUNGHI: 	angoliToString[i]="    \u001B[35m"+angoli[i].toString()+"\u001B[0m";
 											break;
-				case StatoAngolo.PIUMA: 	angoliToString[i]="     \u001B[33m"+angoli[i].toString()+"\u001B[0m";
+				case PIUMA: 	angoliToString[i]="     \u001B[33m"+angoli[i].toString()+"\u001B[0m";
 											break;
-				case StatoAngolo.INCHIOSTRO:angoliToString[i]="\u001B[33m"+angoli[i].toString()+"\u001B[0m";
+				case INCHIOSTRO:angoliToString[i]="\u001B[33m"+angoli[i].toString()+"\u001B[0m";
 											break;
-				case StatoAngolo.PERGAMENA: angoliToString[i]=" \u001B[33m"+angoli[i].toString()+"\u001B[0m";
+				case PERGAMENA: angoliToString[i]=" \u001B[33m"+angoli[i].toString()+"\u001B[0m";
 											break;
-				case StatoAngolo.NULL: 		angoliToString[i]="\t  ";
+				case NULL: 		angoliToString[i]="\t  ";
 											break;
-				case StatoAngolo.VUOTO: 	angoliToString[i]="     "+angoli[i].toString();
+				case VUOTO: 	angoliToString[i]="     "+angoli[i].toString();
 											break;
-				case StatoAngolo.COPERTO: 	angoliToString[i]="   "+angoli[i].toString();
+				case COPERTO: 	angoliToString[i]="   "+angoli[i].toString();
 											break;
 				}
 				angoliToString[i]=angoliToString[i]+" ";
