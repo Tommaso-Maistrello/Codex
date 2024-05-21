@@ -1,31 +1,30 @@
 package Gioco;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
 import Carte.CartaIniziale;
+import Carte.CartaOro;
+import Carte.CartaRisorsa;
 import Enum.ColoreSegnalino;
+import Mazzi.MazzoCarteOro;
+import Mazzi.MazzoCarteRisorsa;
 
 public class Giocatore {
 
 	private final String username;
 	private final ColoreSegnalino coloreSegnalino;
 	private int punteggio;
-	public static int numGiocatore;
-
-	
-	
-	/***
-	 * Costruttore della classe Giocatore
-	 * 
-	 * @param username		->	parametro che passa lo username del nuovo giocatore
-	 * 
-	 */
-	public Giocatore(String username) {
+	private static int numGiocatore;
+	private static Mano mano;
+ 
+	public Giocatore(String username ) {
 		this.username=username;
 		coloreSegnalino=ColoreSegnalino.getColore();
 		this.punteggio=0;
+		this.mano= mano;
 		
 	}
 	
@@ -48,10 +47,13 @@ public class Giocatore {
 	public ColoreSegnalino getColoreSegnalino() {
 		return coloreSegnalino;
 	}
+	public int  getNumGiocatori() {
+		return numGiocatore;
+	}
 	
 	
 	
-	private static Giocatore[] setGiocatori() {
+	public static Giocatore[] setGiocatori() {
 		Scanner sc=new Scanner(System.in);
 		
 		int numGiocatori=0;
@@ -81,12 +83,13 @@ public class Giocatore {
 			//}while(username.trim().isEmpty());
 			giocatori[i]=new Giocatore(username);
 		}
-			return giocatori;
+		sc.close();
+		return giocatori;
 		}
 	
 	
 	
-	private static Giocatore[] disordinaGiocatori() {
+	public static Giocatore[] disordinaGiocatori() {
 		Giocatore[] giocatori = new Giocatore[numGiocatore];
 		giocatori = setGiocatori();
 		
@@ -101,10 +104,6 @@ public class Giocatore {
 		return giocatori;
 	}
 	
-	private static int numGiocatori() {
-		return numGiocatore;
-	}	
-	
 	
 	public static void creaGiocatori() {
 		
@@ -115,7 +114,17 @@ public class Giocatore {
 			 System.out.println("Il giocatore che giocherà per "+j+"° è "+giocatori[i].getUsername()+" e ha segnalino "+ giocatori[i].getColoreSegnalino().toString().toLowerCase()+".");
 			 
 		}
+		
 	}
+	
+	public void setMano(Mano mano) {
+		this.mano= mano;
+	}
+	public static Mano getMano(Mano mano) {
+		return mano;
+	}
+	
+	
 			
 	
 }
