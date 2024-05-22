@@ -30,14 +30,17 @@ public class Partita {
 		//Campo campo = new Campo();
 		//campo.visualizzaCampo();
 		//Giocatore.creaGiocatori();
-		
+		MazzoCarteOro.costruisciMazzo();
+        MazzoCarteRisorsa.costruisciMazzo();
+        MazzoCarteOro.mischiaMazzo();
+        MazzoCarteRisorsa.mischiaMazzo();
 		
 		player = Giocatore.setGiocatori();
 		 
 		//System.out.println("il giocatore 1 :"+ player[0].getUsername());
 		//System.out.println("il giocatore 2c:"+ player[1].getUsername());
 		
-		for(int i =0; i<player.length; i++) {
+		for(int i =0; i<player.length-1; i++) {
 			
 		player[i].setMano(pescaCarte());
 		System.out.println("il giocatore " + player[i].getUsername()+"ha id della carta risorsa 1: " +mano.getCartaRisorsa1(player[i]).getId() );	
@@ -53,15 +56,14 @@ public class Partita {
 	public Mano pescaCarte() {
 		// crea i mazzi
 
-		MazzoCarteOro.costruisciMazzo();
-        MazzoCarteRisorsa.costruisciMazzo();
+		
         
         List<CartaRisorsa> mazzoRisorsa= MazzoCarteRisorsa.getMazzoRisorsa();
         List<CartaOro> mazzoOro =MazzoCarteOro.getMazzoOro();
         
-        MazzoCarteOro.mischiaMazzo();
-        MazzoCarteRisorsa.mischiaMazzo();
-        
+       
+     	System.out.println("lungezza lista iniziale mazzoRisorse " +MazzoCarteRisorsa.mazzoRisorse.size());
+    	System.out.println("lungezza listaf iniziale mazzoOro" +MazzoCarteOro.mazzoOro.size()); 
   
   
        
@@ -81,9 +83,12 @@ public class Partita {
        
         System.out.println("carta risorsa 1  " + mano.getCartaRisorsa1(player[0]).getId());
         System.out.println("carta risorsa 2  " +mano.getCartaRisorsa2(player[0]).getId());
-	System.out.println("lungezza listafinale mazzoRisorse " +MazzoCarteRisorsa.mazzoRisorse.size());
-	System.out.println("lungezza listafinale mazzoOro" +MazzoCarteOro.mazzoOro.size());
+	System.out.println("lungezza lista finale mazzoRisorse " +MazzoCarteRisorsa.mazzoRisorse.size());
+	System.out.println("lungezza lista finale mazzoOro" +MazzoCarteOro.mazzoOro.size()); 
 	*/
+      	 
+        
+        
 		 //System.out.println("id giocatore " +mano.getNumeroGiocatore());
 	return mano;
 	
