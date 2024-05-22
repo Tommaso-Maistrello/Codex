@@ -19,6 +19,7 @@ public class Giocatore {
 	private int punteggio;
 	private static int numGiocatore;
 	private static Mano mano;
+	private static Giocatore[] giocatori;
  
 	public Giocatore(String username ) {
 		this.username=username;
@@ -88,7 +89,7 @@ public class Giocatore {
 		}
 	
 	
-	
+	/*
 	public static Giocatore[] disordinaGiocatori() {
 		Giocatore[] giocatori = new Giocatore[numGiocatore];
 		giocatori = setGiocatori();
@@ -103,8 +104,9 @@ public class Giocatore {
 		System.out.println("Elaborazione dell'ordine casuale di gioco in corso...");
 		return giocatori;
 	}
+	*/
 	
-	
+	/*
 	public static void creaGiocatori() {
 		
 		Giocatore[] giocatori = disordinaGiocatori();
@@ -114,8 +116,13 @@ public class Giocatore {
 			 System.out.println("Il giocatore che giocherà per "+j+"° è "+giocatori[i].getUsername()+" e ha segnalino "+ giocatori[i].getColoreSegnalino().toString().toLowerCase()+".");
 			 
 		}
-		
 	}
+	*/
+
+    public static Giocatore[] getGiocatori() {
+       
+        return giocatori;
+    }
 	
 	public void setMano(Mano mano) {
 		this.mano= mano;

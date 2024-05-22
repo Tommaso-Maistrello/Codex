@@ -43,15 +43,15 @@ public class Mano {
 }
     
 
-    public static CartaRisorsa getCartaRisorsa1() {
+    public static CartaRisorsa getCartaRisorsa1(Giocatore player) {
         return cartaRisorsa1;
     }
 
-    public static CartaRisorsa getCartaRisorsa2() {
+    public static CartaRisorsa getCartaRisorsa2(Giocatore player) {
         return cartaRisorsa2;
     }
 
-    public static CartaOro getCartaOro() {
+    public static CartaOro getCartaOro(Giocatore player) {
         return cartaOro;
     }
 /*
