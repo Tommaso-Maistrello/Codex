@@ -15,7 +15,7 @@ public class Partita {
 	public static List<CartaRisorsa> mazzoRisorse = new ArrayList<>();
 	  public static List<CartaOro> mazzoOro = new ArrayList<>();
 	  private static Giocatore[] player;
-	  private static Mano mano;
+	  //private static Mano mano;
 
 	public void newPartita( )throws FileNotFoundException {
 		
@@ -30,6 +30,8 @@ public class Partita {
 		//Campo campo = new Campo();
 		//campo.visualizzaCampo();
 		//Giocatore.creaGiocatori();
+		
+		
 		MazzoCarteOro.costruisciMazzo();
         MazzoCarteRisorsa.costruisciMazzo();
         MazzoCarteOro.mischiaMazzo();
@@ -40,23 +42,36 @@ public class Partita {
 		//System.out.println("il giocatore 1 :"+ player[0].getUsername());
 		//System.out.println("il giocatore 2c:"+ player[1].getUsername());
 		
-		for(int i =0; i<player.length-1; i++) {
+		for(int i =0; i<player.length; i++) {
 			
 		player[i].setMano(pescaCarte());
-		System.out.println("il giocatore " + player[i].getUsername()+"ha id della carta risorsa 1: " +mano.getCartaRisorsa1(player[i]).getId() );	
-		System.out.println("ilgiocatore " + player[i].getUsername()+"ha id della carta risorsa 2: " +mano.getCartaRisorsa2(player[i]).getId());	
-		System.out.println("ilgiocatore " + player[i].getUsername()+"ha id della carta carta oro: " +mano.getCartaOro(player[i]).getId());
+		/*
+		System.out.println("il giocatore " + player[i].getUsername()+" ha id della carta risorsa 1: " +mano.getCartaRisorsa(player[i],0).getId());	
+		System.out.println("ilgiocatore " + player[i].getUsername()+" ha id della carta risorsa 2: " +mano.getCartaRisorsa(player[i],5).getId());	
+		System.out.println("ilgiocatore " + player[i].getUsername()+" ha id della carta carta oro: " +mano.getCartaOro(player[i],0).getId());
+				System.out.println("il giocatore " + player[i].getUsername()+" ha id della carta risorsa 1: "+player[i].getMano().getCartaRisorsa(0).toString());
+		System.out.println("il giocatore " + player[i].getUsername()+" ha id della carta risorsa 1: "+player[i].getMano().getCartaRisorsa(1).toString());
+		System.out.println("il giocatore " + player[i].getUsername()+" ha id della carta risorsa 2: "+player[i].getMano().getCartaOro(0).toString());
+		
+		*/
+		Mano mano2;
+		mano2= player[i].getMano();
+		
+		System.out.println("il giocatore " + player[i].getUsername()+" ha id della carta risorsa 1:" +mano2.getCartaRisorsa(0).toString());
+
+		
 		}
 		
 		
 		
 //		player = Giocatore.disordinaGiocatori();
-		pescaCarte();
+		
 	}
 	public Mano pescaCarte() {
 		// crea i mazzi
-
+		Mano manoTemporanea = null;
 		
+		Mano mano= null;
         
         List<CartaRisorsa> mazzoRisorsa= MazzoCarteRisorsa.getMazzoRisorsa();
         List<CartaOro> mazzoOro =MazzoCarteOro.getMazzoOro();
@@ -65,13 +80,19 @@ public class Partita {
      	System.out.println("lungezza lista iniziale mazzoRisorse " +MazzoCarteRisorsa.mazzoRisorse.size());
     	System.out.println("lungezza listaf iniziale mazzoOro" +MazzoCarteOro.mazzoOro.size()); 
   
-  
+    	   
        
-        Mano.PescaCartaRisorsa(mazzoRisorsa, 1);
-        Mano.PescaCartaRisorsa(mazzoRisorsa, 2);
-        Mano.PescaCartaOro(mazzoOro);
-    
-        mano= new Mano(Mano.getCartaRisorsa1(player[0]), Mano.getCartaRisorsa2(player[0]), Mano.getCartaOro(player[0]));
+    	manoTemporanea.PescaCartaRisorsa(mazzoRisorsa);
+    	manoTemporanea.PescaCartaRisorsa(mazzoRisorsa);
+    	manoTemporanea.PescaCartaOro(mazzoOro);
+         List<CartaRisorsa> mazzoRisorsaTemporaneo;
+        List<CartaOro> mazzoOroTemporaneo;
+        mazzoRisorsaTemporaneo= manoTemporanea.getManoRisorsa();
+        mazzoOroTemporaneo= manoTemporanea.getManoOro();
+        mano= new Mano(mazzoRisorsaTemporaneo, mazzoOroTemporaneo);
+        mazzoRisorsa =null;
+        mazzoOro= null;
+        System.out.println( mazzoOroTemporaneo.get(0).getId()+ "è stata eliminata");
       //  System.out.println("lungezza lista inizialie mazzoRisorse " +MazzoCarteRisorsa.mazzoRisorse.size());
        
      
@@ -83,11 +104,12 @@ public class Partita {
        
         System.out.println("carta risorsa 1  " + mano.getCartaRisorsa1(player[0]).getId());
         System.out.println("carta risorsa 2  " +mano.getCartaRisorsa2(player[0]).getId());
+      	*/  
 	System.out.println("lungezza lista finale mazzoRisorse " +MazzoCarteRisorsa.mazzoRisorse.size());
 	System.out.println("lungezza lista finale mazzoOro" +MazzoCarteOro.mazzoOro.size()); 
-	*/
+
       	 
-        
+	    
         
 		 //System.out.println("id giocatore " +mano.getNumeroGiocatore());
 	return mano;

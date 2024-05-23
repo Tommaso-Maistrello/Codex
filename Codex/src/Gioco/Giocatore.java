@@ -127,9 +127,11 @@ public class Giocatore {
 	public void setMano(Mano mano) {
 		this.mano= mano;
 	}
-	public static Mano getMano(Mano mano) {
+	public static Mano getMano() {
 		return mano;
 	}
+
+ 
 	
 	
 			
