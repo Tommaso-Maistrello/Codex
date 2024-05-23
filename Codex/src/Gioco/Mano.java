@@ -11,7 +11,7 @@ import Carte.CartaRisorsa;
 public class Mano {
     private static List<CartaRisorsa> cartaRisorsa;
     private static List<CartaOro>  cartaOro;
-    private int numeroGiocatore;
+
   
     
     public Mano(List<CartaRisorsa> cartaR,List<CartaOro> cartaO) {
@@ -44,10 +44,12 @@ public class Mano {
       //  this.numeroGiocatore= numeroGiocatore;
 }
     
+    
 
     public static CartaRisorsa getCartaRisorsa(int posizione) {
     	CartaRisorsa carta = null;
-    	if (posizione<cartaRisorsa.size()) {
+    	int l= cartaRisorsa.size();
+    	if (posizione<l) {
     		carta= cartaRisorsa.get(posizione);
     	}
     	else {

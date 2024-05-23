@@ -25,7 +25,7 @@ public class Giocatore {
 		this.username=username;
 		coloreSegnalino=ColoreSegnalino.getColore();
 		this.punteggio=0;
-		this.mano= mano;
+		this.mano= null;
 		
 	}
 	
@@ -125,12 +125,15 @@ public class Giocatore {
     }
 	
 	public void setMano(Mano mano) {
+ 
 		this.mano= mano;
 	}
 	public static Mano getMano() {
 		return mano;
 	}
-
+	
+	  
+ 
  
 	
 	

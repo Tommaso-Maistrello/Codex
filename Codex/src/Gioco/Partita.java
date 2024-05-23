@@ -50,15 +50,13 @@ public class Partita {
 		System.out.println("ilgiocatore " + player[i].getUsername()+" ha id della carta risorsa 2: " +mano.getCartaRisorsa(player[i],5).getId());	
 		System.out.println("ilgiocatore " + player[i].getUsername()+" ha id della carta carta oro: " +mano.getCartaOro(player[i],0).getId());
 				System.out.println("il giocatore " + player[i].getUsername()+" ha id della carta risorsa 1: "+player[i].getMano().getCartaRisorsa(0).toString());
-		System.out.println("il giocatore " + player[i].getUsername()+" ha id della carta risorsa 1: "+player[i].getMano().getCartaRisorsa(1).toString());
-		System.out.println("il giocatore " + player[i].getUsername()+" ha id della carta risorsa 2: "+player[i].getMano().getCartaOro(0).toString());
-		
+				System.out.println("il giocatore " + player[i].getUsername()+" ha id della carta risorsa 1: "+player[i].getMano().getCartaRisorsa(1).getId() );
+		System.out.println("il giocatore " + player[i].getUsername()+" ha id della carta risorsa 2: "+player[i].getMano().getCartaOro(0).getId() );
 		*/
-		Mano mano2;
-		mano2= player[i].getMano();
-		
-		System.out.println("il giocatore " + player[i].getUsername()+" ha id della carta risorsa 1:" +mano2.getCartaRisorsa(0).toString());
-
+		//int j = player[i].getMano().getCartaRisorsa(0).getId();
+		//Mano mano2=  player[i].getMano();
+		//System.out.println("la risorsa 1 in mano ha id" + player[i].getMano().getCartaRisorsa(0).getId());
+		 
 		
 		}
 		
@@ -69,9 +67,9 @@ public class Partita {
 	}
 	public Mano pescaCarte() {
 		// crea i mazzi
-		Mano manoTemporanea = null;
+		Mano manoTemporanea=null;
 		
-		Mano mano= null;
+		Mano mano=null;
         
         List<CartaRisorsa> mazzoRisorsa= MazzoCarteRisorsa.getMazzoRisorsa();
         List<CartaOro> mazzoOro =MazzoCarteOro.getMazzoOro();
@@ -85,14 +83,17 @@ public class Partita {
     	manoTemporanea.PescaCartaRisorsa(mazzoRisorsa);
     	manoTemporanea.PescaCartaRisorsa(mazzoRisorsa);
     	manoTemporanea.PescaCartaOro(mazzoOro);
+    	
          List<CartaRisorsa> mazzoRisorsaTemporaneo;
         List<CartaOro> mazzoOroTemporaneo;
+        
         mazzoRisorsaTemporaneo= manoTemporanea.getManoRisorsa();
         mazzoOroTemporaneo= manoTemporanea.getManoOro();
         mano= new Mano(mazzoRisorsaTemporaneo, mazzoOroTemporaneo);
-        mazzoRisorsa =null;
-        mazzoOro= null;
-        System.out.println( mazzoOroTemporaneo.get(0).getId()+ "è stata eliminata");
+        mazzoRisorsaTemporaneo.removeAll(mazzoRisorsaTemporaneo);
+        mazzoOroTemporaneo.removeAll(mazzoOroTemporaneo);
+        
+ 
       //  System.out.println("lungezza lista inizialie mazzoRisorse " +MazzoCarteRisorsa.mazzoRisorse.size());
        
      
