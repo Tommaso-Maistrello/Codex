@@ -2,7 +2,7 @@ package Enum;
 
 public enum ColoreSegnalino {
 	
-	ROSSO, BLU, VERDE, GIALLO;
+	ROSSO, BLU, VERDE, GIALLO, NERO;
 
 	//variabile per contare quanti giocatori sono stati costruiti e sapere il numero del giocatore corrente
     private static int conta=1;
@@ -27,8 +27,19 @@ public enum ColoreSegnalino {
             case 4:
                 conta++;
                 return GIALLO;
+            case 5:
+            	conta++;
+            	return NERO;
             default:
                 return null;
         }
+       } 
+   public static void main(String[] args) {
+	   for(int i=1; i <= 4; i++) {
+		   ColoreSegnalino colore = ColoreSegnalino.getColore();
+		   System.out.println("Giocatore "+i+": "+colore);
+	   }
+   }
+    
     }
-}
+
