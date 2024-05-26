@@ -2,6 +2,8 @@ package Tabellone;
 
 import java.io.FileNotFoundException;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 import Gioco.Partita;
 
 public class Campo {
@@ -9,7 +11,7 @@ public class Campo {
 	// Se l'utente dovesse posizionare tutte le carte in diagonale, la grandezza
 	// massima sarebbe di 41 caselle occupate ma bisgona considerare ogni direzione
 	private final Casella[][] tabella;
-	private static final int SIZE = 8;
+	private static final int SIZE = 21;
 
 	public Campo() {
 		tabella = new Casella[SIZE][SIZE];
@@ -43,7 +45,67 @@ public class Campo {
 	}*/
 
 	public void visualizzaCampo() {
-		tabella[1][1].visualizzaCasella();
+		//PRIMA RIGA
+		//Sopra
+		System.out.print("┌─");
+		for(int i=0; i<20; i++) {
+			System.out.print("─┬─");
+		}
+		System.out.print("─┐");
+		//Mezzo
+		System.out.println();
+		System.out.print("│");
+		for(int i=0; i<21; i++) {
+			System.out.print(tabella[i][i].getIdColored());
+			System.out.print("│");
+		}
+		//Sotto
+		System.out.println();
+		System.out.print("├─");
+		for(int i=0; i<20; i++) {
+			System.out.print("─┼─");
+		}
+		System.out.print("─┤");
+		//RIGHE IN MEZZO
+		for(int j=1; j<20; j++) {
+			System.out.println();
+			System.out.print("│");
+			for(int i=0; i<21; i++) {
+				System.out.print(tabella[i][i].getIdColored());
+				System.out.print("│");
+			}
+			//Sotto
+			System.out.println();
+			System.out.print("├─");
+			for(int i=0; i<20; i++) {
+				System.out.print("─┼─");
+			}
+			System.out.print("─┤");
+		}
+		//RIGA IN MEZZO CON CARTA INIZIALE
+		//ULTIMA RIGA
+		System.out.println();
+		System.out.print("│");
+		for(int i=0; i<21; i++) {
+			System.out.print(tabella[i][i].getIdColored());
+			System.out.print("│");
+		}
+		
+		System.out.println();
+		System.out.print("└─");
+		for(int i=0; i<20; i++) {
+			System.out.print("─┴─");
+		}
+		System.out.print("─┘");
+		System.out.println();
+		
+		
+		
+		
+		
+		
+		
+		//tabella[1][1].visualizzaCasella();
 		
 	}
 

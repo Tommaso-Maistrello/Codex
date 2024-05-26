@@ -1,7 +1,13 @@
 package Tabellone;
 
+import java.util.List;
+
+import Carte.CartaOro;
+import Carte.CartaRisorsa;
 import Enum.Colore;
 import Enum.StatoAngolo;
+import Mazzi.MazzoCarteOro;
+import Mazzi.MazzoCarteRisorsa;
 
 public class Casella {
 
@@ -25,7 +31,7 @@ public class Casella {
 		this.punti=0;*/
 		//per prova
 		this.coordinata = new Coordinata(1,1);
-		this.id=1;		//1,VEGETALE,VEGETALE,NULL,VUOTO,VEGETALE,VERDE,0,
+		this.id=3;		
 		this.angoli = new StatoAngolo[Casella.SIZE];
 		this.angoliToString = new String[SIZE];
 		this.angoli[1] = StatoAngolo.VEGETALE;
@@ -117,6 +123,40 @@ public class Casella {
 	protected int getId() {
 		return id;
 	}
+	protected String getIdColored() {
+		String idColorato = String.valueOf(getId());
+		Colore coloreCarta;
+		if(getId()>=1 && getId()<=40) {
+			List<CartaRisorsa> mazzoRisorsa = MazzoCarteRisorsa.getMazzoRisorsa();
+			CartaRisorsa cartaRisorsaCercata = mazzoRisorsa.get(getId()-1);
+			coloreCarta=cartaRisorsaCercata.getColore();
+		} else if(getId()>=41 && getId()<=80) {
+			List<CartaOro> mazzoOro = MazzoCarteOro.getMazzoOro();
+			CartaOro cartaOroCercata = mazzoOro.get(getId()-41);
+			coloreCarta=cartaOroCercata.getColore();
+		} else {
+			coloreCarta=null;
+		}
+		if(coloreCarta!=null) {
+			switch(coloreCarta) {
+				case VERDE:	idColorato="\u001B[32m"+idColorato+"\u001B[0m";
+					break;
+				case VIOLA:	idColorato="\u001B[35m"+idColorato+"\u001B[0m";
+					break;
+				case BLU:	idColorato="\u001B[36m"+idColorato+"\u001B[0m";
+					break;
+				case ROSSO:	idColorato="\u001B[31m"+idColorato+"\u001B[0m";
+					break;
+				case ORO: 	idColorato="\u001B[33m"+idColorato+"\u001B[0m";
+					break;
+			}
+		}
+		
+		idColorato = String.format("%2s", idColorato);
+		
+		return idColorato;
+	}
+	
 
 	protected void setCarta(int id) {
 		this.id = id;

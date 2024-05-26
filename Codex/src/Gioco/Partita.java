@@ -20,15 +20,16 @@ public class Partita {
 	public void newPartita( )throws FileNotFoundException {
 		
 		//CartaRisorsa.newMazzoRisorsa();
-		
+		MazzoCarteRisorsa.costruisciMazzo();
+		MazzoCarteOro.costruisciMazzo();
 		
 	//	CartaObiettivo[] estratte = CartaObiettivo.carteObiettivoEstratte(CartaObiettivo.mescolaMazzo());
 	//	Tavolo tavolo = new Tavolo(estratte);
 	//	tavolo.visualizzaObiettiviComuni();
 		
 		
-		//Campo campo = new Campo();
-		//campo.visualizzaCampo();
+		Campo campo = new Campo();
+		campo.visualizzaCampo();
 		//Giocatore.creaGiocatori();
 		
 		
