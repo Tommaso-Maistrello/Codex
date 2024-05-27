@@ -13,7 +13,7 @@ public class Tavolo {
 	}
 	
 	
-	private static void visualizzaCaso(int id) {
+	public static void visualizzaCaso(int id) {
 		      
 		switch (id) {
 	        case 87:
@@ -109,6 +109,8 @@ public class Tavolo {
         String RequisitiPunti1 = obiettiviComuni[1].getRequisitiPunti();
         System.out.println("Secondo obiettivo comune: " + RequisitiPunti1);		*/
     }
+	
+
 	
 		/*
 	public static void main(String[] args) throws FileNotFoundException {

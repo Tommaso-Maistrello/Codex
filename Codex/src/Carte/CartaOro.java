@@ -15,14 +15,14 @@ import Gioco.Partita;
 public class CartaOro extends Carta {
 	
 	private final Colore colore;
-	private final String condizioneA, condizioneF, condizioneI, condizioneV,condizione;
+	private final String condizioneA, condizioneF, condizioneI, condizioneV,punti;
 	private final int numeroAnimale, numeroFunghi, numeroInsetti, numeroVegetale;
 	
 	
 	
 	public CartaOro(int id, StatoAngolo angoloFronteTopLeft, StatoAngolo angoloFronteTopRight, StatoAngolo angoloFronteBottomLeft, StatoAngolo angoloFronteBottomRight, 
 			StatoAngolo angoloRetroTopLeft, StatoAngolo angoloRetroTopRight, StatoAngolo angoloRetroBottomLeft, StatoAngolo angoloRetroBottomRight, StatoAngolo risorsaRetroCentrale, 
-			Colore colore,String condizione, String condizioneA, int numeroAnimale, String condizioneF, int numeroFunghi, String condizioneI, int numeroInsetti, String condizioneV, int numeroVegetale ) {
+			Colore colore,String punti, String condizioneA, int numeroAnimale, String condizioneF, int numeroFunghi, String condizioneI, int numeroInsetti, String condizioneV, int numeroVegetale ) {
 		super(id, angoloFronteTopLeft, angoloFronteTopRight, angoloFronteBottomLeft, angoloFronteBottomRight, 
 				angoloRetroTopLeft, angoloRetroTopRight, angoloRetroBottomLeft, angoloRetroBottomRight, risorsaRetroCentrale ); 
 			
@@ -36,7 +36,7 @@ public class CartaOro extends Carta {
 		this.numeroFunghi = numeroFunghi;
 		this.numeroInsetti = numeroInsetti;
 		this.numeroVegetale = numeroVegetale;
-		this.condizione = condizione;
+		this.punti = punti;
 		}
 		
 	
@@ -44,7 +44,7 @@ public class CartaOro extends Carta {
 		return colore;
 	}	
 	public String getCondizione() {
-		return condizione;
+		return punti;
 	}
 	
 	public String getCondizioneAnimali() {

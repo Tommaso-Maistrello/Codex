@@ -50,8 +50,8 @@ public class CartaObiettivo {
 	}
 
 
-	public static CartaObiettivo[] mescolaMazzo() throws FileNotFoundException {
-		CartaObiettivo[] mazzo = new CartaObiettivo[17];  
+	public static void mescolaMazzo(CartaObiettivo[] mazzo) throws FileNotFoundException {
+		   
 		CartaObiettivo[] temp = new CartaObiettivo[17]; 
 		mazzo = costruisciCarteObiettivo();
 		Random rnd = new Random();
@@ -64,7 +64,7 @@ public class CartaObiettivo {
 			mazzo[posizioneRandom]= mazzo[i];
 			mazzo[i]=temp[i];
 		}
-		return mazzo;
+		 
 	}
 	
 	/*
@@ -87,5 +87,6 @@ public class CartaObiettivo {
 		}
 		return estratte;
 	}
+	
 	
 }

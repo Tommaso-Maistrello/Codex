@@ -89,10 +89,8 @@ public class Giocatore {
 		}
 	
 	
-	/*
-	public static Giocatore[] disordinaGiocatori() {
-		Giocatore[] giocatori = new Giocatore[numGiocatore];
-		giocatori = setGiocatori();
+	public static Giocatore[] disordinaGiocatori(Giocatore[] giocatori) {
+	 
 		
 		Random rnd = new Random();
 		for (int i = 0; i < giocatori.length; i++) {
@@ -104,7 +102,7 @@ public class Giocatore {
 		System.out.println("Elaborazione dell'ordine casuale di gioco in corso...");
 		return giocatori;
 	}
-	*/
+	
 	
 	/*
 	public static void creaGiocatori() {

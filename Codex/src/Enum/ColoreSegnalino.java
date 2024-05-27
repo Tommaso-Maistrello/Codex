@@ -34,12 +34,13 @@ public enum ColoreSegnalino {
                 return null;
         }
        } 
+    /*
    public static void main(String[] args) {
 	   for(int i=1; i <= 4; i++) {
 		   ColoreSegnalino colore = ColoreSegnalino.getColore();
 		   System.out.println("Giocatore "+i+": "+colore);
 	   }
-   }
+   }*/
     
     }
 
