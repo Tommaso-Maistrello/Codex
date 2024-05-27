@@ -1,5 +1,6 @@
 package Tabellone;
 
+import java.util.Formatter;
 import java.util.List;
 
 import Carte.CartaOro;
@@ -31,7 +32,7 @@ public class Casella {
 		this.punti=0;*/
 		//per prova
 		this.coordinata = new Coordinata(1,1);
-		this.id=3;		
+		this.id=9;		
 		this.angoli = new StatoAngolo[Casella.SIZE];
 		this.angoliToString = new String[SIZE];
 		this.angoli[1] = StatoAngolo.VEGETALE;
@@ -126,6 +127,7 @@ public class Casella {
 	protected String getIdColored() {
 		String idColorato = String.valueOf(getId());
 		Colore coloreCarta;
+		
 		if(getId()>=1 && getId()<=40) {
 			List<CartaRisorsa> mazzoRisorsa = MazzoCarteRisorsa.getMazzoRisorsa();
 			CartaRisorsa cartaRisorsaCercata = mazzoRisorsa.get(getId()-1);
@@ -137,6 +139,7 @@ public class Casella {
 		} else {
 			coloreCarta=null;
 		}
+		
 		if(coloreCarta!=null) {
 			switch(coloreCarta) {
 				case VERDE:	idColorato="\u001B[32m"+idColorato+"\u001B[0m";
@@ -150,9 +153,9 @@ public class Casella {
 				case ORO: 	idColorato="\u001B[33m"+idColorato+"\u001B[0m";
 					break;
 			}
-		}
+		} else if(getId()<80) idColorato=" ";
 		
-		idColorato = String.format("%2s", idColorato);
+		if(getId()<10) idColorato=idColorato+" ";
 		
 		return idColorato;
 	}

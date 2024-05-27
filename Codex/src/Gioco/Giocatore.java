@@ -84,7 +84,7 @@ public class Giocatore {
 			//}while(username.trim().isEmpty());
 			giocatori[i]=new Giocatore(username);
 		}
-		sc.close();
+		//sc.close();
 		return giocatori;
 		}
 	
