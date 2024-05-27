@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Carte.CartaIniziale;
+import Carte.CartaObiettivo;
 import Carte.CartaOro;
 import Carte.CartaRisorsa;
 import Enum.ColoreSegnalino;
@@ -20,12 +21,13 @@ public class Giocatore {
 	private static int numGiocatore;
 	private static Mano mano;
 	private static Giocatore[] giocatori;
- 
+	private static CartaObiettivo obbiettivo;
 	public Giocatore(String username ) {
 		this.username=username;
 		coloreSegnalino=ColoreSegnalino.getColore();
 		this.punteggio=0;
 		this.mano= null;
+		this.obbiettivo=null;
 		
 	}
 	
@@ -129,7 +131,13 @@ public class Giocatore {
 	public static Mano getMano() {
 		return mano;
 	}
-	
+
+	public void setCartaObiettivo(CartaObiettivo cartaObiettivo) {
+		this.obbiettivo= cartaObiettivo;
+	}
+	public CartaObiettivo getCartaObiettivo() {
+		return obbiettivo;
+	}
 	  
  
  

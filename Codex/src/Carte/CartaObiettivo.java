@@ -35,11 +35,11 @@ public class CartaObiettivo {
 	
 	
 	public static CartaObiettivo[] costruisciCarteObiettivo() throws FileNotFoundException {
-		int i=1;
+		int i=0;
 		File fileObiettivo = new File ("carteObiettivo.txt");
 		Scanner leggi = new Scanner (fileObiettivo);
 		leggi.useDelimiter(",");
-		CartaObiettivo[] CartaObiettivo= new CartaObiettivo[17];
+		CartaObiettivo[] CartaObiettivo= new CartaObiettivo[16];
 		while(leggi.hasNextLine()) {
 			CartaObiettivo[i] = new CartaObiettivo ( leggi.nextInt(), leggi.next() ); // id, requisitiPunti
 			leggi.next();
@@ -50,10 +50,9 @@ public class CartaObiettivo {
 	}
 
 
-	public static void mescolaMazzo(CartaObiettivo[] mazzo) throws FileNotFoundException {
+	public static CartaObiettivo[] mescolaMazzo(CartaObiettivo[] mazzo) throws FileNotFoundException {
 		   
-		CartaObiettivo[] temp = new CartaObiettivo[17]; 
-		mazzo = costruisciCarteObiettivo();
+		CartaObiettivo[] temp = new CartaObiettivo[16]; 
 		Random rnd = new Random();
 		int posizioneRandom;
 		for (int i = mazzo.length-1; i>0; i--) {
@@ -64,7 +63,8 @@ public class CartaObiettivo {
 			mazzo[posizioneRandom]= mazzo[i];
 			mazzo[i]=temp[i];
 		}
-		 
+		
+		return mazzo; 
 	}
 	
 	/*

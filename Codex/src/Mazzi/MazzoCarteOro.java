@@ -60,6 +60,7 @@ public class MazzoCarteOro {
 		return mazzoOro;
 		
 	}
+	
 	public static void mischiaMazzo() {
 	        Collections.shuffle(mazzoOro);    
 	    	
