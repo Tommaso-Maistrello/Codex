@@ -35,8 +35,7 @@ public class Partita {
         
         player = Giocatore.setGiocatori();
         
-        //Per visualizzare il campo di un giocatore usare:
-     //   player[1].getCampo();
+    
 		
         
 
@@ -60,18 +59,13 @@ public class Partita {
 	    	System.out.println("-------------------------------------------------------------"  );
 	    	System.out.println("Premi Invio per continuare...");
 	    	sc.nextLine();
-	    	  for(int j =0; j<player.length; j++) {
-		   			 
-		  			System.out.println(" la carta ha "+player[j].getUsername()+"ha la carta con id"+player[j].getMano().getManoRisorsa().get(0).getId());
-		  			System.out.println(" la carta ha "+player[j].getUsername()+"ha la carta con id"+player[j].getMano().getManoRisorsa().get(1).getId());
-		  			
-		  		 
-		  		}
+	    
 	    	estraiObbiettivi();
 	     
 	    	mostraMano();
 	    	
-		
+	        //Per visualizzare il campo di un giocatore usare:
+	        player[1].getCampo();
 			
 	}
 	public Mano pescaCarte() {
@@ -92,18 +86,26 @@ public class Partita {
 	public void  mostraMano() {
 		Scanner sc= new Scanner(System.in);
 		CartaRisorsa cartaRisorsa;
-		 
+		CartaOro cartaOro;
 		int lunghezza;
 		for(int i =0; i<player.length; i++) {
 			System.out.println("è il turno del giocatore : "+ player[i].getUsername() );
     		System.out.println(" in mano ha le carte:" );
     		
-    		lunghezza=player[i].getMano().getManoRisorsa().size();
-			for(int j =0; j<lunghezza; j++) {
+    		 
+			for(int j =0; j<player[i].getMano().getManoRisorsa().size(); j++) {
 				 
 				System.out.println(" la carta ha id"+player[i].getMano().getManoRisorsa().get(j).getId());
 				cartaRisorsa=player[i].getMano().getManoRisorsa().get(j);
-			Mano.visualizzaCartaRisorsa(cartaRisorsa);;
+			Mano.visualizzaCartaRisorsa(cartaRisorsa);
+			
+			}
+			
+			for(int j =0; j<player[i].getMano().getManoOro().size(); j++) {
+				 
+				System.out.println(" la carta ha id"+player[i].getMano().getManoOro().get(j).getId());
+				cartaOro=player[i].getMano().getManoOro().get(j);
+				Mano.visualizzaCartaOro(cartaOro);
 			
 			}
 			System.out.println("Premi Invio per continuare...");

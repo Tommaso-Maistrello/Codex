@@ -89,16 +89,16 @@ public class Mano {
 		System.out.println("└──────────────┴──────────────┘");
 		System.out.println();
 	}
-    protected void visualizzaCartaOro(CartaOro cartaOro ) {
+    protected static void visualizzaCartaOro(CartaOro cartaOro ) {
  		System.out.println("┌──────────────┬──────────────┐");
- 		System.out.println("│"+cartaOro.angoloFronteTopLeft+"│"+cartaOro.angoloFronteTopRight+"│");
+ 		System.out.println("│"+cartaOro.angoloFronteTopLeft+"		"+cartaOro.angoloFronteTopRight+"│");
  		System.out.println("├──────────────┴──────────────┤");
  		System.out.println("│\t\t\t      │");
  		if(cartaOro.getRisorsaRetroCentrale().toString()!="\t")System.out.println("│\t"+cartaOro.getRisorsaRetroCentrale()+"\t      │");
  		System.out.println("│\t       "+cartaOro.getCondizione()+" \t      │");
  		System.out.println("│\t\t\t      │");
  		System.out.println("├──────────────┬──────────────┤");
- 		System.out.println("│"+cartaOro.angoloFronteBottomLeft+"│"+cartaOro.angoloFronteBottomLeft+"│");
+ 		System.out.println("│"+cartaOro.angoloFronteBottomLeft+"		│"+cartaOro.angoloFronteBottomLeft+"│");
  		System.out.println("└──────────────┴──────────────┘");
  		System.out.println();
  	}
