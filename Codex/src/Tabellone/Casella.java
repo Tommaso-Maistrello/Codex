@@ -31,25 +31,26 @@ public class Casella {
 		this.colore = null;
 		this.punti=0;*/
 		//per prova
-		this.coordinata = new Coordinata(1,1);
-		this.id=9;		
+		this.coordinata = coordinata;
+		/*this.id=9;		
 		this.angoli = new StatoAngolo[Casella.SIZE];
 		this.angoliToString = new String[SIZE];
 		this.angoli[1] = StatoAngolo.VEGETALE;
 		this.angoli[0] = StatoAngolo.INSETTI;
 		this.angoli[3] = StatoAngolo.NULL;
 		this.angoli[2] = StatoAngolo.INCHIOSTRO;
-		/*this.angoli[4] = StatoAngolo.COPERTO;
+		this.angoli[4] = StatoAngolo.COPERTO;
 		this.angoli[5] = StatoAngolo.FUNGHI;
 		this.angoli[6] = StatoAngolo.VUOTO;
 		this.angoli[7] = StatoAngolo.PIUMA;
 		this.angoli[8] = StatoAngolo.PERGAMENA;
 		this.angoli[9] = StatoAngolo.PIUMA;*/
-		this.risorsaCentrale = StatoAngolo.FUNGHI;
+		/*this.risorsaCentrale = StatoAngolo.FUNGHI;
 		this.colore = Colore.VERDE;
 		this.punti=2;
 		this.risorsaCentraleToString=null;
-		
+		*/
+		if(risorsaCentrale!=null) {
 		switch(risorsaCentrale) {
 		
 		case VEGETALE: 	risorsaCentraleToString="    \u001B[32m"+risorsaCentrale.toString()+"\u001B[0m ";
@@ -118,12 +119,19 @@ public class Casella {
 				angoliToString[i]=angoliToString[i]+" ";
 			}
 		}
+		} else {
 			
+		}
 	}
 
 	protected int getId() {
 		return id;
 	}
+	
+	/**
+	 * 
+	 * @return String idColorato -> ritorna la stringa id ma con il colore della carta stessa
+	 */
 	protected String getIdColored() {
 		String idColorato = String.valueOf(getId());
 		Colore coloreCarta;

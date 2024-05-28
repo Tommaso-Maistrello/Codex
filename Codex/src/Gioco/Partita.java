@@ -23,8 +23,6 @@ public class Partita {
 	
 		 Scanner sc = new Scanner(System.in);
 		
-	//	Campo campo = new Campo();
-		//campo.visualizzaCampo();
 		
 		
 		//costruzione mazzi  
@@ -37,7 +35,10 @@ public class Partita {
         
         player = Giocatore.setGiocatori();
         
-		Mano mano;
+        //Per visualizzare il campo di un giocatore usare:
+        player[1].getCampo();
+		
+        Mano mano;
 
 		for(int i =0; i<player.length; i++) {
 			mano = pescaCarte();

@@ -12,6 +12,7 @@ import Carte.CartaRisorsa;
 import Enum.ColoreSegnalino;
 import Mazzi.MazzoCarteOro;
 import Mazzi.MazzoCarteRisorsa;
+import Tabellone.Campo;
 
 public class Giocatore {
 
@@ -22,15 +23,19 @@ public class Giocatore {
 	private static Mano mano;
 	private static Giocatore[] giocatori;
 	private static CartaObiettivo obbiettivo;
+	private static Campo campo;
 	public Giocatore(String username ) {
 		this.username=username;
 		coloreSegnalino=ColoreSegnalino.getColore();
 		this.punteggio=0;
 		this.mano= null;
 		this.obbiettivo=null;
+		this.campo=new Campo();
 		
 	}
-	
+	public void getCampo() {
+		campo.visualizzaCampo();
+	}
 	public int getPunteggio() {
 		return punteggio;
 	}
