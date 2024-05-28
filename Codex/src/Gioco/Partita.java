@@ -36,28 +36,17 @@ public class Partita {
         player = Giocatore.setGiocatori();
         
         //Per visualizzare il campo di un giocatore usare:
-        player[1].getCampo();
+     //   player[1].getCampo();
 		
-        Mano mano;
+        
 
 		for(int i =0; i<player.length; i++) {
-			mano = pescaCarte();
-			player[i].setMano(mano);
+			Mano mano = pescaCarte();
+			 player[i].setMano(mano);
 			
-			 
-			System.out.println(" la carta ha "+player[i].getUsername()+"ha la carta con id"+player[i].getMano().getManoRisorsa().get(0).getId());
-  			System.out.println(" la carta ha "+player[i].getUsername()+"ha la carta con id"+player[i].getMano().getManoRisorsa().get(1).getId());
-  			
-			
-		 
 		}
-		  for(int j =0; j<player.length; j++) {
-	   			 
-	  			System.out.println(" la carta ha "+player[j].getUsername()+"ha la carta con id"+player[j].getMano().getManoRisorsa().get(0).getId());
-	  			System.out.println(" la carta ha "+player[j].getUsername()+"ha la carta con id"+player[j].getMano().getManoRisorsa().get(1).getId());
-	  			
-	  		 
-	  		}
+
+	  		
 			System.out.println("-------------------------------------------------------------"  );
 	     	System.out.println("Il giocatore 1 è: "+ player[0].getUsername() );
 	     	System.out.println("con segnalino colore: "+ player[0].getColoreSegnalino().toString().toLowerCase() );
@@ -87,18 +76,17 @@ public class Partita {
 	}
 	public Mano pescaCarte() {
 
-        List<CartaRisorsa> mazzoRisorsa= MazzoCarteRisorsa.getMazzoRisorsa();
-        List<CartaOro> mazzoOro =MazzoCarteOro.getMazzoOro();
+		List<CartaRisorsa> mazzoRisorsa = MazzoCarteRisorsa.getMazzoRisorsa();
+	    List<CartaOro> mazzoOro = MazzoCarteOro.getMazzoOro();
 
-         List<CartaRisorsa> mazzoRisorsaNew = null;
-        List<CartaOro> mazzoOroNew=null;
-        
-       Mano mano= new Mano(mazzoRisorsaNew, mazzoOroNew);
-       mano.PescaCartaRisorsa(mazzoRisorsa);
-    	mano.PescaCartaRisorsa(mazzoRisorsa);
-    	mano.PescaCartaOro(mazzoOro);
+	    List<CartaRisorsa> manoRisorsa = new ArrayList<>();
+	    List<CartaOro> manoOro = new ArrayList<>();
+
+	    manoRisorsa.add(mazzoRisorsa.remove(0));
+	    manoRisorsa.add(mazzoRisorsa.remove(0));
+	    manoOro.add(mazzoOro.remove(0));
       
-	return mano;
+        return new Mano(manoRisorsa, manoOro);
 	
 	}
 	public void  mostraMano() {

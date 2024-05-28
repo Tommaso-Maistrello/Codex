@@ -9,8 +9,8 @@ import Carte.CartaRisorsa;
 
 
 public class Mano {
-    private static List<CartaRisorsa> cartaRisorsa;
-    private static List<CartaOro>  cartaOro;
+    private List<CartaRisorsa> cartaRisorsa;
+    private List<CartaOro>  cartaOro;
 
   
     
@@ -21,7 +21,7 @@ public class Mano {
       
           //  this.numeroGiocatore= numeroGiocatore;
     }
-    public static void PescaCartaRisorsa(List<CartaRisorsa> mazzoRisorsa ) {
+    public void PescaCartaRisorsa(List<CartaRisorsa> mazzoRisorsa ) {
     	 if (cartaRisorsa == null) {
  	        cartaRisorsa = new ArrayList<>(); // Initialize cartaRisorsa list if it's null
  	    }
@@ -30,7 +30,7 @@ public class Mano {
         		 
       //  this.numeroGiocatore= numeroGiocatore;
 }
-    public static void PescaCartaOro(List<CartaOro> mazzoOro ) {
+    public void PescaCartaOro(List<CartaOro> mazzoOro ) {
     	 if (cartaOro == null) {
     	        cartaOro = new ArrayList<>(); // Initialize cartaRisorsa list if it's null
     	    }
@@ -40,35 +40,32 @@ public class Mano {
         
         
        
-        ;  
+        
       //  this.numeroGiocatore= numeroGiocatore;
 }
     
     
 
-    public static CartaRisorsa getCartaRisorsa(int posizione) {
-    	CartaRisorsa carta = null;
-    	int l= cartaRisorsa.size();
-    	if (posizione<l) {
-    		carta= cartaRisorsa.get(posizione);
-    	}
-    	else {
-    		System.out.println("non esiste la carta in posizione:"+posizione);
-    	}
-    	
+    public CartaRisorsa getCartaRisorsa(int posizione) {
+        CartaRisorsa carta = null;
+        int l = cartaRisorsa.size();
+        if (posizione < l) {
+            carta = cartaRisorsa.get(posizione);
+        } else {
+            System.out.println("Non esiste la carta in posizione: " + posizione);
+        }
         return carta;
     }
-    public static List<CartaRisorsa> getManoRisorsa() {
-    	
-    	return cartaRisorsa;
-        
+
+    public List<CartaRisorsa> getManoRisorsa() {
+        return cartaRisorsa;
     }
-  public static List<CartaOro> getManoOro() {
+  public  List<CartaOro> getManoOro() {
     	
     	return cartaOro;
         
     }
-    public static CartaOro getCartaOro( int posizione) {
+    public  CartaOro getCartaOro( int posizione) {
     	CartaOro carta = null;
     	if (posizione<cartaOro.size()) {
     		carta= cartaOro.get(posizione);
@@ -105,46 +102,7 @@ public class Mano {
  		System.out.println("└──────────────┴──────────────┘");
  		System.out.println();
  	}
-   
-    
-/*
- * 
- *     public static CartaRisorsa PescaCartaRisorsa(List<CartaRisorsa> mazzoRisorsa) {
-        if (cartaRisorsa == null) {
-            cartaRisorsa = new ArrayList<>(); // Initialize cartaRisorsa list if it's null
-        }
-        
-        CartaRisorsa carta = mazzoRisorsa.get(0); // Get the first carta from mazzoRisorsa
-        cartaRisorsa.add(carta); // Add the carta to cartaRisorsa list
-        mazzoRisorsa.remove(0); // Remove the carta from mazzoRisorsa
-        
-        return carta; // Return the carta
-    }
-    public static CartaOro PescaCartaOro(List<CartaOro> mazzoOro) {
-        if (cartaRisorsa == null) {
-            cartaRisorsa = new ArrayList<>(); // Initialize cartaRisorsa list if it's null
-        }
-        
-        CartaOro carta = mazzoOro.get(0); // Get the first carta from mazzoRisorsa
-        cartaOro.add(carta); // Add the carta to cartaRisorsa list
-        mazzoOro.remove(0); // Remove the carta from mazzoRisorsa
-        
-        return carta; // Return the carta
-    }
-    
-    public static CartaRisorsa getCartaRisorsa2(Giocatore player) {
-        return cartaRisorsa2;
-    }
 
-    public static CartaOro getCartaOro(Giocatore player) {
-        return cartaOro;
-    }
-    */
-/*
-	public int getNumeroGiocatore() {
-		return numeroGiocatore;
-	}
-*/
     }
 
 

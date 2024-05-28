@@ -20,7 +20,7 @@ public class Giocatore {
 	private final ColoreSegnalino coloreSegnalino;
 	private int punteggio;
 	private static int numGiocatore;
-	private static Mano mano;
+	private  Mano mano;
 	private static Giocatore[] giocatori;
 	private static CartaObiettivo obbiettivo;
 	private static Campo campo;
@@ -133,7 +133,7 @@ public class Giocatore {
  
 		this.mano= mano;
 	}
-	public static Mano getMano() {
+	public  Mano getMano() {
 		return mano;
 	}
 
