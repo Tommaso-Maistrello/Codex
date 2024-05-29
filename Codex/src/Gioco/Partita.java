@@ -11,6 +11,7 @@ import Carte.CartaRisorsa;
 import Mazzi.MazzoCarteOro;
 import Mazzi.MazzoCarteRisorsa;
 import Tabellone.Campo;
+import Tabellone.Casella;
 
 public class Partita {
 	private static List<CartaRisorsa> mazzoRisorse = new ArrayList<>();
@@ -44,28 +45,45 @@ public class Partita {
 			 player[i].setMano(mano);
 			
 		}
-
-	  		
-			System.out.println("-------------------------------------------------------------"  );
-	     	System.out.println("Il giocatore 1 è: "+ player[0].getUsername() );
-	     	System.out.println("con segnalino colore: "+ player[0].getColoreSegnalino().toString().toLowerCase() );
-	    	System.out.println("Il giocatore 2 è: "+ player[1].getUsername() );
-	    	System.out.println("con segnalino colore: "+ player[1].getColoreSegnalino().toString().toLowerCase() );
-	    	System.out.println("-------------------------------------------------------------"  );
-	    	System.out.println("Premi Invio per continuare...");
-	    	sc.nextLine();
-	    	//player= Giocatore.disordinaGiocatori(player);
-	    	System.out.println("Il primo giocatore è: "+ player[0].getUsername() );
-	    	System.out.println("-------------------------------------------------------------"  );
-	    	System.out.println("Premi Invio per continuare...");
-	    	sc.nextLine();
-	    
-	    	estraiObbiettivi();
-	     
-	    	mostraMano();
-	    	
-	        //Per visualizzare il campo di un giocatore usare:
-	        player[1].getCampo();
+		System.out.println("-------------------------------------------------------------"  );
+	  	for(int i=0; i<player.length; i++) {
+	  		int j=i+1;
+	     	System.out.print("Il giocatore "+j+" è "+ player[i].getUsername());
+	     	System.out.print(" con segnalino colore ");
+	     	switch(player[i].getColoreSegnalino().toString().toLowerCase()) {
+	     		case "rosso":	System.out.print("\u001B[31mrosso");
+	     						player[i].setUsername("\u001B[31m"+player[i].getUsername()+"\u001B[0m");
+	     						break;
+	     		case "blu":		System.out.print("\u001B[34mblu");
+	     						player[i].setUsername("\u001B[34m"+player[i].getUsername()+"\u001B[0m");
+	     						break;
+	     		case "verde":	System.out.print("\u001B[32mverde");
+	     						player[i].setUsername("\u001B[32m"+player[i].getUsername()+"\u001B[0m");
+	     						break;
+	     		case "giallo":	System.out.print("\u001B[33mgiallo");
+	     						player[i].setUsername("\u001B[33m"+player[i].getUsername()+"\u001B[0m");
+	     						break;
+	     		case "nero":	System.out.print("\u001B[30mnero");
+	     						player[i].setUsername("\u001B[30m"+player[i].getUsername()+"\u001B[0m");
+	     						break;
+	     	}
+	     	System.out.println("\u001B[0m.");
+	    }
+    	System.out.println("-------------------------------------------------------------"  );
+    	System.out.println("\nPremi invio per continuare...");
+    	sc.nextLine();
+    	//player= Giocatore.disordinaGiocatori(player);
+    	//System.out.println("Il primo giocatore è: "+ player[0].getUsername() );
+    	//System.out.println("-------------------------------------------------------------"  );
+    	//System.out.println("Premi invio per continuare...");
+    	//sc.nextLine();
+    
+    	estraiObbiettivi();
+     
+    	mostraMano();
+    	
+        //Per visualizzare il campo di un giocatore usare:
+        player[0].getCampo();
 			
 	}
 	public Mano pescaCarte() {
@@ -89,7 +107,7 @@ public class Partita {
 		CartaOro cartaOro;
 		int lunghezza;
 		for(int i =0; i<player.length; i++) {
-			System.out.println("è il turno del giocatore : "+ player[i].getUsername() );
+			System.out.println("È il turno del giocatore : "+ player[i].getUsername() );
     		System.out.println(" in mano ha le carte:" );
     		
     		 
@@ -97,7 +115,9 @@ public class Partita {
 				 
 				System.out.println(" la carta ha id"+player[i].getMano().getManoRisorsa().get(j).getId());
 				cartaRisorsa=player[i].getMano().getManoRisorsa().get(j);
-			Mano.visualizzaCartaRisorsa(cartaRisorsa);
+			//Mano.visualizzaCartaRisorsa(cartaRisorsa);
+			Casella casellaRisorsa=new Casella(cartaRisorsa);
+			casellaRisorsa.visualizzaCasella();
 			
 			}
 			
@@ -105,7 +125,7 @@ public class Partita {
 				 
 				System.out.println(" la carta ha id"+player[i].getMano().getManoOro().get(j).getId());
 				cartaOro=player[i].getMano().getManoOro().get(j);
-				Mano.visualizzaCartaOro(cartaOro);
+				//Mano.visualizzaCartaOro(cartaOro);
 			
 			}
 			System.out.println("Premi Invio per continuare...");
@@ -125,10 +145,10 @@ public class Partita {
 		CartaObiettivo[] estratte = CartaObiettivo.carteObiettivoEstratte(mazzoObbiettivo);
 		Tavolo tavolo = new Tavolo(estratte);
 		tavolo.visualizzaObiettiviComuni();
-		System.out.println("Premi Invio per continuare...");
-    	sc.nextLine();
 		System.out.println("-------------------------------------------------------------"  );
-		System.out.println("Scegli uno di questi 2 obbiettivi"  );
+		System.out.println("\nPremi Invio per continuare...");
+    	sc.nextLine();
+		System.out.println("Ora ogni giocatore deve scegliere il proprio obiettivo segreto"  );
 		
 		
 		
@@ -139,7 +159,7 @@ public class Partita {
                
 
             
-            System.out.println("Il giocatore " + player[i].getUsername() + " può scegliere tra le carte:");
+            System.out.println(player[i].getUsername() + " può scegliere tra le carte:");
             System.out.println("1) Obiettivo con id " + mazzoObbiettivo[id].getId()+": ");
             tavolo.visualizzaCaso(mazzoObbiettivo[id].getId());
             id++;
@@ -147,7 +167,7 @@ public class Partita {
             tavolo.visualizzaCaso(mazzoObbiettivo[id].getId());
             id++;
             do { 
-            	System.out.print("Scegli l'id della carta (1 o 2): ");
+            	System.out.print("Scegli la carta (1 o 2): ");
              
                 scelta=sc.nextInt();
                 
@@ -156,14 +176,14 @@ public class Partita {
                     scelta = id-2;
                     player[i].setCartaObiettivo(mazzoObbiettivo[scelta]);
                     System.out.println("Il giocatore " + player[i].getUsername() + " ha scelto l'obiettivo con id " +player[i].getCartaObiettivo().getId());
-                    System.out.println("-------------------------------------------------------------"  );
+                    System.out.println("-------------------------------------------------------------\n"  );
                 } else if(scelta == 2) {
                 	 valido = true;
                 	 scelta = id-1;
                 	   player[i].setCartaObiettivo(mazzoObbiettivo[scelta]);
                 	   player[i].setCartaObiettivo(mazzoObbiettivo[scelta]);
                       System.out.println("Il giocatore " + player[i].getUsername() + " ha scelto l'obiettivo con id " +player[i].getCartaObiettivo().getId());
-                      System.out.println("-------------------------------------------------------------"  );
+                      System.out.println("-------------------------------------------------------------\n"  );
                  
                      
                 } else {

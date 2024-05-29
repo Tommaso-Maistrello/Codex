@@ -22,6 +22,22 @@ public class Casella {
 	private Colore colore;
 	private int punti;
 
+	//2 costruttori diversi per carta oro e carta obiettivo e carta iniziale
+	public Casella(CartaRisorsa cartaRisorsa) {
+		this.coordinata=null;
+		this.id=-1;
+		this.angoli = new StatoAngolo[SIZE];
+		angoli[0]=cartaRisorsa.getAngoloFronteTopLeft();
+		angoli[1]=cartaRisorsa.getAngoloFronteTopRight();
+		angoli[2]=cartaRisorsa.getAngoloFronteBottomLeft();
+		angoli[3]=cartaRisorsa.getAngoloFronteBottomRight();
+		this.angoliToString = new String[SIZE];
+		this.risorsaCentrale=cartaRisorsa.getRisorsaRetroCentrale();
+		this.risorsaCentraleToString=null;
+		this.colore=cartaRisorsa.getColore();
+		this.punti=cartaRisorsa.getPunti();
+		controlli();
+	}
 	protected Casella(Coordinata coordinata) {
 		/*cancellato per prova sotto
 		this.coordinata = coordinata;
@@ -39,91 +55,90 @@ public class Casella {
 		this.angoli[0] = StatoAngolo.INSETTI;
 		this.angoli[3] = StatoAngolo.NULL;
 		this.angoli[2] = StatoAngolo.INCHIOSTRO;
-		this.angoli[4] = StatoAngolo.COPERTO;
-		this.angoli[5] = StatoAngolo.FUNGHI;
-		this.angoli[6] = StatoAngolo.VUOTO;
-		this.angoli[7] = StatoAngolo.PIUMA;
-		this.angoli[8] = StatoAngolo.PERGAMENA;
-		this.angoli[9] = StatoAngolo.PIUMA;*/
-		/*this.risorsaCentrale = StatoAngolo.FUNGHI;
+		this.risorsaCentrale = StatoAngolo.FUNGHI;
 		this.colore = Colore.VERDE;
 		this.punti=2;
-		this.risorsaCentraleToString=null;
-		*/
-		if(risorsaCentrale!=null) {
-		switch(risorsaCentrale) {
+		this.risorsaCentraleToString=null;*/
 		
-		case VEGETALE: 	risorsaCentraleToString="    \u001B[32m"+risorsaCentrale.toString()+"\u001B[0m ";
-									break;
-		case ANIMALE: 	risorsaCentraleToString="    \u001B[36m"+risorsaCentrale.toString()+"\u001B[0m ";
-									break;
-		case INSETTI: 	risorsaCentraleToString="    \u001B[31m"+risorsaCentrale.toString()+"\u001B[0m ";
-									break;
-		case FUNGHI: 	risorsaCentraleToString="     \u001B[35m"+risorsaCentrale.toString()+"\u001B[0m ";
-									break;
-		default: 	risorsaCentraleToString="\t";
-					break;
-		}
-		for(int i=0; i<SIZE; i++) {
-			
-			if(i==0 || i==2) {
-				switch(angoli[i]) {
-				
-				case VEGETALE: 	angoliToString[i]="\u001B[32m"+angoli[i].toString()+"\u001B[0m\t    ";
-											break;
-				case ANIMALE: 	angoliToString[i]="\u001B[36m"+angoli[i].toString()+"\u001B[0m";
-											break;
-				case INSETTI: 	angoliToString[i]="\u001B[31m"+angoli[i].toString()+"\u001B[0m\t     ";
-											break;
-				case FUNGHI: 	angoliToString[i]="\u001B[35m"+angoli[i].toString()+"\u001B[0m\t      ";
-											break;
-				case PIUMA: 	angoliToString[i]="\u001B[33m"+angoli[i].toString()+"\u001B[0m\t       ";
-											break;
-				case INCHIOSTRO:angoliToString[i]="\u001B[33m"+angoli[i].toString()+"\u001B[0m   ";				
-											break;
-				case PERGAMENA: angoliToString[i]="\u001B[33m"+angoli[i].toString()+"\u001B[0m";
-											break;
-				case NULL: 		angoliToString[i]="\t       ";
-											break;
-				case VUOTO: 	angoliToString[i]=angoli[i].toString()+"        ";
-											break;
-				case COPERTO: 	angoliToString[i]=angoli[i].toString()+"      ";
-											break;
-				}
-				angoliToString[i]=" "+angoliToString[i];
-			}
-			else{
-				switch(angoli[i]) {
-				
-				case VEGETALE: 	angoliToString[i]="     \u001B[32m"+angoli[i].toString()+"\u001B[0m";
-											break;
-				case ANIMALE: 	angoliToString[i]="   \u001B[36m"+angoli[i].toString()+"\u001B[0m";
-											break;
-				case INSETTI: 	angoliToString[i]="      \u001B[31m"+angoli[i].toString()+"\u001B[0m";
-											break;
-				case FUNGHI: 	angoliToString[i]="       \u001B[35m"+angoli[i].toString()+"\u001B[0m";
-											break;
-				case PIUMA: 	angoliToString[i]="        \u001B[33m"+angoli[i].toString()+"\u001B[0m";
-											break;
-				case INCHIOSTRO:angoliToString[i]="   \u001B[33m"+angoli[i].toString()+"\u001B[0m";
-											break;
-				case PERGAMENA: angoliToString[i]=" \u001B[33m"+angoli[i].toString()+"\u001B[0m";
-											break;
-				case NULL: 		angoliToString[i]="\t     ";
-											break;
-				case VUOTO: 	angoliToString[i]="        "+angoli[i].toString();
-											break;
-				case COPERTO: 	angoliToString[i]="      "+angoli[i].toString();
-											break;
-				}
-				angoliToString[i]=angoliToString[i]+" ";
-			}
-		}
-		} else {
-			
-		}
+		controlli();
+		
 	}
 
+	private void controlli(){
+		if(risorsaCentrale!=null) {
+			switch(risorsaCentrale) {
+			
+			case VEGETALE: 	risorsaCentraleToString="    \u001B[32m"+risorsaCentrale.toString()+"\u001B[0m ";
+										break;
+			case ANIMALE: 	risorsaCentraleToString="    \u001B[36m"+risorsaCentrale.toString()+"\u001B[0m ";
+										break;
+			case INSETTI: 	risorsaCentraleToString="    \u001B[31m"+risorsaCentrale.toString()+"\u001B[0m ";
+										break;
+			case FUNGHI: 	risorsaCentraleToString="     \u001B[35m"+risorsaCentrale.toString()+"\u001B[0m ";
+										break;
+			default: 	risorsaCentraleToString="\t";
+						break;
+			}
+			for(int i=0; i<SIZE; i++) {
+				
+				if(i==0 || i==2) {
+					switch(angoli[i]) {
+					
+					case VEGETALE: 	angoliToString[i]="\u001B[32m"+angoli[i].toString()+"\u001B[0m\t    ";
+												break;
+					case ANIMALE: 	angoliToString[i]="\u001B[36m"+angoli[i].toString()+"\u001B[0m      ";
+												break;
+					case INSETTI: 	angoliToString[i]="\u001B[31m"+angoli[i].toString()+"\u001B[0m\t     ";
+												break;
+					case FUNGHI: 	angoliToString[i]="\u001B[35m"+angoli[i].toString()+"\u001B[0m\t      ";
+												break;
+					case PIUMA: 	angoliToString[i]="\u001B[33m"+angoli[i].toString()+"\u001B[0m\t       ";
+												break;
+					case INCHIOSTRO:angoliToString[i]="\u001B[33m"+angoli[i].toString()+"\u001B[0m   ";				
+												break;
+					case PERGAMENA: angoliToString[i]="\u001B[33m"+angoli[i].toString()+"\u001B[0m    ";
+												break;
+					case NULL: 		angoliToString[i]="\t       ";
+												break;
+					case VUOTO: 	angoliToString[i]=angoli[i].toString()+"        ";
+												break;
+					case COPERTO: 	angoliToString[i]=angoli[i].toString()+"      ";
+												break;
+					}
+					angoliToString[i]=" "+angoliToString[i];
+				}
+				else{
+					switch(angoli[i]) {
+					
+					case VEGETALE: 	angoliToString[i]="     \u001B[32m"+angoli[i].toString()+"\u001B[0m";
+												break;
+					case ANIMALE: 	angoliToString[i]="      \u001B[36m"+angoli[i].toString()+"\u001B[0m";
+												break;
+					case INSETTI: 	angoliToString[i]="      \u001B[31m"+angoli[i].toString()+"\u001B[0m";
+												break;
+					case FUNGHI: 	angoliToString[i]="       \u001B[35m"+angoli[i].toString()+"\u001B[0m";
+												break;
+					case PIUMA: 	angoliToString[i]="        \u001B[33m"+angoli[i].toString()+"\u001B[0m";
+												break;
+					case INCHIOSTRO:angoliToString[i]="   \u001B[33m"+angoli[i].toString()+"\u001B[0m";
+												break;
+					case PERGAMENA: angoliToString[i]="    \u001B[33m"+angoli[i].toString()+"\u001B[0m";
+												break;
+					case NULL: 		angoliToString[i]="\t     ";
+												break;
+					case VUOTO: 	angoliToString[i]="        "+angoli[i].toString();
+												break;
+					case COPERTO: 	angoliToString[i]="      "+angoli[i].toString();
+												break;
+					}
+					angoliToString[i]=angoliToString[i]+" ";
+				}
+			}
+			} else {
+				
+			}
+	}
+	
 	protected int getId() {
 		return id;
 	}
@@ -183,7 +198,7 @@ public class Casella {
 	protected Coordinata getCoordinata() {
 		return coordinata;
 	}
-	protected void visualizzaCasella() {
+	public void visualizzaCasella() {
 		System.out.println("┌──────────────┬──────────────┐");
 		System.out.println("│"+angoliToString[0]+"│"+angoliToString[1]+"│");
 		System.out.println("├──────────────┴──────────────┤");

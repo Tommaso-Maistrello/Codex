@@ -16,7 +16,7 @@ import Tabellone.Campo;
 
 public class Giocatore {
 
-	private final String username;
+	private String username;
 	private final ColoreSegnalino coloreSegnalino;
 	private int punteggio;
 	private static int numGiocatore;
@@ -38,6 +38,9 @@ public class Giocatore {
 	}
 	public int getPunteggio() {
 		return punteggio;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	/**
@@ -67,7 +70,7 @@ public class Giocatore {
 		int numGiocatori=0;
 				
 		do {
-			System.out.println("Inserisci il numero di giocatori: ");
+			System.out.print("Inserisci il numero di giocatori: ");
 			numGiocatori=sc.nextInt();
 			if(numGiocatori<2 || numGiocatori>4) {
 				System.out.println("Numero dei giocatori inseriti non valido");
@@ -75,7 +78,7 @@ public class Giocatore {
 		}while(numGiocatori<2 || numGiocatori>4);
 		
 		sc.nextLine(); //libera il buffer
-		
+		System.out.println();
 		Giocatore[] giocatori = new Giocatore[numGiocatori];
 		
 		for(int i=0; i<giocatori.length; i++)
@@ -83,7 +86,7 @@ public class Giocatore {
 			int j=i+1;
 			//DO-WHILE ERRORE STATIC
 			//do {
-				System.out.println("Inserisci lo username del giocatore numero: "+ j);
+				System.out.print("Inserisci lo username del giocatore numero "+ j+": ");
 				String username=sc.nextLine();
 				if(username.trim().isEmpty()) {
 					System.out.println("Username inserito non valido");
