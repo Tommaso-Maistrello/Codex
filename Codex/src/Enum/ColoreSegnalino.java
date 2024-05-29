@@ -21,6 +21,7 @@ public enum ColoreSegnalino {
 		Collections.addAll(coloriRestanti, ROSSO, BLU, VERDE, GIALLO);
 		Collections.shuffle(coloriRestanti); // Mescola i colori che rimangono da assegnare
 		
+		// costruisci l'ordine dei colori da assegnare con il nero come primo colore
 		sequenzaColori = new ArrayList<>();
 		sequenzaColori.add(NERO); // il primo colore assegnato è il nero 
 		for(int i=0; i<=4; i++) {
@@ -33,7 +34,7 @@ public enum ColoreSegnalino {
 	
 	public static ColoreSegnalino getColore() {
 		if ( conta>sequenzaColori.size()) {
-			return null; //se non ci sono più colori
+			return null; //se non ci sono più colori disponibili
 		}
 		return sequenzaColori.get(conta++ - 1);
 	}
