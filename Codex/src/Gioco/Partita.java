@@ -45,7 +45,7 @@ public class Partita {
 			 player[i].setMano(mano);
 			
 		}
-		System.out.println("-------------------------------------------------------------"  );
+		System.out.println("\n-------------------------------------------------------------\n"  );
 	  	for(int i=0; i<player.length; i++) {
 	  		int j=i+1;
 	     	System.out.print("Il giocatore "+j+" è "+ player[i].getUsername());
@@ -69,7 +69,7 @@ public class Partita {
 	     	}
 	     	System.out.println("\u001B[0m.");
 	    }
-    	System.out.println("-------------------------------------------------------------"  );
+    	System.out.println("\n-------------------------------------------------------------"  );
     	System.out.println("\nPremi invio per continuare...");
     	sc.nextLine();
     	//player= Giocatore.disordinaGiocatori(player);
@@ -126,6 +126,8 @@ public class Partita {
 				System.out.println(" la carta ha id"+player[i].getMano().getManoOro().get(j).getId());
 				cartaOro=player[i].getMano().getManoOro().get(j);
 				//Mano.visualizzaCartaOro(cartaOro);
+				Casella casellaRisorsa=new Casella(cartaOro);
+				casellaRisorsa.visualizzaCasellaOro(cartaOro);
 			
 			}
 			System.out.println("Premi Invio per continuare...");
@@ -148,7 +150,7 @@ public class Partita {
 		System.out.println("-------------------------------------------------------------"  );
 		System.out.println("\nPremi Invio per continuare...");
     	sc.nextLine();
-		System.out.println("Ora ogni giocatore deve scegliere il proprio obiettivo segreto"  );
+		System.out.println("Ora ogni giocatore deve scegliere il proprio obiettivo segreto\n"  );
 		
 		
 		
@@ -160,10 +162,10 @@ public class Partita {
 
             
             System.out.println(player[i].getUsername() + " può scegliere tra le carte:");
-            System.out.println("1) Obiettivo con id " + mazzoObbiettivo[id].getId()+": ");
+            System.out.println("1) obiettivo con id " + mazzoObbiettivo[id].getId()+": ");
             tavolo.visualizzaCaso(mazzoObbiettivo[id].getId());
             id++;
-            System.out.println("2) Obiettivo con id " + mazzoObbiettivo[id].getId()+": ");
+            System.out.println("2) obiettivo con id " + mazzoObbiettivo[id].getId()+": ");
             tavolo.visualizzaCaso(mazzoObbiettivo[id].getId());
             id++;
             do { 
@@ -175,15 +177,15 @@ public class Partita {
                     valido = true;
                     scelta = id-2;
                     player[i].setCartaObiettivo(mazzoObbiettivo[scelta]);
-                    System.out.println("Il giocatore " + player[i].getUsername() + " ha scelto l'obiettivo con id " +player[i].getCartaObiettivo().getId());
-                    System.out.println("-------------------------------------------------------------\n"  );
+                    System.out.println("\nIl giocatore " + player[i].getUsername() + " ha scelto l'obiettivo con id " +player[i].getCartaObiettivo().getId());
+                    System.out.println("\n-------------------------------------------------------------\n"  );
                 } else if(scelta == 2) {
                 	 valido = true;
                 	 scelta = id-1;
                 	   player[i].setCartaObiettivo(mazzoObbiettivo[scelta]);
                 	   player[i].setCartaObiettivo(mazzoObbiettivo[scelta]);
-                      System.out.println("Il giocatore " + player[i].getUsername() + " ha scelto l'obiettivo con id " +player[i].getCartaObiettivo().getId());
-                      System.out.println("-------------------------------------------------------------\n"  );
+                      System.out.println("\nIl giocatore " + player[i].getUsername() + " ha scelto l'obiettivo con id " +player[i].getCartaObiettivo().getId());
+                      System.out.println("\n-------------------------------------------------------------\n"  );
                  
                      
                 } else {

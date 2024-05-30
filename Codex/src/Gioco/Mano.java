@@ -75,7 +75,7 @@ public class Mano {
     	}
     	
         return carta;
-    }
+    }/*
     public static void visualizzaCartaRisorsa(CartaRisorsa cartaRisorsa ) {
 		System.out.println("┌──────────────┬──────────────┐");
 		System.out.println("│"+cartaRisorsa.angoloFronteTopLeft.toString()+"		│"+cartaRisorsa.angoloFronteTopRight.toString()+"│");
@@ -101,7 +101,7 @@ public class Mano {
  		System.out.println("│"+cartaOro.angoloFronteBottomLeft+"		│"+cartaOro.angoloFronteBottomLeft+"│");
  		System.out.println("└──────────────┴──────────────┘");
  		System.out.println();
- 	}
+ 	}*/
 
     }
 
