@@ -160,6 +160,7 @@ public static void  disordinaGiocatori( Giocatore[] giocatori) {
 	public void setCartaIniziale(CartaIniziale cartaIniziale) {
 		this.cartaIniziale = cartaIniziale;
 	}
+	 
 	  
  
  

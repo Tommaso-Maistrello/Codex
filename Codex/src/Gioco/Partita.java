@@ -82,8 +82,9 @@ public class Partita {
     
     	estraiObbiettivi();
      
-    	mostraMano();
-    	
+    //	mostraMano(player);
+    	 mostraManoGiocatore(  player[0]);
+    	 mostraManoGiocatore(  player[1]);
         //Per visualizzare il campo di un giocatore usare:
     	for (Giocatore giocatore : player) {
     	        giocatore.getCampo().posizionaCartaIniziale(giocatore); // Aggiungi questa riga
@@ -91,6 +92,7 @@ public class Partita {
     	    }
         //posizionaCartaIniziale(player); 
         
+
 			
 	}
 	public static void assegnaCarteIniziali( Giocatore[] giocatori,CartaIniziale[] cartaIniziale) {
@@ -118,7 +120,7 @@ public class Partita {
         return new Mano(manoRisorsa, manoOro);
 	
 	}
-	public void  mostraMano() {
+	public static void  mostraMano(Giocatore[] player) {
 		Scanner sc= new Scanner(System.in);
 		CartaRisorsa cartaRisorsa;
 		CartaOro cartaOro;
@@ -149,9 +151,44 @@ public class Partita {
 			}
 			System.out.println("Premi Invio per continuare...");
 	    	sc.nextLine();
+	    	}
     		
     		
 		}
+		public static void  mostraManoGiocatore(Giocatore player) {
+			Scanner sc= new Scanner(System.in);
+			CartaRisorsa cartaRisorsa;
+			CartaOro cartaOro;
+			int lunghezza;
+			
+				System.out.println("È il turno del giocatore : "+ player.getUsername() );
+	    		System.out.println(" in mano ha le carte:" );
+	    		
+	    		 
+				for(int j =0; j<player.getMano().getManoRisorsa().size(); j++) {
+					 
+					System.out.println(" la carta ha id "+player.getMano().getManoRisorsa().get(j).getId());
+					cartaRisorsa=player.getMano().getManoRisorsa().get(j);
+				//Mano.visualizzaCartaRisorsa(cartaRisorsa);
+				Casella casellaRisorsa=new Casella(cartaRisorsa);
+				casellaRisorsa.visualizzaCasella();
+				
+				}
+				
+				for(int j =0; j<player.getMano().getManoOro().size(); j++) {
+					 
+					System.out.println(" la carta ha id "+player.getMano().getManoOro().get(j).getId());
+					cartaOro=player.getMano().getManoOro().get(j);
+					//Mano.visualizzaCartaOro(cartaOro);
+					Casella casellaRisorsa=new Casella(cartaOro);
+					casellaRisorsa.visualizzaCasellaOro(cartaOro);
+				
+				}
+				System.out.println("Premi Invio per continuare...");
+		    	sc.nextLine();
+	    		
+	    		
+			
       
 	 
 	
@@ -216,6 +253,9 @@ public class Partita {
         
  
 	
+	}
+	public static Giocatore[] getGiocatore( ) {
+		return player;
 	}
 
 	
