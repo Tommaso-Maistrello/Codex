@@ -152,5 +152,10 @@ public void visualizzaCampo() {
 		    int X = SIZE / 2;
 		    int Y = SIZE / 2;
 		    tabella[X][Y].setCarta(giocatore.getCartaIniziale().getId());
+		   /*dovrebbe essere modificata a
+		    *  tabella[X][Y].setCartaIniziale(giocatore.getCartaIniziale());
+		    * cosi prende tutta la carta anzi che solo l'id
+		    * */
+		    
 		}
 }
