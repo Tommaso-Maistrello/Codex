@@ -3,8 +3,10 @@ package Gioco;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
+import Carte.CartaIniziale;
 import Carte.CartaObiettivo;
 import Carte.CartaOro;
 import Carte.CartaRisorsa;
@@ -33,16 +35,20 @@ public class Partita {
         MazzoCarteOro.mischiaMazzo();
         MazzoCarteRisorsa.mischiaMazzo();
     
+        CartaIniziale[] carteIniziali = CartaIniziale.mescolaMazzo();
         
         player = Giocatore.setGiocatori();
         
-    
+        Giocatore.disordinaGiocatori( player) ;
 		
+        Giocatore.assegnaCarteIniziali(player, carteIniziali);
         
 
 		for(int i =0; i<player.length; i++) {
 			Mano mano = pescaCarte();
 			 player[i].setMano(mano);
+			 player[i].setCampo(new Campo());
+			 
 			
 		}
 		System.out.println("\n-------------------------------------------------------------\n"  );
@@ -72,18 +78,22 @@ public class Partita {
     	System.out.println("\n-------------------------------------------------------------"  );
     	System.out.println("\nPremi invio per continuare...");
     	sc.nextLine();
-    	//player= Giocatore.disordinaGiocatori(player);
-    	//System.out.println("Il primo giocatore è: "+ player[0].getUsername() );
-    	//System.out.println("-------------------------------------------------------------"  );
-    	//System.out.println("Premi invio per continuare...");
-    	//sc.nextLine();
+   
     
     	estraiObbiettivi();
      
     	mostraMano();
     	
         //Per visualizzare il campo di un giocatore usare:
-        player[0].getCampo();
+    	  
+    		 
+    	     
+    	 for (Giocatore giocatore : player) {
+    	        giocatore.getCampo().posizionaCartaIniziale(giocatore); // Aggiungi questa riga
+    	    }
+       player[0].getCampo().visualizzaCampo();
+        //posizionaCartaIniziale(player); 
+        
 			
 	}
 	public Mano pescaCarte() {
@@ -200,5 +210,7 @@ public class Partita {
  
 	
 	}
+
+	
 	
 }

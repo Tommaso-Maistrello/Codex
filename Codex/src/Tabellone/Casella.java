@@ -3,6 +3,7 @@ package Tabellone;
 import java.util.Formatter;
 import java.util.List;
 
+import Carte.CartaIniziale;
 import Carte.CartaOro;
 import Carte.CartaRisorsa;
 import Enum.Colore;
@@ -50,6 +51,22 @@ public class Casella {
 		controlli();
 		
 	}
+    public Casella(CartaIniziale cartaIniziale) {
+    	 
+        this.id = -1;
+		this.coordinata = new Coordinata(); 
+        this.angoli = new StatoAngolo[SIZE];
+        angoli[0] = cartaIniziale.getAngoloFronteTopLeft();
+        angoli[1] = cartaIniziale.getAngoloFronteTopRight();
+        angoli[2] = cartaIniziale.getAngoloFronteBottomLeft();
+        angoli[3] = cartaIniziale.getAngoloFronteBottomRight();
+        this.angoliToString = new String[SIZE];
+        this.risorsaCentrale = cartaIniziale.getRisorsaRetroCentrale();
+        this.risorsaCentraleToString = null;
+        this.colore = null; 
+        this.punti = 0; 
+        controlli();
+    }
 	public Casella(CartaRisorsa cartaRisorsa) {
 		this.coordinata=null;
 		this.id=-1;

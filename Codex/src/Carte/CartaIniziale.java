@@ -37,11 +37,11 @@ public class CartaIniziale extends Carta {
 	
 	
 	public static CartaIniziale[] costruisciCarteIniziali() throws FileNotFoundException {
-		int i=1;
+		int i=0;
 		File fileIniziali = new File ("carteIniziali.txt");
 		Scanner leggi = new Scanner (fileIniziali);
 		leggi.useDelimiter(",");
-		CartaIniziale[] cartaIniziale= new CartaIniziale[7];
+		CartaIniziale[] cartaIniziale= new CartaIniziale[6];
 		while(leggi.hasNextLine()) {
 			cartaIniziale[i] = new CartaIniziale ( leggi.nextInt(), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), // id, fronteTopLeft, fronteTopRight, fronteBottomLeft, fronteBottomRight
 					StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), StatoAngolo.valueOf(leggi.next()), // retroTopLeft, retroTopRight, retroBottomLeft, retroBottomRight, risorsaRetroCentrale
@@ -55,8 +55,8 @@ public class CartaIniziale extends Carta {
 	
 	
 	public static CartaIniziale[] mescolaMazzo() throws FileNotFoundException {
-		CartaIniziale[] mazzo = new CartaIniziale[7];  
-		CartaIniziale[] temp = new CartaIniziale[7]; 
+		CartaIniziale[] mazzo = new CartaIniziale[6];  
+		CartaIniziale[] temp = new CartaIniziale[6]; 
 		mazzo = costruisciCarteIniziali();
 		Random rnd = new Random();
 		int posizioneRandom;

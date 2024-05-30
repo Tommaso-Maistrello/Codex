@@ -5,6 +5,8 @@ import java.util.Scanner;
 
 import javax.swing.plaf.synth.SynthOptionPaneUI;
 
+import Carte.CartaIniziale;
+import Gioco.Giocatore;
 import Gioco.Partita;
 
 public class Campo {
@@ -87,7 +89,7 @@ public class Campo {
         }
 		//sc.close();
 	}
-	public void visualizzaCampo() {
+public void visualizzaCampo() {
 		
 		//PRIMA RIGA
 		//Sopra
@@ -145,5 +147,10 @@ public class Campo {
 		
 		casellaSpecifica();
 	}
-
+	   
+	  public void posizionaCartaIniziale(Giocatore giocatore) {
+		    int X = SIZE / 2;
+		    int Y = SIZE / 2;
+		    tabella[X][Y].setCarta(giocatore.getCartaIniziale().getId());
+		}
 }
