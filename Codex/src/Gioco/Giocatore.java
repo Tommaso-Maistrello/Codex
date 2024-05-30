@@ -23,7 +23,7 @@ public class Giocatore {
 	private  Mano mano;
 	private static Giocatore[] giocatori;
 	private static CartaObiettivo obbiettivo;
-	private static Campo campo;
+	private Campo campo;
 	private CartaIniziale cartaIniziale;
 	public Giocatore(String username ) {
 		this.username=username;
@@ -134,19 +134,11 @@ public static void  disordinaGiocatori( Giocatore[] giocatori) {
 			giocatori[posizioneRandom] = giocatori[i];
 			giocatori[i] = temp;
 		}
-		System.out.println("Elaborazione dell'ordine casuale di gioco in corso...");
+		System.out.println("\n-------------------------------------------------------------\n"  );
+		System.out.println("Elaborazione dell'ordine casuale di gioco in corso...\n");
 		 
 	}
-public static void  assegnaCarteIniziali( Giocatore[] giocatori,CartaIniziale[] cartaIniziale) {
-	 
 
-	for (int i = 0; i < giocatori.length; i++) {
-		giocatori[i].setCartaIniziale(cartaIniziale[i]);
-		System.out.println("il giocatore  "+giocatori[i].getUsername()+"ha la carta con id: "+cartaIniziale[i].getId());
-	}
-	System.out.println("sono state assegnate le carte inziali");
-	
-}
 	
 	public void setMano(Mano mano) {
  

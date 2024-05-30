@@ -39,9 +39,9 @@ public class Partita {
         
         player = Giocatore.setGiocatori();
         
-        Giocatore.disordinaGiocatori( player) ;
+        Giocatore.disordinaGiocatori(player) ;
 		
-        Giocatore.assegnaCarteIniziali(player, carteIniziali);
+        assegnaCarteIniziali(player, carteIniziali);
         
 
 		for(int i =0; i<player.length; i++) {
@@ -85,16 +85,23 @@ public class Partita {
     	mostraMano();
     	
         //Per visualizzare il campo di un giocatore usare:
-    	  
-    		 
-    	     
-    	 for (Giocatore giocatore : player) {
+    	for (Giocatore giocatore : player) {
     	        giocatore.getCampo().posizionaCartaIniziale(giocatore); // Aggiungi questa riga
+    	        giocatore.getCampo().visualizzaCampo();
     	    }
-       player[0].getCampo().visualizzaCampo();
         //posizionaCartaIniziale(player); 
         
 			
+	}
+	public static void assegnaCarteIniziali( Giocatore[] giocatori,CartaIniziale[] cartaIniziale) {
+		 
+
+		System.out.println("Sono state assegnate le carte inziali");
+		for (int i = 0; i < giocatori.length; i++) {
+			giocatori[i].setCartaIniziale(cartaIniziale[i]);
+			System.out.println("Il giocatore "+giocatori[i].getUsername()+" ha la carta con id: "+cartaIniziale[i].getId());
+		}
+		
 	}
 	public Mano pescaCarte() {
 
@@ -123,7 +130,7 @@ public class Partita {
     		 
 			for(int j =0; j<player[i].getMano().getManoRisorsa().size(); j++) {
 				 
-				System.out.println(" la carta ha id"+player[i].getMano().getManoRisorsa().get(j).getId());
+				System.out.println(" la carta ha id "+player[i].getMano().getManoRisorsa().get(j).getId());
 				cartaRisorsa=player[i].getMano().getManoRisorsa().get(j);
 			//Mano.visualizzaCartaRisorsa(cartaRisorsa);
 			Casella casellaRisorsa=new Casella(cartaRisorsa);
@@ -133,7 +140,7 @@ public class Partita {
 			
 			for(int j =0; j<player[i].getMano().getManoOro().size(); j++) {
 				 
-				System.out.println(" la carta ha id"+player[i].getMano().getManoOro().get(j).getId());
+				System.out.println(" la carta ha id "+player[i].getMano().getManoOro().get(j).getId());
 				cartaOro=player[i].getMano().getManoOro().get(j);
 				//Mano.visualizzaCartaOro(cartaOro);
 				Casella casellaRisorsa=new Casella(cartaOro);

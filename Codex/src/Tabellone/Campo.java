@@ -102,7 +102,7 @@ public void visualizzaCampo() {
 		System.out.println();
 		System.out.print("│");
 		for(int i=0; i<SIZE; i++) {
-			System.out.print(tabella[i][i].getIdColored());
+			System.out.print(tabella[0][i].getIdColored());
 			System.out.print("│");
 		}
 		//Sotto
@@ -117,7 +117,7 @@ public void visualizzaCampo() {
 			System.out.println();
 			System.out.print("│");
 			for(int i=0; i<SIZE; i++) {
-				System.out.print(tabella[i][i].getIdColored());
+				System.out.print(tabella[j][i].getIdColored());
 				System.out.print("│");
 			}
 			//Sotto
@@ -133,7 +133,7 @@ public void visualizzaCampo() {
 		System.out.println();
 		System.out.print("│");
 		for(int i=0; i<SIZE; i++) {
-			System.out.print(tabella[i][i].getIdColored());
+			System.out.print(tabella[SIZE-1][i].getIdColored());
 			System.out.print("│");
 		}
 		
@@ -148,14 +148,23 @@ public void visualizzaCampo() {
 		casellaSpecifica();
 	}
 	   
-	  public void posizionaCartaIniziale(Giocatore giocatore) {
+	  /*public void posizionaCartaIniziale(Giocatore giocatore) {
 		    int X = SIZE / 2;
 		    int Y = SIZE / 2;
-		    tabella[X][Y].setCarta(giocatore.getCartaIniziale().getId());
+		    giocatore.getCampo().setCartaIniziale(giocatore.getCartaIniziale().getId());
 		   /*dovrebbe essere modificata a
 		    *  tabella[X][Y].setCartaIniziale(giocatore.getCartaIniziale());
 		    * cosi prende tutta la carta anzi che solo l'id
-		    * */
+		    * 
 		    
-		}
+		}*/
+	  public void posizionaCartaIniziale(Giocatore giocatore) {
+	        int centroX = SIZE/2-1;
+	        int centroY = SIZE/2-1;
+	        tabella[centroX][centroY].setCartaIniziale(giocatore.getCartaIniziale());
+	    }
+
+	public int getSize() {
+		return SIZE;
+	}
 }

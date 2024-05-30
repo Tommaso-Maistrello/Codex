@@ -13,7 +13,7 @@ import Mazzi.MazzoCarteRisorsa;
 
 public class Casella {
 
-	private final Coordinata coordinata;
+	private  Coordinata coordinata;
 	private int id;
 	private StatoAngolo[] angoli;
 	private String[] angoliToString;
@@ -68,8 +68,8 @@ public class Casella {
         controlli();
     }
     public void setCartaIniziale(CartaIniziale cartaIniziale) {
-        this.id = -1;
-        //this.coordinata=null;
+        this.id = cartaIniziale.getId();
+        this.coordinata= new Coordinata(SIZE/2,SIZE/2);
         this.angoli = new StatoAngolo[SIZE];
         angoli[0] = cartaIniziale.getAngoloFronteTopLeft();
         angoli[1] = cartaIniziale.getAngoloFronteTopRight();
@@ -111,7 +111,6 @@ public class Casella {
 		this.risorsaCentraleToString=null;
 		this.colore=cartaOro.getColore();
 		this.punti=-1;
-		//this.condizione=cartaOro.getCondizione();
 		controlli();
 	}
 	private void controlli(){
@@ -184,9 +183,7 @@ public class Casella {
 					angoliToString[i]=angoliToString[i]+" ";
 				}
 			}
-			} /*else {
-				
-			}*/
+			}
 	}
 	
 	protected int getId() {
@@ -290,5 +287,10 @@ public class Casella {
 			if(cartaOro.getNumeroAnimali()==1) System.out.println(cartaOro.getNumeroVegetale()+" vegetale visibile ");
 			else System.out.println(cartaOro.getNumeroVegetale()+" vegetali visibili ");
 		}
+		System.out.println();
+	}
+	public void setCartaIniziale(int id) {
+		this.id = id;
+		this.coordinata=new Coordinata(SIZE/2,SIZE/2);
 	}
 }
