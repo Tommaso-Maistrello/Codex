@@ -91,9 +91,9 @@ public class Partita {
     	        giocatore.getCampo().visualizzaCampo();
     	    }
         //posizionaCartaIniziale(player); 
-        
-
-			
+    	 mostraManoGiocatore(  player[0]);
+    	player[0].getCampo().giocaCarta(player[0]);
+    	player[0].getCampo().visualizzaCampo();
 	}
 	public static void assegnaCarteIniziali( Giocatore[] giocatori,CartaIniziale[] cartaIniziale) {
 		 

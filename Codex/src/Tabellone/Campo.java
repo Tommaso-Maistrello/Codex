@@ -10,6 +10,7 @@ import Carte.Carta;
 import Carte.CartaIniziale;
 import Carte.CartaOro;
 import Carte.CartaRisorsa;
+import Enum.StatoAngolo;
 import Gioco.Giocatore;
 import Gioco.Mano;
 import Gioco.Partita;
@@ -94,11 +95,11 @@ public class Campo {
         }
 		//sc.close();
 	}
-public void visualizzaCampo() {
+	public void visualizzaCampo() {
 		
 		//RIGA NUMERI
 		System.out.print( "  ");
-		for(int i=0; i<SIZE-2; i++) {
+		for(int i=0; i<SIZE-1; i++) {
 		System.out.print(" "+i+" ");
 		}
 		System.out.println();
@@ -155,7 +156,7 @@ public void visualizzaCampo() {
 		//RIGA IN MEZZO CON CARTA INIZIALE
 		//ULTIMA RIGA
 		System.out.println();
-		k=SIZE-2;
+		k=SIZE-1;
 		System.out.print(k);// ULTIMO NUMERO DELLA COLONNA NUMERI A DESTRA
 		System.out.print("│");
 		for(int i=0; i<SIZE; i++) {
@@ -173,18 +174,8 @@ public void visualizzaCampo() {
 		
 		//casellaSpecifica();
 	}
-	   
-	  /*public void posizionaCartaIniziale(Giocatore giocatore) {
-		    int X = SIZE / 2;
-		    int Y = SIZE / 2;
-		    giocatore.getCampo().setCartaIniziale(giocatore.getCartaIniziale().getId());
-		   /*dovrebbe essere modificata a
-		    *  tabella[X][Y].setCartaIniziale(giocatore.getCartaIniziale());
-		    * cosi prende tutta la carta anzi che solo l'id
-		    * 
-		    
-		}*/
-	  public void posizionaCartaIniziale(Giocatore giocatore) {
+
+	public void posizionaCartaIniziale(Giocatore giocatore) {
 	        int centroX = SIZE/2-1;
 	        int centroY = SIZE/2-1;
 	        int k =  SIZE/2-1;
@@ -195,95 +186,105 @@ public void visualizzaCampo() {
 	public int getSize() {
 		return SIZE;
 	}	
-		/*
 	
-	public void giocataCarta(Giocatore player) {
-	    Scanner sc = new Scanner(System.in);
+	public void giocaCarta(Giocatore player) {
+		boolean esiste= false;
+		int x,y;
+		
+		int id =esisteCarta(player);// controlla che il giocatore abbia fornito id di una carta che ha in mano
+		
+		Scanner sc = new Scanner(System.in);
+		esiste= false;
+		do {
 
-	    // Display cards in hand
-	    System.out.println("Carte nella tua mano:");
-	    Mano mano = player.getMano();
-	    
-	    // Show resource cards
-	    List<CartaRisorsa> manoRisorsa = mano.getManoRisorsa();
-	    if (!manoRisorsa.isEmpty()) {
-	        System.out.println("Carte Risorsa:");
-	        for (int i = 0; i < manoRisorsa.size(); i++) {
-	            System.out.println((i + 1) + ". " + manoRisorsa.get(i));
-	        }
-	    }
-	    
-	    // Show gold cards
-	    List<CartaOro> manoOro = mano.getManoOro();
-	    if (!manoOro.isEmpty()) {
-	        System.out.println("Carte Oro:");
-	        for (int i = 0; i < manoOro.size(); i++) {
-	            System.out.println((i + 1) + ". " + manoOro.get(i));
-	        }
-	    }
-	    
-	    // Choose type of card to play
-	    int tipoCarta = -1;
-	    do {
-	        System.out.print("Scegli il tipo di carta che vuoi giocare (1 per Risorsa, 2 per Oro): ");
-	        tipoCarta = sc.nextInt();
-	        if (tipoCarta != 1 && tipoCarta != 2) {
-	            System.out.println("Scelta non valida. Riprova.");
-	        }
-	    } while (tipoCarta != 1 && tipoCarta != 2);
-
-	    // Choose the specific card to play
-	    int sceltaCarta = -1;
-	    List<? extends Carta> carteInMano;
-	    if (tipoCarta == 1) {
-	        carteInMano = manoRisorsa;
-	    } else {
-	        carteInMano = manoOro;
-	    }
-
-	    do {
-	        System.out.print("Scegli il numero della carta che vuoi giocare: ");
-	        sceltaCarta = sc.nextInt() - 1;
-	        if (sceltaCarta < 0 || sceltaCarta >= carteInMano.size()) {
-	            System.out.println("Scelta non valida. Riprova.");
-	        }
-	    } while (sceltaCarta < 0 || sceltaCarta >= carteInMano.size());
-
-	    Carta cartaDaGiocare = carteInMano.get(sceltaCarta);
-
-	    // Ask for coordinates
-	    int x = -1, y = -1;
-	    boolean coordinataValida = false;
-	    do {
-	        System.out.print("Inserisci la coordinata X dove vuoi posizionare la carta: ");
-	        x = sc.nextInt();
-	        System.out.print("Inserisci la coordinata Y dove vuoi posizionare la carta: ");
-	        y = sc.nextInt();
-
-	        if (x >= 0 && x < player.getCampo().getSize() && y >= 0 && y < player.getCampo().getSize()) {
-	            Coordinata coordinata = new Coordinata(x, y);
-	            if (player.getCampo().getCasella(coordinata).getId()!=0) {
-	                coordinataValida = true;
-	            } else {
-	                System.out.println("La casella è già occupata. Riprova.");
-	            }
-	        } else {
-	            System.out.println("Coordinate fuori dai limiti del campo. Riprova.");
-	        }
-	    } while (!coordinataValida);
-
-	    Coordinata coordinata = new Coordinata(x, y);
-	    player.getCampo().getCasella(coordinata).setCarta(cartaDaGiocare.getId());
-	    
-	    // Remove the card from player's hand
-	    if (tipoCarta == 1) {
-	        mano.rimuoviCartaRisorsa((CartaRisorsa) cartaDaGiocare);
-	    } else {
-	        mano.rimuoviCartaOro((CartaOro) cartaDaGiocare);
-	    }
-
-	    System.out.println("Hai posizionato la carta " + cartaDaGiocare + " sulla casella (" + x + ", " + y + ").");
+		esiste= false;
+		int coordinata[]=getCoordinata(sc);// controlla che la cordinata esiste
+		x= coordinata[0];
+		y= coordinata[1];
+		System.out.println("x:"+coordinata[0]+"y:"+coordinata[1]);
+		if(tabella[x][y].getId()==0) {//contrtolla che la posizione in qui si vuole giocare è libera
+			System.out.println("si può giocare la carta");
+			esiste= true;
+		}else {
+			System.out.println("la carta non si può giocare");
+		}
+		
+		}while(esiste== false);// il ciclo finisce se la cella di coordinata x y esiste ed è libera
+		StatoAngolo[] angoli=null;
+		
+		//il ciclo for deve controlalre se attorno alla casella x y ci sono altre carte con angoli liberi
+		
+		for (int i = 0; i<4; i++) {
+			if (tabella[x-1][y-1].getId()!=0) {// controlla la casella in alto a sinistra
+				angoli=tabella[x-1][y-1].getAngoli();
+				System.out.println(angoli[3]);// controlla l'angolo in basso a destra
+			}else if(tabella[x-1][y+1].getId()!=0) {// controlla la casella in alto a destra
+				angoli=tabella[x-1][y+1].getAngoli();
+				System.out.println(angoli[2]);// controlla l'angolo in basso a sinistra
+			}else if(tabella[x+1][y-1].getId()!=0) {// controlla la casella in basso a sinistra
+				angoli=tabella[x+1][y-1].getAngoli();
+				System.out.println(angoli[1]);// controlla l'angolo in alto a destra
+			}else if(tabella[x+1][y+1].getId()!=0){// controlla la casella in basso a destra
+				angoli=tabella[x+1][y-1].getAngoli();
+				System.out.println(angoli[0]);// controlla l'angolo in alto a sinistra
+			}
+			 	
+			
+		}
+		sc.close();
+		if (id <41) {
+			CartaRisorsa carta= Mano.prendiCartaRisorsaConID(id, player);
+			 tabella[x][y].setCartaRisorsa(carta);
+			 System.out.println("hai giocato la carta risorsa");
+		}else {
+			CartaOro carta= Mano.prendiCartaOroConID(id, player);
+			 tabella[x][y].setCartaOro(carta);
+			 System.out.println("hai giocato la carta oro");
+		}
+		System.out.println("hai giocato la carta");
+		
 	}
-*/
+	public int esisteCarta(Giocatore player) {
+		boolean esiste= false;
+		Scanner sc = new Scanner(System.in);
+		int id;
+		do {
+			System.out.println("\n-------------------------------------------------------------\n"  );
+			System.out.println("qual'è l'id della carta che vuoi giocare?");
+			id = sc.nextInt();
+			System.out.println("hai scalto la carta con id : "+id);
+			esiste = player.getMano().haCartaConId(player, id);
+		if (esiste == true) {
+			System.out.println("il giocatore ha la carta in mano con id "+id);
+			
+		}else {
+			System.out.println("il giocatore non ha la carta in mano "+id);
+		}
+		}while(esiste== false);// controlla che il giocatore abbia in mana la corta che si vuole giocare
+		return id;
+	}
+	public int[] getCoordinata(Scanner sc) {
+		boolean esiste= false;
+		 
+		int x,y;
+		do {
+			System.out.println("qual'è la coordinata x in qui voi giocare la carta");
+			x = sc.nextInt();
+			System.out.println("qual'è la coordinata y in qui voi giocare la carta");
+			y = sc.nextInt();
+		
+		if (x <SIZE-2 && y <SIZE-2) {
+			System.out.println("la coordinata esiste");
+			esiste= true;
+		}else {
+			System.out.println("la coordinata non esiste");
+		}
+		
+		}while(esiste== false);// controlla se la coordinata è valida
+	 
+		return new int[]{x, y};
+	}
+
+
 
 }

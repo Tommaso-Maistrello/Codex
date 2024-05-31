@@ -75,7 +75,41 @@ public class Mano {
     	}
     	
         return carta;
-    }/*
+    }
+	 public boolean haCartaConId(Giocatore player, int id) {
+		 
+	        for (CartaOro carta : player.getMano().getManoOro()) {
+	            if (carta.getId() == id) {
+	                return true;
+	            }
+	        }
+	        for (CartaRisorsa carta : player.getMano().getManoRisorsa()) {
+	            if (carta.getId() == id) {
+	                return true;
+	            }
+	        }
+	        return false;
+	    }
+	 public static CartaRisorsa prendiCartaRisorsaConID(int id, Giocatore player) {
+		 CartaRisorsa cartaR= null;
+			for(CartaRisorsa carta: player.getMano().getManoRisorsa()) {
+				if (carta.getId()==id) {
+					cartaR= carta;
+				}
+			}
+		 return cartaR;
+	 }
+	 public static CartaOro prendiCartaOroConID(int id, Giocatore player) {
+		 CartaOro cartaOro= null;
+			for(CartaOro carta: player.getMano().getManoOro()) {
+				if (carta.getId()==id) {
+					cartaOro= carta;
+				}
+			}
+		 return cartaOro;
+	 }
+    
+    /*
     public static void visualizzaCartaRisorsa(CartaRisorsa cartaRisorsa ) {
 		System.out.println("┌──────────────┬──────────────┐");
 		System.out.println("│"+cartaRisorsa.angoloFronteTopLeft.toString()+"		│"+cartaRisorsa.angoloFronteTopRight.toString()+"│");

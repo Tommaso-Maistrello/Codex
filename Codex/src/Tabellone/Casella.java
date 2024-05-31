@@ -98,9 +98,39 @@ public class Casella {
 		this.punti=cartaRisorsa.getPunti();
 		controlli();
 	}
+	public void setCartaRisorsa(CartaRisorsa cartaRisorsa) {
+		    this.coordinata=null;
+		    this.id = cartaRisorsa.getId();
+			this.angoli = new StatoAngolo[SIZE];
+			angoli[0]=cartaRisorsa.getAngoloFronteTopLeft();
+			angoli[1]=cartaRisorsa.getAngoloFronteTopRight();
+			angoli[2]=cartaRisorsa.getAngoloFronteBottomLeft();
+			angoli[3]=cartaRisorsa.getAngoloFronteBottomRight();
+			this.angoliToString = new String[SIZE];
+			this.risorsaCentrale=cartaRisorsa.getRisorsaRetroCentrale();
+			this.risorsaCentraleToString=null;
+			this.colore=cartaRisorsa.getColore();
+			this.punti=cartaRisorsa.getPunti();
+			controlli();
+	    }
 	public Casella(CartaOro cartaOro) {
 		this.coordinata=null;
 		this.id=-1;
+		this.angoli = new StatoAngolo[SIZE];
+		angoli[0]=cartaOro.getAngoloFronteTopLeft();
+		angoli[1]=cartaOro.getAngoloFronteTopRight();
+		angoli[2]=cartaOro.getAngoloFronteBottomLeft();
+		angoli[3]=cartaOro.getAngoloFronteBottomRight();
+		this.angoliToString = new String[SIZE];
+		this.risorsaCentrale=cartaOro.getRisorsaRetroCentrale();
+		this.risorsaCentraleToString=null;
+		this.colore=cartaOro.getColore();
+		this.punti=-1;
+		controlli();
+	}
+	public void setCartaOro(CartaOro cartaOro) {
+		this.coordinata=null;
+		this.id = cartaOro.getId();
 		this.angoli = new StatoAngolo[SIZE];
 		angoli[0]=cartaOro.getAngoloFronteTopLeft();
 		angoli[1]=cartaOro.getAngoloFronteTopRight();
@@ -292,5 +322,10 @@ public class Casella {
 	public void setCartaIniziale(int id) {
 		this.id = id;
 		this.coordinata=new Coordinata(SIZE/2,SIZE/2);
+	}
+	//private StatoAngolo[] angoli;
+	public StatoAngolo[] getAngoli() {
+		return angoli;
+		
 	}
 }
