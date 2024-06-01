@@ -250,8 +250,6 @@ public class Casella {
 					break;
 				case ROSSO:	idColorato="\u001B[31m"+idColorato+"\u001B[0m";
 					break;
-				case ORO: 	idColorato="\u001B[33m"+idColorato+"\u001B[0m";
-					break;
 			}
 		} else if(getId()<80) idColorato=" ";
 		
@@ -289,6 +287,11 @@ public class Casella {
 		System.out.println("└──────────────┴──────────────┘");
 		System.out.println();
 		
+	}
+	public void visualizzaCasellaOroDaId(int id) {
+		List<CartaOro> mazzoOro = MazzoCarteOro.getMazzoOro();
+		CartaOro cartaOroCercata = mazzoOro.get(getId()-41);
+		visualizzaCasellaOro(cartaOroCercata);
 	}
 	public void visualizzaCasellaOro(CartaOro cartaOro) {
 		System.out.println("┌──────────────┬──────────────┐");

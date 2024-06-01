@@ -82,18 +82,33 @@ public class Partita {
     
     	estraiObbiettivi();
      
-    //	mostraMano(player);
-    	 mostraManoGiocatore(  player[0]);
-    	 mostraManoGiocatore(  player[1]);
+    
+    	 //mostraManoGiocatore(player[0]);
+    	 //mostraManoGiocatore(player[1]);
         //Per visualizzare il campo di un giocatore usare:
     	for (Giocatore giocatore : player) {
     	        giocatore.getCampo().posizionaCartaIniziale(giocatore); // Aggiungi questa riga
-    	        giocatore.getCampo().visualizzaCampo();
+    	        //mostraManoGiocatore(giocatore);
+    	        //giocatore.getCampo().visualizzaCampo();
     	    }
-        //posizionaCartaIniziale(player); 
-    	 mostraManoGiocatore(  player[0]);
-    	player[0].getCampo().giocaCarta(player[0]);
-    	player[0].getCampo().visualizzaCampo();
+    	//CICLO GIOCO
+    	//verificare che quando un giocatore arriva a venti, acnhe gli altri finiscano il turno
+    	//altrimenti creare una nuova variabile Giocatore a cui viene attribuito il numero del giocatore che ha finito, poi fare un for da quell'indice alla fine
+    	boolean finito=false;
+    	
+    	do {
+    		
+	        for(Giocatore giocatore: player) {
+	        	
+	        	giocatore.getCampo().visualizzaCampo();
+	        	mostraManoGiocatore(giocatore);
+	        	giocatore.getCampo().giocaCarta(giocatore);
+	        	giocatore.getCampo().visualizzaCampo();
+	        	if(giocatore.getPunteggio()>=20) finito=true;
+	        }
+	        
+    	}while(finito==false);
+    	//AGGIUNGERE TURNO EXTRA -> VEDI REGOLE
 	}
 	public static void assegnaCarteIniziali( Giocatore[] giocatori,CartaIniziale[] cartaIniziale) {
 		 
