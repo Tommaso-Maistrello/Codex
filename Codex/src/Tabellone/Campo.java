@@ -211,26 +211,46 @@ public class Campo {
 		
 		}while(esiste== false);// il ciclo finisce se la cella di coordinata x y esiste ed è libera
 		StatoAngolo[] angoli=null;
+		StatoAngolo[] nuoviAngoli=new StatoAngolo[4];
 		
+		/*
+		 * nuoviAngolo è l'angolo che si andrà a creare controllando gli angoli che toccano o potrebbero toccare la carta da giocare
+		 */
 		//il ciclo for deve controlalre se attorno alla casella x y ci sono altre carte con angoli liberi
 		
-		for (int i = 0; i<4; i++) {
+		
 			if (tabella[x-1][y-1].getId()!=0) {// controlla la casella in alto a sinistra
 				angoli=tabella[x-1][y-1].getAngoli();
-				System.out.println(angoli[3]);// controlla l'angolo in basso a destra
+				nuoviAngoli[3]=angoli[3];
+				//System.out.println(angoli[3]);// controlla l'angolo in basso a destra
 			}else if(tabella[x-1][y+1].getId()!=0) {// controlla la casella in alto a destra
 				angoli=tabella[x-1][y+1].getAngoli();
-				System.out.println(angoli[2]);// controlla l'angolo in basso a sinistra
+				nuoviAngoli[2]=angoli[2];
+				//System.out.println(angoli[2]);// controlla l'angolo in basso a sinistra
 			}else if(tabella[x+1][y-1].getId()!=0) {// controlla la casella in basso a sinistra
+				nuoviAngoli[1]=angoli[1];
 				angoli=tabella[x+1][y-1].getAngoli();
-				System.out.println(angoli[1]);// controlla l'angolo in alto a destra
+				//System.out.println(angoli[1]);// controlla l'angolo in alto a destra
 			}else if(tabella[x+1][y+1].getId()!=0){// controlla la casella in basso a destra
-				angoli=tabella[x+1][y-1].getAngoli();
-				System.out.println(angoli[0]);// controlla l'angolo in alto a sinistra
+				angoli=tabella[x+1][y+1].getAngoli();
+				nuoviAngoli[0]=angoli[0];
+				//System.out.println(angoli[0]);// controlla l'angolo in alto a sinistra
 			}
+			System.out.println("stampa nuovi angoli");
+			
+			 
+			for(StatoAngolo angol: nuoviAngoli ) {
+				if(angol!=null) {
+					System.out.println(angol);
+				}
+				
+			}
+			 
+			
+			
 			 	
 			
-		}
+		
 		sc.close();
 		if (id <41) {
 			CartaRisorsa carta= Mano.prendiCartaRisorsaConID(id, player);
