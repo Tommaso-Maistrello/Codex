@@ -14,6 +14,8 @@ import Enum.StatoAngolo;
 import Gioco.Giocatore;
 import Gioco.Mano;
 import Gioco.Partita;
+import Mazzi.MazzoCarteOro;
+import Mazzi.MazzoCarteRisorsa;
 
 public class Campo {
 
@@ -328,6 +330,38 @@ public class Campo {
 	 
 		return new int[]{x, y};
 	}
+	
+	public void inizia() {
+		MazzoCarteRisorsa mazzoRisorsa = new MazzoCarteRisorsa();
+		MazzoCarteOro mazzoOro = new MazzoCarteOro();
+		Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("Scegli un'opzione:");
+            System.out.println("1. Pesca una carta dal Mazzo Risorsa");
+            System.out.println("2. Pesca una carta dal Mazzo Oro");
+            System.out.println("3. Pesca una carta dal Campo");
+            System.out.println("4. Esci");
+
+            int scelta = scanner.nextInt();
+
+            switch (scelta) {
+                case 1:
+                    /*pescaDalMazzo*/(mazzoRisorsa);
+                    break;
+                case 2:
+                    /*pescaDalMazzo*/(mazzoOro);
+                    break;
+                case 3:
+                    /*pescaDalCampo*/();
+                    break;
+                case 4:
+                    System.out.println("Grazie per aver giocato!");
+                    return;
+                default:
+                    System.out.println("Scelta non valida. Riprova.");
+            }
+        }
+    }
 
 	
 

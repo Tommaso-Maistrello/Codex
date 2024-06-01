@@ -60,6 +60,10 @@ public class Partita {
 	     		case "rosso":	System.out.print("\u001B[31mrosso");
 	     						player[i].setUsername("\u001B[31m"+player[i].getUsername()+"\u001B[0m");
 	     						break;
+	
+	     		
+	     		
+	     		
 	     		case "blu":		System.out.print("\u001B[34mblu");
 	     						player[i].setUsername("\u001B[34m"+player[i].getUsername()+"\u001B[0m");
 	     						break;
