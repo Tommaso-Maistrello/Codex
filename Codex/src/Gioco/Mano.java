@@ -95,8 +95,12 @@ public class Mano {
 			for(CartaRisorsa carta: player.getMano().getManoRisorsa()) {
 				if (carta.getId()==id) {
 					cartaR= carta;
+				
+					
+					
 				}
 			}
+				rimuoviCartaRisorsa(player, cartaR);
 		 return cartaR;
 	 }
 	 public static CartaOro prendiCartaOroConID(int id, Giocatore player) {
@@ -104,10 +108,30 @@ public class Mano {
 			for(CartaOro carta: player.getMano().getManoOro()) {
 				if (carta.getId()==id) {
 					cartaOro= carta;
+					
 				}
 			}
+			rimuoviCartaOro(player, cartaOro);
 		 return cartaOro;
 	 }
+	 public static void rimuoviCartaOro(Giocatore player, CartaOro cartaOro) {
+		 if (player != null && cartaOro != null) {
+		        List<CartaOro> manoOro = player.getMano().getManoOro();
+		        if (manoOro != null) {
+		            manoOro.remove(cartaOro);
+		        }
+		    }
+		}
+
+	 public static void rimuoviCartaRisorsa(Giocatore player, CartaRisorsa cartaRisorsa) {
+		    if (player != null && cartaRisorsa != null) {
+		        List<CartaRisorsa> manoRisorsa = player.getMano().getManoRisorsa();
+		        if (manoRisorsa != null) {
+		            manoRisorsa.remove(cartaRisorsa);
+		        }
+		    }
+		}
+
     
     /*
     public static void visualizzaCartaRisorsa(CartaRisorsa cartaRisorsa ) {

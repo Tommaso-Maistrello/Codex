@@ -15,7 +15,8 @@ import Gioco.Partita;
 public class CartaOro extends Carta {
 	
 	private final Colore colore;
-	private final String condizioneA, condizioneF, condizioneI, condizioneV, punti;
+	private final String condizioneA, condizioneF, condizioneI, condizioneV;
+	private String punti;
 	private final int numeroAnimale, numeroFunghi, numeroInsetti, numeroVegetale;
 	
 	
@@ -70,5 +71,11 @@ public class CartaOro extends Carta {
 	}
 	public int getNumeroVegetale() {
 		return numeroVegetale;
+	}
+
+
+	public void setPunti(String punti) {
+		this.punti= punti;
+		
 	}
 }

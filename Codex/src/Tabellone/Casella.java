@@ -177,7 +177,7 @@ public class Casella {
 												break;
 					case PERGAMENA: angoliToString[i]="\u001B[33m"+angoli[i].toString()+"\u001B[0m    ";
 												break;
-					case NULL: 		angoliToString[i]="\t       ";
+					case NULLO: 		angoliToString[i]="\t       ";
 												break;
 					case VUOTO: 	angoliToString[i]=angoli[i].toString()+"        ";
 												break;
@@ -203,7 +203,7 @@ public class Casella {
 												break;
 					case PERGAMENA: angoliToString[i]="    \u001B[33m"+angoli[i].toString()+"\u001B[0m";
 												break;
-					case NULL: 		angoliToString[i]="\t     ";
+					case NULLO: 		angoliToString[i]="\t     ";
 												break;
 					case VUOTO: 	angoliToString[i]="        "+angoli[i].toString();
 												break;

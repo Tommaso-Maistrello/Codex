@@ -186,10 +186,11 @@ public class Campo {
 			System.out.print(numeroFormattato);
 		}
 		System.out.println("\n");
-		casellaSpecifica();
+	//	casellaSpecifica();
 	}
 
-	public void posizionaCartaIniziale(Giocatore giocatore) {
+ 
+public void posizionaCartaIniziale(Giocatore giocatore) {
 	        int centroX = SIZE/2;
 	        int centroY = SIZE/2;
 	        int k =  SIZE/2;
@@ -203,6 +204,8 @@ public class Campo {
 	
 	public void giocaCarta(Giocatore player) {
 		boolean esiste= false;
+		String red = "\033[31m";
+		 String reset = "\033[0m";
 		int x,y;
 		
 		int id =esisteCarta(player);// controlla che il giocatore abbia fornito id di una carta che ha in mano
@@ -211,68 +214,66 @@ public class Campo {
 		do {
 
 			esiste= false;
-			int coordinata[]=verificaCoordinata(sc);// controlla che la cordinata esiste
+			int coordinata[]=verificaCoordinata(sc);//contrtolla che la posizione in qui si vuole giocare è libera ed se è x e y sono entrambi pari o dispari
 			x= coordinata[0];
 			y= coordinata[1];
 			System.out.println("x:"+coordinata[0]+"y:"+coordinata[1]);
-			if(tabella[x][y].getId()==0) {//contrtolla che la posizione in qui si vuole giocare è libera
-				System.out.println("Si può giocare la carta");
-				System.out.println();
-				esiste= true;
+			
+			// prende le carte che vengono toccate
+			
+			
+			if(tabella[x][y].getId()==0) {
+			System.out.println();
+			esiste= true;
 			}else {
-				System.out.println("La carta non si può giocare");
-				System.out.println();
+			System.out.println(red+" la carta non si può giocare "+reset);
+			System.out.println();
 			}
-		
-		}while(esiste== false);// il ciclo finisce se la cella di coordinata x y esiste ed è libera
-		StatoAngolo[] angoli=null;
-		StatoAngolo[] nuoviAngoli=new StatoAngolo[4];
-		
-		/*
-		 * nuoviAngolo è l'angolo che si andrà a creare controllando gli angoli che toccano o potrebbero toccare la carta da giocare
-		 */
-		//il ciclo for deve controllare se attorno alla casella x y ci sono altre carte con angoli liberi
-		
-		
-			if (tabella[x-1][y-1].getId()!=0) {// controlla la casella in alto a sinistra
-				angoli=tabella[x-1][y-1].getAngoli();
-				nuoviAngoli[3]=angoli[3];
-				//System.out.println(angoli[3]);// controlla l'angolo in basso a destra
-			}else if(tabella[x-1][y+1].getId()!=0) {// controlla la casella in alto a destra
-				angoli=tabella[x-1][y+1].getAngoli();
-				nuoviAngoli[2]=angoli[2];
-				//System.out.println(angoli[2]);// controlla l'angolo in basso a sinistra
-			}else if(tabella[x+1][y-1].getId()!=0) {// controlla la casella in basso a sinistra
-				angoli=tabella[x+1][y-1].getAngoli();
-				nuoviAngoli[1]=angoli[1];
-				//System.out.println(angoli[1]);// controlla l'angolo in alto a destra
-			}else if(tabella[x+1][y+1].getId()!=0){// controlla la casella in basso a destra
-				angoli=tabella[x+1][y+1].getAngoli();
-				nuoviAngoli[0]=angoli[0];
-				//System.out.println(angoli[0]);// controlla l'angolo in alto a sinistra
-			}
-			System.out.println("stampa nuovi angoli");
-			
-			 
-			for(StatoAngolo angol: nuoviAngoli ) {
-				if(angol!=null) {
-					System.out.println(angol);
-				}
 				
+			if (esiste == true) {
+				esiste = posizioneGiocabile(x,y);// controlla se la coordintata è in un punto giocabile cioè se uno dei 4 angoli tocca un'altra carta
+												// inoltre controlla se la carta viene giocata sopra ad un angolo coperto o meno
+				if (esiste == false) {
+					System.out.println(red+"La carta non si poò giocare nelle coordinate fornite"+reset);// controlla se la coordintata è in un punto giocabile cioè se uno dei 4 angoli tocca un'altra carta
+				}
 			}
-			 
 			
+				if (esiste == true) {
+				esiste =controlloAngoli(x,y);// controlla che la carta non venga giocata su angoli non coperti o nulli
+				}
 			
-			 	
-			
+		}while(esiste== false);// il ciclo finisce se la cella di coordinata x y esiste ed è libera
 		
+ 	
+		 System.out.println("per giocare la carta sul fronte scrivi 1, per giocare la carta sul retro scrivi 2");
+		int verso=0;
+		 do {
+			 System.out.println("fornisci un input valido per il verso della carta");
+			verso=sc.nextInt();
+			
+			
+		}while(verso!=1 && verso!=2 );
 		//sc.close();
 		if (id <41) {
 			CartaRisorsa carta= Mano.prendiCartaRisorsaConID(id, player);
+			if (verso==2) {
+				carta.setAngoloFronteBottomLeft(StatoAngolo.VUOTO);
+				carta.setAngoloFronteBottomRight(StatoAngolo.VUOTO);
+				carta.setAngoloFronteTopLeft(StatoAngolo.VUOTO);
+				carta.setAngoloFronteTopRight(StatoAngolo.VUOTO);
+				carta.setPunti(0);
+			}
 			 tabella[x][y].setCartaRisorsa(carta);
 			 System.out.println("hai giocato la carta risorsa");
 		}else {
 			CartaOro carta= Mano.prendiCartaOroConID(id, player);
+			if (verso==2) {
+				carta.setAngoloFronteBottomLeft(StatoAngolo.VUOTO);
+				carta.setAngoloFronteBottomRight(StatoAngolo.VUOTO);
+				carta.setAngoloFronteTopLeft(StatoAngolo.VUOTO);
+				carta.setAngoloFronteTopRight(StatoAngolo.VUOTO);
+				carta.setPunti("0");
+			}
 			 tabella[x][y].setCartaOro(carta);
 			 System.out.println("hai giocato la carta oro");
 		}
@@ -311,7 +312,8 @@ public class Campo {
 	}
 	public int[] verificaCoordinata(Scanner sc) {
 		boolean esiste= false;
-		 
+		String red = "\033[31m";
+		 String reset = "\033[0m";
 		int x,y;
 		do {
 			System.out.print("Qual è la coordinata x in qui voi giocare la carta? ");
@@ -319,18 +321,115 @@ public class Campo {
 			System.out.print("Qual è la coordinata y in qui voi giocare la carta? ");
 			y = sc.nextInt();
 		
-		if (x <SIZE-1 && y <SIZE-1) {
-			System.out.println("La coordinata esiste");
+		if (x <SIZE-1 && y <SIZE-1 && (x % 2 == 0 && y % 2 == 0) || (x % 2 != 0 && y % 2 != 0)) {
+			 
 			esiste= true;
 		}else {
-			System.out.println("La coordinata non esiste");
+			System.out.println(red+"non è possibile giocare la carta nelle coordinate fornite"+ reset);
 		}
 		
 		}while(esiste== false);// controlla se la coordinata è valida
 	 
 		return new int[]{x, y};
 	}
+	public boolean posizioneGiocabile(int x, int y) {
+		boolean esiste = false;
+		String red = "\033[31m";
+		 String reset = "\033[0m";
+		StatoAngolo[] angoli=null;
+		//boolean topRight, topLeft,boottomRight, boottomLeft = false;
+		//for (int i=0; i<4;i++) {
+		if ((tabella[x-1][y-1].getId()!=0  )||tabella[x-1][y+1].getId()!=0 ||tabella[x+1][y-1].getId()!=0||tabella[x+1][y+1].getId()!=0) {
+			esiste = true;
+		}
+		if (tabella[x-1][y-1].getId()!=0) {
+		angoli=tabella[x-1][y-1].getAngoli();// carta in alto a sinistra rispetto alla coordinata
+			if(angoli[3]==StatoAngolo.NULLO||angoli[3]==StatoAngolo.COPERTO) {//controlla angol bottom right
+			esiste = false;
+			System.out.println(red+"non è possibile giocare la carta su angoli nulli o coperti"+ reset);
+			}	
+		}
+		if (tabella[x-1][y+1].getId()!=0) {
+			angoli=tabella[x-1][y+1].getAngoli();// carta in basso a sinistra rispetto alla coordinata
+			if(angoli[1]==StatoAngolo.NULLO||angoli[1]==StatoAngolo.COPERTO) {//controlla angolo top right
+				esiste = false;
+				System.out.println(red+"non è possibile giocare la carta su angoli nulli o coperti"+ reset);
+			}	
+			}
+		if (tabella[x+1][y-1].getId()!=0) {
+			angoli=tabella[x+1][y-1].getAngoli();// carta in alto a destra rispetto alla coordinata
+			if(angoli[2]==StatoAngolo.NULLO||angoli[2]==StatoAngolo.COPERTO) {//controlla angolo bottom left
+				esiste = false;
+				System.out.println(red+"non è possibile giocare la carta su angoli nulli o coperti"+ reset);
+			}	
+			}
+		if (tabella[x+1][y+1].getId()!=0) {
+			angoli=tabella[x+1][y+1].getAngoli();// carta in basso a destra rispetto alla coordinata
+			if(angoli[0]==StatoAngolo.NULLO||angoli[0]==StatoAngolo.COPERTO) {//controlla angolo top left
+				esiste = false;
+				System.out.println(red+"non è possibile giocare la carta su angoli nulli o coperti"+ reset);
+				
+			}	
+			}
 	
+		
+		
+		
+
+		//}
+		return esiste;
+	}
+
+	public boolean controlloAngoli(int x, int y) {
+		boolean esiste = true;
+		String red = "\033[31m";
+		 String reset = "\033[0m";
+		StatoAngolo[] angoli=null;
+		StatoAngolo[] nuoviAngoli=new StatoAngolo[4];
+		
+		/*
+		 * nuoviAngolo è l'angolo che si andrà a creare controllando gli angoli che toccano o potrebbero toccare la carta da giocare
+		 */
+			
+		
+			if (tabella[x-1][y-1].getId()!=0) {// controlla la casella in alto a sinistra
+				angoli=tabella[x-1][y-1].getAngoli();
+				nuoviAngoli[3]=angoli[3];
+				//System.out.println(angoli[3]);// controlla l'angolo in basso a destra
+			}else if(tabella[x-1][y+1].getId()!=0) {// controlla la casella in alto a destra
+				angoli=tabella[x-1][y+1].getAngoli();
+				nuoviAngoli[2]=angoli[2];
+				//System.out.println(angoli[2]);// controlla l'angolo in basso a sinistra
+			}else if(tabella[x+1][y-1].getId()!=0) {// controlla la casella in basso a sinistra
+				angoli=tabella[x+1][y-1].getAngoli();
+				nuoviAngoli[1]=angoli[1];
+				//System.out.println(angoli[1]);// controlla l'angolo in alto a destra
+			}else if(tabella[x+1][y+1].getId()!=0){// controlla la casella in basso a destra
+				angoli=tabella[x+1][y+1].getAngoli();
+				nuoviAngoli[0]=angoli[0];
+				//System.out.println(angoli[0]);// controlla l'angolo in alto a sinistra
+			}
+			System.out.println("stampa nuovi angoli");
+	
+			
+					for(StatoAngolo angol: nuoviAngoli ) {
+						if(angol==StatoAngolo.NULLO || angol==StatoAngolo.COPERTO) {
+							esiste =false;
+						}
+						
+					}
+					if (esiste == false) {
+						System.out.println(red+"non è possibile giocare la carta in quanto è presenteo un angolo nullo oppure gia coperto"+reset);
+						
+						
+					}
+					
+				
+		 
+		return esiste;
+	}
+	
+	/*
 	public void inizia() {
 		MazzoCarteRisorsa mazzoRisorsa = new MazzoCarteRisorsa();
 		MazzoCarteOro mazzoOro = new MazzoCarteOro();
@@ -346,13 +445,13 @@ public class Campo {
 
             switch (scelta) {
                 case 1:
-                    /*pescaDalMazzo*/(mazzoRisorsa);
+                     pescaDalMazzo (mazzoRisorsa);
                     break;
                 case 2:
-                    /*pescaDalMazzo*/(mazzoOro);
+                     pescaDalMazzo (mazzoOro);
                     break;
                 case 3:
-                    /*pescaDalCampo*/();
+                     pescaDalCampo ();
                     break;
                 case 4:
                     System.out.println("Grazie per aver giocato!");
@@ -362,6 +461,7 @@ public class Campo {
             }
         }
     }
+    */
 
 	
 

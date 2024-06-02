@@ -17,7 +17,7 @@ import Tabellone.Campo;
 public class Giocatore {
 
 	private String username;
-	private final ColoreSegnalino coloreSegnalino;
+	private ColoreSegnalino coloreSegnalino;
 	private int punteggio;
 	private static int numGiocatore;
 	private  Mano mano;
@@ -63,6 +63,7 @@ public class Giocatore {
 	public ColoreSegnalino getColoreSegnalino() {
 		return coloreSegnalino;
 	}
+
 	public int  getNumGiocatori() {
 		return numGiocatore;
 	}
@@ -131,6 +132,7 @@ public static void  disordinaGiocatori( Giocatore[] giocatori) {
 		for (int i = 0; i < giocatori.length; i++) {
 			int posizioneRandom = rnd.nextInt(giocatori.length);
 			Giocatore temp = giocatori[posizioneRandom];
+			
 			giocatori[posizioneRandom] = giocatori[i];
 			giocatori[i] = temp;
 		}

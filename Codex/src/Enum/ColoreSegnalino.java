@@ -3,6 +3,9 @@ package Enum;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+
+import Gioco.Giocatore;
+
 import java.util.List;
 
 public enum ColoreSegnalino {
@@ -10,7 +13,7 @@ public enum ColoreSegnalino {
 	ROSSO, BLU, VERDE, GIALLO, NERO;
 	
 	private static int conta = 1;
-	private static final int giocatoreNero;
+	private static int giocatoreNero;
 	private static List<ColoreSegnalino> coloriRestanti;
 	private static List<ColoreSegnalino> sequenzaColori;
 	
@@ -38,6 +41,7 @@ public enum ColoreSegnalino {
 		}
 		return sequenzaColori.get(conta++ - 1);
 	}
+
 /*
    public static void main(String[] args) {
 	   for(int i=1; i <= 4; i++) {

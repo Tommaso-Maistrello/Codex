@@ -103,12 +103,23 @@ public class Partita {
     	do {
     		
 	        for(Giocatore giocatore: player) {
-	        	
+	        	System.out.println("\n-------------------------------------------------------------"  );
+	        	System.out.println("è il turno del giocatore "+giocatore.getUsername());
+	        	System.out.println("\nPremi invio per continuare...");
+	        	sc.nextLine();
 	        	giocatore.getCampo().visualizzaCampo();
+	        	System.out.println("\nPremi invio per continuare...");
+	        	sc.nextLine();
 	        	mostraManoGiocatore(giocatore);
+	        
 	        	giocatore.getCampo().giocaCarta(giocatore);
+	        	System.out.println("\nPremi invio per continuare...");
+	        	sc.nextLine();
+	        	System.out.println("pesca una nuova carta");
+	        //	pescaNuovaCarta(giocatore, sc);
 	        	giocatore.getCampo().visualizzaCampo();
 	        	if(giocatore.getPunteggio()>=20) finito=true;
+	        	
 	        }
 	        
     	}while(finito==false);
@@ -123,6 +134,20 @@ public class Partita {
 			System.out.println("Il giocatore "+giocatori[i].getUsername()+" ha la carta con id: "+cartaIniziale[i].getId());
 		}
 		
+	}
+	public void pescaNuovaCarta(Giocatore player2, Scanner sc) {
+		List<CartaRisorsa> mazzoRisorsa = MazzoCarteRisorsa.getMazzoRisorsa();
+	    List<CartaOro> mazzoOro = MazzoCarteOro.getMazzoOro();
+	    Casella casellaRisorsa1=new Casella(mazzoRisorsa.get(0));
+	    Casella casellaRisorsa2=new Casella(mazzoRisorsa.get(1));
+	    System.out.println("scegli una carta tra le carte risorsa: "); 
+		casellaRisorsa1.visualizzaCasella();
+		casellaRisorsa2.visualizzaCasella();
+		 System.out.println("scegli una carta tra le carte Oro: "); 
+		 Casella casellaOro1=new Casella(mazzoOro.get(0));
+		 Casella casellaOro2=new Casella(mazzoOro.get(1));
+		 casellaOro1.visualizzaCasella();
+		 casellaOro2.visualizzaCasella();
 	}
 	public Mano pescaCarte() {
 

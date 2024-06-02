@@ -6,7 +6,7 @@ import Enum.StatoAngolo;
 public class CartaRisorsa extends Carta {
 	
 	private final Colore colore;
-	private final int punti;
+	private int punti;
 	
 	
 	public CartaRisorsa(int id, StatoAngolo angoloFronteTopLeft, StatoAngolo angoloFronteTopRight, StatoAngolo angoloFronteBottomLeft, StatoAngolo angoloFronteBottomRight, 
@@ -26,6 +26,9 @@ public class CartaRisorsa extends Carta {
 	
 	public int getPunti() {
 		return punti;
+	}
+	public void setPunti(int punti) {
+		this.punti= punti;
 	}
 	
 }
