@@ -204,7 +204,7 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 	
 	public void giocaCarta(Giocatore player) {
 		boolean esiste= false;
-		CartaOro cartaOro=null;
+		
 		int id;
 		String red = "\033[31m";
 		 String reset = "\033[0m";
@@ -220,9 +220,7 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 			esiste= controlloRequisiti(player,id);
 			if(esiste==false) {
 				System.out.println(red+" la carta oro non ha i requisiti per essere giocata"+reset);
-				cartaOro= Partita.prendiCartaOroConID(id, player);
-				System.out.println("i requisiti della carta oro sono: numero animali="+cartaOro.getNumeroAnimali()+"numero insetti="+cartaOro.getNumeroInsetti()+"numero funghi ="+cartaOro.getNumeroFunghi()+"numero vegetale "+cartaOro.getNumeroVegetale());
-				
+		
 			}
 			
 		}else {
@@ -250,7 +248,9 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 			}
 				
 			if (esiste == true) {
-				esiste = posizioneGiocabile(x,y);// controlla se la coordintata è in un punto giocabile cioè se uno dei 4 angoli tocca un'altra carta
+				
+				
+				esiste = posizioneGiocabile(x,y, id);// controlla se la coordintata è in un punto giocabile cioè se uno dei 4 angoli tocca un'altra carta
 												// inoltre controlla se la carta viene giocata sopra ad un angolo coperto o meno
 				if (esiste == false) {
 					System.out.println(red+"La carta non si può giocare nelle coordinate fornite"+reset);// controlla se la coordintata è in un punto giocabile cioè se uno dei 4 angoli tocca un'altra carta
@@ -371,41 +371,65 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 	 
 		return new int[]{x, y};
 	}
-	public boolean posizioneGiocabile(int x, int y) {
+	public boolean posizioneGiocabile(int x, int y, int id) {
 		boolean esiste = false;
 		String red = "\033[31m";
 		 String reset = "\033[0m";
 		StatoAngolo[] angoli=null;
-		StatoAngolo[] angoliCarta=tabella[x][y].getAngoli();
+		StatoAngolo[] angoliCarta =new StatoAngolo[4];
+		
+		if (id >41) {
+			
+			CartaOro carta= Partita.prendiCartaOroConID(id);
+			System.out.println(carta.getId());
+			 angoliCarta[0] =carta.getAngoloFronteTopLeft();
+			 angoliCarta[1] = carta.getAngoloFronteTopLeft();
+			 angoliCarta[2] = carta.getAngoloFronteBottomLeft();
+			 angoliCarta[3] = carta.getAngoloFronteBottomRight();
+		}else {
+			CartaRisorsa carta=Partita.prendiCartaRisorsaConID(id);
+			System.out.println(carta.getId()+"stato angolo 0 "+ carta.getAngoloFronteTopLeft() +"angolo 1"+carta.getAngoloFronteTopLeft());
+			angoliCarta[0] =carta.getAngoloFronteTopLeft();
+			 
+			 angoliCarta[1] = carta.getAngoloFronteTopRight();
+			 angoliCarta[2] = carta.getAngoloFronteBottomLeft();
+			 angoliCarta[3] = carta.getAngoloFronteBottomRight();
+			
+		}
+		
 		//boolean topRight, topLeft,boottomRight, boottomLeft = false;
 		//for (int i=0; i<4;i++) {
 		if ((tabella[x-1][y-1].getId()!=0  )||tabella[x-1][y+1].getId()!=0 ||tabella[x+1][y-1].getId()!=0||tabella[x+1][y+1].getId()!=0) {
 			esiste = true;
 		}
+		
 		if (tabella[x-1][y-1].getId()!=0 && esiste ==true) {
 		angoli=tabella[x-1][y-1].getAngoli();// carta in alto a sinistra rispetto alla coordinata
-			if((angoli[3]==StatoAngolo.NULLO||angoli[3]==StatoAngolo.COPERTO)&&angoliCarta[0]!=StatoAngolo.NULLO) {//controlla angol bottom right && angolo alto a sinistra della  carta
-			esiste = false;
+		System.out.println("angoli 0 1 2 3:"+angoli[0]+","+angoli[1]+","+angoli[2]+","+angoli[3]+",");
+		
+		if(angoli[3]==StatoAngolo.NULLO||angoli[3]==StatoAngolo.COPERTO||angoliCarta[0]==StatoAngolo.NULLO) {//controlla angol bottom right && angolo alto a sinistra della  carta
+				
+				esiste = false;
 			System.out.println(red+"non è possibile giocare la carta su angoli nulli o coperti o se l'angolo da giocare è nullo"+ reset);
 			}	
 		}
 		if (tabella[x-1][y+1].getId()!=0&& esiste ==true) {
 			angoli=tabella[x-1][y+1].getAngoli();// carta in basso a sinistra rispetto alla coordinata
-			if(angoli[1]==StatoAngolo.NULLO||angoli[1]==StatoAngolo.COPERTO&&angoliCarta[2]!=StatoAngolo.NULLO) {//controlla angolo top right && angolo in bassso a sinitra della carta
+			if(angoli[1]==StatoAngolo.NULLO||angoli[1]==StatoAngolo.COPERTO||angoliCarta[2]==StatoAngolo.NULLO) {//controlla angolo top right && angolo in bassso a sinitra della carta
 				esiste = false;
 				System.out.println(red+"non è possibile giocare la carta su angoli nulli o coperti o se l'angolo da giocare è nullo"+ reset);
 			}	
 			}
 		if (tabella[x+1][y-1].getId()!=0&& esiste ==true) {
 			angoli=tabella[x+1][y-1].getAngoli();// carta in alto a destra rispetto alla coordinata
-			if(angoli[2]==StatoAngolo.NULLO||angoli[2]==StatoAngolo.COPERTO&&angoliCarta[1]!=StatoAngolo.NULLO) {//controlla angolo bottom left&& alto a destra della carta
+			if(angoli[2]==StatoAngolo.NULLO||angoli[2]==StatoAngolo.COPERTO||angoliCarta[1]==StatoAngolo.NULLO) {//controlla angolo bottom left&& alto a destra della carta
 				esiste = false;
 				System.out.println(red+"non è possibile giocare la carta su angoli nulli o coperti o se l'angolo da giocare è nullo"+ reset);
 			}	
 			}
-		if (tabella[x+1][y+1].getId()!=0&& esiste ==true) {
+		if (tabella[x+1][y+1].getId()!=0 && esiste ==true) {
 			angoli=tabella[x+1][y+1].getAngoli();// carta in basso a destra rispetto alla coordinata
-			if(angoli[0]==StatoAngolo.NULLO||angoli[0]==StatoAngolo.COPERTO&&angoliCarta[3]!=StatoAngolo.NULLO) {//controlla angolo top left&& e in basso a destra della carta
+			if(angoli[0]==StatoAngolo.NULLO||angoli[0]==StatoAngolo.COPERTO||angoliCarta[3]==StatoAngolo.NULLO) {//controlla angolo top left&& e in basso a destra della carta
 				esiste = false;
 				System.out.println(red+"non è possibile giocare la carta su angoli nulli o coperti o se l'angolo da giocare è nullo"+ reset);
 				
@@ -474,12 +498,12 @@ public boolean controlloRequisiti(Giocatore player, int id) {
 	String condizionePunti;
 	CartaOro cartaOro, cartaOroC;
 	boolean requisiti= false;
-	 
 	StatoAngolo[] angoli=null;
+
 	
  
 	if(id!=0 &&id >40) {
-		cartaOro= Partita.prendiCartaOroConID(id, player);
+		cartaOro= Partita.prendiCartaOroConID(id);
 		condizionePunti=cartaOro.getCondizione();
 		condizioneA=cartaOro.getNumeroAnimali();
 		condizioneF=cartaOro.getNumeroFunghi();
@@ -492,7 +516,8 @@ public boolean controlloRequisiti(Giocatore player, int id) {
 		    for (int j = 0; (j < SIZE) && requisiti==false; j++) {
 		        idC = tabella[i][j].getId(); // Prende id della carta
 		        if (idC != 0 && idC!= player.getCartaIniziale().getId()) {
-		            cartaOroC = Partita.prendiCartaOroConID(idC, player);
+		        	
+		            cartaOroC = Partita.prendiCartaOroConID(idC);
 		            System.out.println(cartaOroC.getId()) ;
 		            if (condizioneA != 0) {
 		                if (( cartaOroC.getAngoloFronteTopLeft() == StatoAngolo.ANIMALE) ||
@@ -530,12 +555,61 @@ public boolean controlloRequisiti(Giocatore player, int id) {
 		                }
 		            }
 		            
+		           
+
+		            
+		            
+		            
 		            if (ANIMALE == condizioneA && FUNGHI == condizioneF && INSETTI == condizioneI && VEGETALE == condizioneV) {
 		                requisiti = true;
 		            }
 		        }
 		    }
 		}
+		
+		 
+        if (condizioneA != 0) {
+            if ((player.getCartaIniziale().getAngoloFronteTopLeft() == StatoAngolo.ANIMALE) ||
+                (player.getCartaIniziale().getAngoloFronteTopRight() == StatoAngolo.ANIMALE) ||
+                (player.getCartaIniziale().getAngoloFronteBottomLeft() == StatoAngolo.ANIMALE) ||
+                (player.getCartaIniziale().getAngoloFronteBottomRight() == StatoAngolo.ANIMALE)) {
+                ANIMALE++;
+            }
+        }
+
+        if (condizioneF != 0) {
+            if ((player.getCartaIniziale().getAngoloFronteTopLeft() == StatoAngolo.FUNGHI) ||
+                (player.getCartaIniziale().getAngoloFronteTopRight() == StatoAngolo.FUNGHI) ||
+                (player.getCartaIniziale().getAngoloFronteBottomLeft() == StatoAngolo.FUNGHI) ||
+                (player.getCartaIniziale().getAngoloFronteBottomRight() == StatoAngolo.FUNGHI)) {
+                FUNGHI++;
+            }
+        }
+
+        if (condizioneI != 0) {
+            if ((player.getCartaIniziale().getAngoloFronteTopLeft() == StatoAngolo.INSETTI) ||
+                (player.getCartaIniziale().getAngoloFronteTopRight() == StatoAngolo.INSETTI) ||
+                (player.getCartaIniziale().getAngoloFronteBottomLeft() == StatoAngolo.INSETTI) ||
+                (player.getCartaIniziale().getAngoloFronteBottomRight() == StatoAngolo.INSETTI)) {
+                INSETTI++;
+            }
+        }
+
+        if (condizioneV != 0) {
+            if ((player.getCartaIniziale().getAngoloFronteTopLeft() == StatoAngolo.VEGETALE) ||
+                (player.getCartaIniziale().getAngoloFronteTopRight() == StatoAngolo.VEGETALE) ||
+                (player.getCartaIniziale().getAngoloFronteBottomLeft() == StatoAngolo.VEGETALE) ||
+                (player.getCartaIniziale().getAngoloFronteBottomRight() == StatoAngolo.VEGETALE)) {
+                VEGETALE++;
+            }
+        }
+        if(requisiti== false) {
+        	 System.out.println("i requisiti della carta oro sono: numero animali="+cartaOro.getNumeroAnimali()+"numero insetti="+cartaOro.getNumeroInsetti()+"numero funghi ="+cartaOro.getNumeroFunghi()+"numero vegetale "+cartaOro.getNumeroVegetale());
+     		
+             System.out.println("al momento il numero di  animali è "+ ANIMALE +"numero insetti="+INSETTI+"numero funghi ="+FUNGHI+"numero vegetale "+VEGETALE);
+     		
+        }
+       
 
 		 
 	}

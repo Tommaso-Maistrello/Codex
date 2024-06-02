@@ -18,6 +18,8 @@ import Tabellone.Casella;
 public class Partita {
 	private static List<CartaRisorsa> mazzoRisorse = new ArrayList<>();
 	  private static List<CartaOro> mazzoOro = new ArrayList<>();
+	  private static List<CartaRisorsa> mazzoRisorsaOrigianle = new ArrayList<>();
+	  private static List<CartaOro> mazzoOroOriginale = new ArrayList<>();
 	  public static CartaObiettivo[] carteObbiettivo;
 	  private static Giocatore[] player;
 
@@ -29,6 +31,8 @@ public class Partita {
 		//costruzione mazzi  
 		MazzoCarteOro.costruisciMazzo();
         MazzoCarteRisorsa.costruisciMazzo();
+        MazzoCarteOro.setMazzoOroOriginale();
+        MazzoCarteRisorsa.setMazzoRisorsaOriginale();
         
         //Mischia mazzi
         MazzoCarteOro.mischiaMazzo();
@@ -369,11 +373,11 @@ public class Partita {
  
 	
 	}
-	 public static CartaRisorsa prendiCartaRisorsaConID(int id, Giocatore player) {
-		 List<CartaRisorsa> mazzoRisorsa = MazzoCarteRisorsa.getMazzoRisorsa();
+	 public static CartaRisorsa prendiCartaRisorsaConID(int id) {
+		 List<CartaRisorsa> mazzoRisorsaOrigianle = MazzoCarteRisorsa.getMazzoRisorsaOriginale();
 		    
 		 CartaRisorsa cartaR= null;
-			for(CartaRisorsa carta: mazzoRisorsa) {
+			for(CartaRisorsa carta: mazzoRisorsaOrigianle) {
 				if (carta.getId()==id) {
 					cartaR= carta;
 				
@@ -383,7 +387,7 @@ public class Partita {
 			}
 		 return cartaR;
 	 }
-	 public static CartaOro prendiCartaOroConID(int id, Giocatore player) {
+	 public static CartaOro prendiCartaOroConID(int id) {
 	 
 		 List<CartaOro> mazzoOroOriginale = MazzoCarteOro.getMazzoOroOriginale();
 		 CartaOro cartaOro= null;

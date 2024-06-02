@@ -14,6 +14,7 @@ import Enum.StatoAngolo;
 
 public class MazzoCarteOro {
     public static List<CartaOro> mazzoOro = new ArrayList<>();
+    public static List<CartaOro> mazzoOroOriginale = new ArrayList<>();
     public static void costruisciMazzo() {
         try {
             File fileOro = new File("carteOro.txt");
@@ -65,7 +66,7 @@ public class MazzoCarteOro {
 	        Collections.shuffle(mazzoOro);    
 	    	
 	}
-    public static List<CartaOro> getMazzoOroOriginale() {
+    public static void setMazzoOroOriginale() {
         try {
             File fileOro = new File("carteOro.txt");
             Scanner leggi = new Scanner(fileOro);
@@ -94,7 +95,7 @@ public class MazzoCarteOro {
                 int numeroV = leggi.nextInt();
                 leggi.nextLine(); // Move to the next line
 
-                mazzoOro.add(new CartaOro(id, fronteTopLeft, fronteTopRight, fronteBottomLeft, fronteBottomRight, 
+                mazzoOroOriginale.add(new CartaOro(id, fronteTopLeft, fronteTopRight, fronteBottomLeft, fronteBottomRight, 
                                           retroTopLeft, retroTopRight, retroBottomLeft, retroBottomRight, 
                                           risorsaRetroCentrale, colore, condizione, condizioneA, numeroAnimale, 
                                           condizioneFunghi, numeroF, condizioneInsetti, numeroI, condizioneVegetali, 
@@ -105,8 +106,13 @@ public class MazzoCarteOro {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-		return mazzoOro;
+	 
 
     }
+	public static List<CartaOro>  getMazzoOroOriginale() {
+		return mazzoOroOriginale;
+		
 	
+	
+}
 }
