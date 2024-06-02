@@ -353,37 +353,38 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 		String red = "\033[31m";
 		 String reset = "\033[0m";
 		StatoAngolo[] angoli=null;
+		StatoAngolo[] angoliCarta=tabella[x][y].getAngoli();
 		//boolean topRight, topLeft,boottomRight, boottomLeft = false;
 		//for (int i=0; i<4;i++) {
 		if ((tabella[x-1][y-1].getId()!=0  )||tabella[x-1][y+1].getId()!=0 ||tabella[x+1][y-1].getId()!=0||tabella[x+1][y+1].getId()!=0) {
 			esiste = true;
 		}
-		if (tabella[x-1][y-1].getId()!=0) {
+		if (tabella[x-1][y-1].getId()!=0 && esiste ==true) {
 		angoli=tabella[x-1][y-1].getAngoli();// carta in alto a sinistra rispetto alla coordinata
-			if(angoli[3]==StatoAngolo.NULLO||angoli[3]==StatoAngolo.COPERTO) {//controlla angol bottom right
+			if((angoli[3]==StatoAngolo.NULLO||angoli[3]==StatoAngolo.COPERTO)&&angoliCarta[0]!=StatoAngolo.NULLO) {//controlla angol bottom right && angolo alto a sinistra della  carta
 			esiste = false;
-			System.out.println(red+"non è possibile giocare la carta su angoli nulli o coperti"+ reset);
+			System.out.println(red+"non è possibile giocare la carta su angoli nulli o coperti o se l'angolo da giocare è nullo"+ reset);
 			}	
 		}
-		if (tabella[x-1][y+1].getId()!=0) {
+		if (tabella[x-1][y+1].getId()!=0&& esiste ==true) {
 			angoli=tabella[x-1][y+1].getAngoli();// carta in basso a sinistra rispetto alla coordinata
-			if(angoli[1]==StatoAngolo.NULLO||angoli[1]==StatoAngolo.COPERTO) {//controlla angolo top right
+			if(angoli[1]==StatoAngolo.NULLO||angoli[1]==StatoAngolo.COPERTO&&angoliCarta[2]!=StatoAngolo.NULLO) {//controlla angolo top right && angolo in bassso a sinitra della carta
 				esiste = false;
-				System.out.println(red+"non è possibile giocare la carta su angoli nulli o coperti"+ reset);
+				System.out.println(red+"non è possibile giocare la carta su angoli nulli o coperti o se l'angolo da giocare è nullo"+ reset);
 			}	
 			}
-		if (tabella[x+1][y-1].getId()!=0) {
+		if (tabella[x+1][y-1].getId()!=0&& esiste ==true) {
 			angoli=tabella[x+1][y-1].getAngoli();// carta in alto a destra rispetto alla coordinata
-			if(angoli[2]==StatoAngolo.NULLO||angoli[2]==StatoAngolo.COPERTO) {//controlla angolo bottom left
+			if(angoli[2]==StatoAngolo.NULLO||angoli[2]==StatoAngolo.COPERTO&&angoliCarta[1]!=StatoAngolo.NULLO) {//controlla angolo bottom left&& alto a destra della carta
 				esiste = false;
-				System.out.println(red+"non è possibile giocare la carta su angoli nulli o coperti"+ reset);
+				System.out.println(red+"non è possibile giocare la carta su angoli nulli o coperti o se l'angolo da giocare è nullo"+ reset);
 			}	
 			}
-		if (tabella[x+1][y+1].getId()!=0) {
+		if (tabella[x+1][y+1].getId()!=0&& esiste ==true) {
 			angoli=tabella[x+1][y+1].getAngoli();// carta in basso a destra rispetto alla coordinata
-			if(angoli[0]==StatoAngolo.NULLO||angoli[0]==StatoAngolo.COPERTO) {//controlla angolo top left
+			if(angoli[0]==StatoAngolo.NULLO||angoli[0]==StatoAngolo.COPERTO&&angoliCarta[3]!=StatoAngolo.NULLO) {//controlla angolo top left&& e in basso a destra della carta
 				esiste = false;
-				System.out.println(red+"non è possibile giocare la carta su angoli nulli o coperti"+ reset);
+				System.out.println(red+"non è possibile giocare la carta su angoli nulli o coperti o se l'angolo da giocare è nullo"+ reset);
 				
 			}	
 			}
