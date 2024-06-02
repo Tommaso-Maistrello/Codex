@@ -13,7 +13,7 @@ public enum ColoreSegnalino {
 	ROSSO, BLU, VERDE, GIALLO, NERO;
 	
 	private static int conta = 1;
-	private static int giocatoreNero;
+	private static final int giocatoreNero;
 	private static List<ColoreSegnalino> coloriRestanti;
 	private static List<ColoreSegnalino> sequenzaColori;
 	
@@ -41,6 +41,37 @@ public enum ColoreSegnalino {
 		}
 		return sequenzaColori.get(conta++ - 1);
 	}
+	//variabile per contare quanti giocatori sono stati costruiti e sapere il numero del giocatore corrente
+    //private static int conta=1;
+
+    /**
+     * Ad ogni nuovo giocatore viene assegnato un colore e la variabile conta viene incrementata. 
+     * Ogni volta che viene richiamato il metodo getColore(), conta viene incrementato cosicchè il giocatore successivo riceva un nuovo colore
+     * 
+     * @return Colore del segnalino in base al numero di giocatore
+     */
+    /*public static ColoreSegnalino getColore() {
+        switch (conta) {
+            case 1:
+                conta++;
+                return NERO;
+            case 2:
+                conta++;
+                return BLU;
+            case 3:
+                conta++;
+                return VERDE;
+            case 4:
+                conta++;
+                return GIALLO;
+            case 5:
+            	conta++;
+            	return ROSSO;
+            default:
+                return null;
+        }
+       } 
+    */
 
 /*
    public static void main(String[] args) {

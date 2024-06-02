@@ -1,6 +1,8 @@
 package Gioco;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -25,9 +27,10 @@ public class Giocatore {
 	private static CartaObiettivo obbiettivo;
 	private Campo campo;
 	private CartaIniziale cartaIniziale;
+	
 	public Giocatore(String username ) {
 		this.username=username;
-		coloreSegnalino=ColoreSegnalino.getColore();
+		this.coloreSegnalino=ColoreSegnalino.getColore();
 		this.punteggio=0;
 		this.mano= null;
 		this.obbiettivo=null;
@@ -75,17 +78,29 @@ public class Giocatore {
 		
 		int numGiocatori=0;
 				
-		do {
+		/*do {
 			System.out.print("Inserisci il numero di giocatori: ");
 			numGiocatori=sc.nextInt();
 			if(numGiocatori<2 || numGiocatori>4) {
 				System.out.println("Numero dei giocatori inseriti non valido");
 			}
-		}while(numGiocatori<2 || numGiocatori>4);
+		}while(numGiocatori<2 || numGiocatori>4);*/
+		do {
+            System.out.print("Inserisci il numero di giocatori: ");
+            while (!sc.hasNextInt()) {
+                System.out.println("Inserisci un numero valido tra 2 e 4.");
+                sc.next(); // Consuma l'input non valido
+            }
+            numGiocatori = sc.nextInt();
+            sc.nextLine(); // Consuma il newline rimanente
+            if (numGiocatori < 2 || numGiocatori > 4) {
+                System.out.println("Numero dei giocatori inseriti non valido. Inserisci un numero tra 2 e 4.");
+            }
+        } while (numGiocatori < 2 || numGiocatori > 4);
 		
-		sc.nextLine(); //libera il buffer
 		System.out.println();
 		Giocatore[] giocatori = new Giocatore[numGiocatori];
+		
 		
 		for(int i=0; i<giocatori.length; i++)
 		{

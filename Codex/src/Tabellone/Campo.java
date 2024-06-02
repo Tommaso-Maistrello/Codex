@@ -78,7 +78,7 @@ public class Campo {
 		        	idCercato = sc.nextInt();
 		        	//pulisco il buffer
 		        	sc.nextLine();
-		        	//faccio passare tutta la tabella per cercare la cella con l'id richiestoo
+		        	//faccio passare tutta la tabella per cercare la cella con l'id richiesto
 		        	for(int i=0; i<SIZE; i++) {
 		        		for(int j=0; j<SIZE; j++) {
 		        			if(tabella[i][j].getId()==idCercato) {
@@ -186,7 +186,7 @@ public class Campo {
 			System.out.print(numeroFormattato);
 		}
 		System.out.println("\n");
-	//	casellaSpecifica();
+		//casellaSpecifica();
 	}
 
  
@@ -300,7 +300,7 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 		*/
 		do {
 			System.out.println("\n-------------------------------------------------------------\n"  );
-			System.out.print("qual'è l'id della carta che vuoi giocare?");
+			System.out.print("qual'è l'id della carta che vuoi giocare? ");
 			id = sc.nextInt();
 			//System.out.println("hai scalto la carta con id: "+id);
 			trovato = player.getMano().haCartaConId(player, id);

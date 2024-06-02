@@ -26,31 +26,30 @@ public class Partita {
 	
 		 Scanner sc = new Scanner(System.in);
 		
-		
-		
 		//costruzione mazzi  
-		
 		MazzoCarteOro.costruisciMazzo();
         MazzoCarteRisorsa.costruisciMazzo();
+        
+        //Mischia mazzi
         MazzoCarteOro.mischiaMazzo();
         MazzoCarteRisorsa.mischiaMazzo();
-    
         CartaIniziale[] carteIniziali = CartaIniziale.mescolaMazzo();
         
+        //Crea giocatori
         player = Giocatore.setGiocatori();
+        //Giocatore.disordinaGiocatori(player);
         
-        Giocatore.disordinaGiocatori(player) ;
-		
         assegnaCarteIniziali(player, carteIniziali);
         
-
+        //Crea mano giocatori
 		for(int i =0; i<player.length; i++) {
 			Mano mano = pescaCarte();
 			 player[i].setMano(mano);
 			 player[i].setCampo(new Campo());
-			 
 			
 		}
+		
+		//Stampa il nome del giocatore con il colore assegnato
 		System.out.println("\n-------------------------------------------------------------\n"  );
 	  	for(int i=0; i<player.length; i++) {
 	  		int j=i+1;
@@ -60,10 +59,6 @@ public class Partita {
 	     		case "rosso":	System.out.print("\u001B[31mrosso");
 	     						player[i].setUsername("\u001B[31m"+player[i].getUsername()+"\u001B[0m");
 	     						break;
-	
-	     		
-	     		
-	     		
 	     		case "blu":		System.out.print("\u001B[34mblu");
 	     						player[i].setUsername("\u001B[34m"+player[i].getUsername()+"\u001B[0m");
 	     						break;
@@ -95,6 +90,8 @@ public class Partita {
     	        //mostraManoGiocatore(giocatore);
     	        //giocatore.getCampo().visualizzaCampo();
     	    }
+    	
+    	System.out.println("INIZIA IL GIOCO");
     	//CICLO GIOCO
     	//verificare che quando un giocatore arriva a venti, acnhe gli altri finiscano il turno
     	//altrimenti creare una nuova variabile Giocatore a cui viene attribuito il numero del giocatore che ha finito, poi fare un for da quell'indice alla fine
@@ -104,19 +101,20 @@ public class Partita {
     		
 	        for(Giocatore giocatore: player) {
 	        	System.out.println("\n-------------------------------------------------------------"  );
-	        	System.out.println("è il turno del giocatore "+giocatore.getUsername());
 	        	System.out.println("\nPremi invio per continuare...");
 	        	sc.nextLine();
 	        	giocatore.getCampo().visualizzaCampo();
+	        	System.out.println("È il turno del giocatore "+giocatore.getUsername());
 	        	System.out.println("\nPremi invio per continuare...");
 	        	sc.nextLine();
 	        	mostraManoGiocatore(giocatore);
-	        
+	        	giocatore.getCampo().casellaSpecifica();
 	        	giocatore.getCampo().giocaCarta(giocatore);
 	        	System.out.println("\nPremi invio per continuare...");
 	        	sc.nextLine();
-	        	System.out.println("pesca una nuova carta");
-	        //	pescaNuovaCarta(giocatore, sc);
+	        	System.out.println("Pesca una nuova carta tra queste");
+	        	//sc.nextLine();
+	        	pescaNuovaCarta(giocatore, sc);
 	        	giocatore.getCampo().visualizzaCampo();
 	        	if(giocatore.getPunteggio()>=20) finito=true;
 	        	
@@ -135,19 +133,92 @@ public class Partita {
 		}
 		
 	}
-	public void pescaNuovaCarta(Giocatore player2, Scanner sc) {
+	public void pescaNuovaCarta(Giocatore player, Scanner sc) {
+		//importo i mazzi
 		List<CartaRisorsa> mazzoRisorsa = MazzoCarteRisorsa.getMazzoRisorsa();
 	    List<CartaOro> mazzoOro = MazzoCarteOro.getMazzoOro();
+	    //due carte risorsa
+	    CartaRisorsa cartaRisorsa1 = mazzoRisorsa.get(0);
+	    CartaRisorsa cartaRisorsa2 = mazzoRisorsa.get(1);
+	    CartaRisorsa cartaRisorsa3 = mazzoRisorsa.get(2);
 	    Casella casellaRisorsa1=new Casella(mazzoRisorsa.get(0));
 	    Casella casellaRisorsa2=new Casella(mazzoRisorsa.get(1));
-	    System.out.println("scegli una carta tra le carte risorsa: "); 
+	    //System.out.println("Scegli una carta tra le carte risorsa "); 
+	    System.out.println("La seguente carta risorsa ha id "+casellaRisorsa1.getId());
 		casellaRisorsa1.visualizzaCasella();
+		System.out.println("La seguente carta risorsa ha id "+casellaRisorsa2.getId());
 		casellaRisorsa2.visualizzaCasella();
-		 System.out.println("scegli una carta tra le carte Oro: "); 
-		 Casella casellaOro1=new Casella(mazzoOro.get(0));
-		 Casella casellaOro2=new Casella(mazzoOro.get(1));
-		 casellaOro1.visualizzaCasella();
-		 casellaOro2.visualizzaCasella();
+		//due carte oro
+		CartaOro cartaOro1 = mazzoOro.get(0);
+		CartaOro cartaOro2 = mazzoOro.get(1);
+		CartaOro cartaOro3 = mazzoOro.get(2);
+		//System.out.println("Scegli una carta tra le carte oro "); 
+		Casella casellaOro1=new Casella(mazzoOro.get(0));
+		Casella casellaOro2=new Casella(mazzoOro.get(1));
+		System.out.println("La seguente carta oro ha id "+casellaOro1.getId());
+		casellaOro1.visualizzaCasellaOro(mazzoOro.get(0));
+		System.out.println("La seguente carta oro ha id "+casellaOro2.getId());
+		casellaOro2.visualizzaCasellaOro(mazzoOro.get(1));
+		
+		int scelta=-1;
+		int mazzoScelto=-1;
+		int idCartaScelta=-1;
+		do {
+            System.out.println("Vuoi pescare una carta scoperta o prenderne una dal mazzo? (1=carta scoperta, 2=mazzo)");
+            while (!sc.hasNextInt()) {
+                System.out.println("Inserisci un numero valido (1=carta scoperta, 2=mazzo) ");
+                sc.next(); // Consuma l'input non valido
+            }
+            scelta = sc.nextInt();
+            sc.nextLine(); // Consuma il newline rimanente
+        } while (scelta != 1 && scelta != 2);
+		
+		if(scelta==1) {
+			do {
+	            System.out.print("Inserisci l'id della carta che vuoi pescare: ");
+	            while (!sc.hasNextInt()) {
+	                System.out.println("Id inserito non valido. Per favore, inserisci l'id di una carta presente.");
+	                sc.next(); // Consuma l'input non valido
+	                System.out.print("Inserisci l'id della carta che vuoi pescare: ");
+	            }
+	            idCartaScelta = sc.nextInt();
+	        } while (idCartaScelta != casellaRisorsa1.getId() && idCartaScelta != casellaRisorsa2.getId() && idCartaScelta != casellaOro1.getId() && idCartaScelta != casellaOro2.getId());
+			//AGGIUNTA CARTA IN MANO
+			if(idCartaScelta<41) {
+				if(idCartaScelta==cartaRisorsa1.getId()) {
+					player.getMano().addCartaRisorsa(player, cartaRisorsa1);
+					mazzoRisorsa.remove(0);
+				}
+				else {
+					player.getMano().addCartaRisorsa(player, cartaRisorsa2);
+					mazzoRisorsa.remove(1);
+				}
+				
+			} else {
+				if(idCartaScelta==cartaOro1.getId()) {
+					player.getMano().addCartaOro(player, cartaOro1);
+					mazzoOro.remove(0);
+
+				}
+				else {
+					player.getMano().addCartaOro(player, cartaOro2);
+					mazzoOro.remove(1);
+				}
+			}
+			//TOLTA CARTA DAL MAZZO
+		} else {
+				do {
+					System.out.println("Inserisci 1 se vuoi pescare dal mazzo risorsa e 2 se vuoi pescare dal mazzo oro: ");
+					mazzoScelto=sc.nextInt();
+				}while(mazzoScelto!=1 && mazzoScelto!=2);
+				
+				if(mazzoScelto==1) {
+					player.getMano().addCartaRisorsa(player, cartaRisorsa3);
+				} else {
+					player.getMano().addCartaOro(player, cartaOro3);
+				}
+		}
+			
 	}
 	public Mano pescaCarte() {
 

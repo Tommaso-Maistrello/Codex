@@ -131,7 +131,14 @@ public class Mano {
 		        }
 		    }
 		}
-
+	 public void addCartaRisorsa(Giocatore player, CartaRisorsa cartaRisorsa) {
+		 List<CartaRisorsa> manoRisorsa = player.getMano().getManoRisorsa();
+	     manoRisorsa.add(cartaRisorsa);  
+	 }
+	 public void addCartaOro(Giocatore player, CartaOro cartaOro) {
+		 List<CartaOro> manoOro = player.getMano().getManoOro();
+	     manoOro.add(cartaOro);  
+	 }
     
     /*
     public static void visualizzaCartaRisorsa(CartaRisorsa cartaRisorsa ) {

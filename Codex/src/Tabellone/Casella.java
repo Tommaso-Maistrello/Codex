@@ -85,7 +85,7 @@ public class Casella {
 
 	public Casella(CartaRisorsa cartaRisorsa) {
 		this.coordinata=null;
-		this.id=-1;
+		this.id=cartaRisorsa.getId();
 		this.angoli = new StatoAngolo[SIZE];
 		angoli[0]=cartaRisorsa.getAngoloFronteTopLeft();
 		angoli[1]=cartaRisorsa.getAngoloFronteTopRight();
@@ -115,7 +115,7 @@ public class Casella {
 	    }
 	public Casella(CartaOro cartaOro) {
 		this.coordinata=null;
-		this.id=-1;
+		this.id=cartaOro.getId();
 		this.angoli = new StatoAngolo[SIZE];
 		angoli[0]=cartaOro.getAngoloFronteTopLeft();
 		angoli[1]=cartaOro.getAngoloFronteTopRight();
@@ -216,7 +216,7 @@ public class Casella {
 			}
 	}
 	
-	protected int getId() {
+	public int getId() {
 		return id;
 	}
 	
