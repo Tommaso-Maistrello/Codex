@@ -488,8 +488,8 @@ public boolean controlloRequisiti(Giocatore player, int id) {
 		
 	 
 
-		for (int i = 0; (i < SIZE-1) && requisiti==false; i++) {
-		    for (int j = 0; (j < SIZE-2) && requisiti==false; j++) {
+		for (int i = 0; (i < SIZE) && requisiti==false; i++) {
+		    for (int j = 0; (j < SIZE) && requisiti==false; j++) {
 		        idC = tabella[i][j].getId(); // Prende id della carta
 		        if (idC != 0 && idC!= player.getCartaIniziale().getId()) {
 		            cartaOroC = Partita.prendiCartaOroConID(idC, player);
