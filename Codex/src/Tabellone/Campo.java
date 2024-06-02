@@ -205,7 +205,7 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 	public void giocaCarta(Giocatore player) {
 		boolean esiste= false;
 		
-		int id;
+		int id,p;
 		String red = "\033[31m";
 		 String reset = "\033[0m";
 		int x,y;
@@ -279,6 +279,7 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 			
 		}while(verso!=1 && verso!=2 );
 		//sc.close();
+		 int punti;
 		if (id <41) {
 			CartaRisorsa carta= Mano.prendiCartaRisorsaConID(id, player);
 			if (verso==2) {
@@ -287,6 +288,10 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 				carta.setAngoloFronteTopLeft(StatoAngolo.VUOTO);
 				carta.setAngoloFronteTopRight(StatoAngolo.VUOTO);
 				carta.setPunti(0);
+			}else {
+				punti=player.getPunteggio();
+				punti+=carta.getPunti();
+				player.setPunteggio(punti);
 			}
 			 tabella[x][y].setCartaRisorsa(carta);
 			 System.out.println("\nHai giocato la carta risorsa");
@@ -298,12 +303,116 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 				carta.setAngoloFronteTopLeft(StatoAngolo.VUOTO);
 				carta.setAngoloFronteTopRight(StatoAngolo.VUOTO);
 				carta.setPunti("0");
+			}else {
+				punti=player.getPunteggio();
+				 p=getPuntiOro(player, carta,x,y);
+				punti+=p;
+				
+				player.setPunteggio(punti);
+				
 			}
 			 tabella[x][y].setCartaOro(carta);
 			 System.out.println("\nHai giocato la carta oro");
 		}
 		//System.out.println("hai giocato la carta");
 		
+	}
+	private int getPuntiOro(Giocatore player, CartaOro carta, int x, int y) {
+		int puntiFinale=0, punti=0;
+		boolean puntiGiaAssegnati= false;
+		int[] conteggioRisorse=new int[3];
+		int	PIUMA=0, INCHISTRO=0,PERGAMENA=0;
+		StatoAngolo topRight, topLeft, bottomRight,bottomLeft;
+		CartaOro cartaOro;
+		String condizione;
+		
+		int	id=0;
+		
+		for (int i = 0; (i < SIZE); i++) {
+		    for (int j = 0; (j < SIZE); j++) {
+		        id=tabella[i][j].getId();
+		        
+		    	 if (id !=0) {
+		    		 cartaOro = Partita.prendiCartaOroConID(id);
+		    		 topRight=cartaOro.getAngoloFronteTopRight();
+		    		 topLeft=cartaOro.getAngoloFronteTopLeft();
+		    		 bottomRight=cartaOro.getAngoloFronteBottomRight();
+		    		 bottomLeft=cartaOro.getAngoloFronteBottomLeft();
+		    		 
+		    		 condizione= carta.getCondizione();
+		    		 switch (condizione){
+		    		 case "1xINCHIOSTRO":
+		    			 if(topRight==StatoAngolo.INCHIOSTRO||topLeft==StatoAngolo.INCHIOSTRO||bottomRight==StatoAngolo.INCHIOSTRO||bottomLeft==StatoAngolo.INCHIOSTRO) {
+		    				 INCHISTRO++; 
+		    			 }
+		    			break;
+		    		 case "1xPERGAMENA":
+		    			 if(topRight==StatoAngolo.PERGAMENA||topLeft==StatoAngolo.PERGAMENA||bottomRight==StatoAngolo.PERGAMENA||bottomLeft==StatoAngolo.PERGAMENA) {
+		    				 PERGAMENA++; 
+		    			 }
+		    			break; 
+		    		 case "1xPIUMA":
+		    			 if(topRight==StatoAngolo.PIUMA||topLeft==StatoAngolo.PIUMA||bottomRight==StatoAngolo.PIUMA||bottomLeft==StatoAngolo.PIUMA) {
+		    				 PIUMA++; 
+		    			 }
+		    			break; 
+		    		 case "3":
+		    			 if(puntiGiaAssegnati==false) {
+		    				 punti+=3;
+		    				 puntiGiaAssegnati=true;
+		    			 }
+		    			break; 
+		    		 case "2":
+		    			 if(puntiGiaAssegnati==false) {
+		    				 punti+=2;
+		    				 puntiGiaAssegnati=true;
+		    			 }
+		    			break; 
+		    		 case "5":
+		    			 if(puntiGiaAssegnati==false) {
+		    				 punti+=5;
+		    				 puntiGiaAssegnati=true;
+		    			 }
+		    			break; 
+		    		 }
+		    		 
+		    	 }
+		    }
+		
+		}
+		condizione= carta.getCondizione();
+		StatoAngolo[] angoli =new StatoAngolo[4];
+		if (condizione=="2xANGOLO") {
+			if (tabella[x-1][y-1].getId()!=0) {
+				angoli=tabella[x-1][y-1].getAngoli();// carta in alto a sinistra rispetto alla coordinata		
+				if(angoli[3]==StatoAngolo.COPERTO) {//controlla angol bottom right
+					punti+=1;
+	 
+					}	
+			}
+			if (tabella[x-1][y+1].getId()!=0) {
+					angoli=tabella[x-1][y+1].getAngoli();// carta in basso a sinistra rispetto alla coordinata
+					if(angoli[1]==StatoAngolo.COPERTO) {//controlla angolo top right && angolo in bassso a sinitra della carta
+						punti+=1;
+					}	
+			}
+			if (tabella[x+1][y-1].getId()!=0 ) {
+					angoli=tabella[x+1][y-1].getAngoli();// carta in alto a destra rispetto alla coordinata
+					if( angoli[2]==StatoAngolo.COPERTO ) {//controlla angolo bottom left&& alto a destra della carta
+						punti+=1;
+					}	
+			}
+			if (tabella[x+1][y+1].getId()!=0) {
+					angoli=tabella[x+1][y+1].getAngoli();// carta in basso a destra rispetto alla coordinata
+					if( angoli[0]==StatoAngolo.COPERTO ) {//controlla angolo top left&& e in basso a destra della carta
+						punti+=1; 
+					}	
+			}
+			
+			
+		}
+		puntiFinale+=punti+PIUMA+INCHISTRO+PERGAMENA;
+		return puntiFinale;
 	}
 	private void copriAngoli(int x, int y) {
 		if(tabella[x-1][y-1].getId()!=0) {
@@ -493,7 +602,7 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 		return esiste;
 	}
 public boolean controlloRequisiti(Giocatore player, int id) {
-	int PIUMA=0, INCHIOSTRO=0, PERGAMENA=0, ANIMALE=0, FUNGHI=0, INSETTI=0, VEGETALE=0,idC=0;
+	int  ANIMALE=0, FUNGHI=0, INSETTI=0, VEGETALE=0,idC=0;
 	int condizioneA,condizioneI,condizioneF,condizioneV;
 	String condizionePunti;
 	CartaOro cartaOro, cartaOroC;
@@ -554,11 +663,7 @@ public boolean controlloRequisiti(Giocatore player, int id) {
 		                    VEGETALE++;
 		                }
 		            }
-		            
-		           
 
-		            
-		            
 		            
 		            if (ANIMALE == condizioneA && FUNGHI == condizioneF && INSETTI == condizioneI && VEGETALE == condizioneV) {
 		                requisiti = true;
@@ -604,9 +709,9 @@ public boolean controlloRequisiti(Giocatore player, int id) {
             }
         }
         if(requisiti== false) {
-        	 System.out.println("i requisiti della carta oro sono: numero animali="+cartaOro.getNumeroAnimali()+"numero insetti="+cartaOro.getNumeroInsetti()+"numero funghi ="+cartaOro.getNumeroFunghi()+"numero vegetale "+cartaOro.getNumeroVegetale());
+        	 System.out.println("i requisiti della carta oro sono: numero animali = "+cartaOro.getNumeroAnimali()+"numero insetti = "+cartaOro.getNumeroInsetti()+"numero funghi = "+cartaOro.getNumeroFunghi()+"numero vegetale ="+cartaOro.getNumeroVegetale());
      		
-             System.out.println("al momento il numero di  animali è "+ ANIMALE +"numero insetti="+INSETTI+"numero funghi ="+FUNGHI+"numero vegetale "+VEGETALE);
+             System.out.println("al momento il numero di  regni tra quelli richiesti  è numero nimali = "+ ANIMALE +"numero insetti = "+INSETTI+"numero funghi = "+FUNGHI+"numero vegetale = "+VEGETALE);
      		
         }
        
