@@ -226,7 +226,7 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 			System.out.println();
 			esiste= true;
 			}else {
-			System.out.println(red+" la carta non si può giocare "+reset);
+			System.out.println(red+" La carta non si può giocare "+reset);
 			System.out.println();
 			}
 				
@@ -234,18 +234,20 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 				esiste = posizioneGiocabile(x,y);// controlla se la coordintata è in un punto giocabile cioè se uno dei 4 angoli tocca un'altra carta
 												// inoltre controlla se la carta viene giocata sopra ad un angolo coperto o meno
 				if (esiste == false) {
-					System.out.println(red+"La carta non si poò giocare nelle coordinate fornite"+reset);// controlla se la coordintata è in un punto giocabile cioè se uno dei 4 angoli tocca un'altra carta
+					System.out.println(red+"La carta non si può giocare nelle coordinate fornite"+reset);// controlla se la coordintata è in un punto giocabile cioè se uno dei 4 angoli tocca un'altra carta
 				}
 			}
 			
-				if (esiste == true) {
-				esiste =controlloAngoli(x,y);// controlla che la carta non venga giocata su angoli non coperti o nulli
-				}
+			if (esiste == true) {
+			esiste =controlloAngoli(x,y);// controlla che la carta non venga giocata su angoli non coperti o nulli
+			//GLI ANGOLI COPERTI DALLA CARTA DEVONO DIVENTARE "COPERTO"
+			copriAngoli(x,y);
+			}
 			
 		}while(esiste== false);// il ciclo finisce se la cella di coordinata x y esiste ed è libera
 		
  	
-		 System.out.println("per giocare la carta sul fronte scrivi 1, per giocare la carta sul retro scrivi 2");
+		 System.out.println("Per giocare la carta sul fronte scrivi 1, per giocare la carta sul retro scrivi 2");
 		int verso=0;
 		 do {
 			 System.out.println("fornisci un input valido per il verso della carta");
@@ -264,7 +266,7 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 				carta.setPunti(0);
 			}
 			 tabella[x][y].setCartaRisorsa(carta);
-			 System.out.println("hai giocato la carta risorsa");
+			 System.out.println("\nHai giocato la carta risorsa");
 		}else {
 			CartaOro carta= Mano.prendiCartaOroConID(id, player);
 			if (verso==2) {
@@ -275,10 +277,24 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 				carta.setPunti("0");
 			}
 			 tabella[x][y].setCartaOro(carta);
-			 System.out.println("hai giocato la carta oro");
+			 System.out.println("\nHai giocato la carta oro");
 		}
-		System.out.println("hai giocato la carta");
+		//System.out.println("hai giocato la carta");
 		
+	}
+	private void copriAngoli(int x, int y) {
+		if(tabella[x-1][y-1].getId()!=0) {
+			tabella[x-1][y-1].setAngoloBassoDx();
+		}
+		if(tabella[x+1][y-1].getId()!=0) {
+			tabella[x+1][y-1].setAngoloBassoSx();
+		}
+		if(tabella[x-1][y+1].getId()!=0) {
+			tabella[x-1][y+1].setAngoloAltoDx();
+		}
+		if(tabella[x+1][y+1].getId()!=0) {
+			tabella[x+1][y+1].setAngoloAltoSx();
+		}
 	}
 	public int esisteCarta(Giocatore player) {
 		boolean trovato= false;
@@ -300,7 +316,7 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 		*/
 		do {
 			System.out.println("\n-------------------------------------------------------------\n"  );
-			System.out.print("qual'è l'id della carta che vuoi giocare? ");
+			System.out.print("Qual è l'id della carta che vuoi giocare? ");
 			id = sc.nextInt();
 			//System.out.println("hai scalto la carta con id: "+id);
 			trovato = player.getMano().haCartaConId(player, id);
@@ -409,7 +425,7 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 				nuoviAngoli[0]=angoli[0];
 				//System.out.println(angoli[0]);// controlla l'angolo in alto a sinistra
 			}
-			System.out.println("stampa nuovi angoli");
+			//System.out.println("stampa nuovi angoli");
 	
 			
 					for(StatoAngolo angol: nuoviAngoli ) {
@@ -419,7 +435,7 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 						
 					}
 					if (esiste == false) {
-						System.out.println(red+"non è possibile giocare la carta in quanto è presenteo un angolo nullo oppure gia coperto"+reset);
+						System.out.println(red+"Non è possibile giocare la carta in quanto è presente un angolo nullo oppure gia coperto"+reset);
 						
 						
 					}

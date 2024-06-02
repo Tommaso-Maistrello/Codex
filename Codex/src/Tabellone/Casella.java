@@ -331,4 +331,20 @@ public class Casella {
 		return angoli;
 		
 	}
+	public void setAngoloAltoSx() {
+		this.angoli[0]=StatoAngolo.COPERTO;
+		controlli();
+	}
+	public void setAngoloAltoDx() {
+		this.angoli[1]=StatoAngolo.COPERTO;
+		controlli();
+	}
+	public void setAngoloBassoSx() {
+		this.angoli[2]=StatoAngolo.COPERTO;
+		controlli();
+	}
+	public void setAngoloBassoDx() {
+		this.angoli[3]=StatoAngolo.COPERTO;
+		controlli();
+	}
 }
