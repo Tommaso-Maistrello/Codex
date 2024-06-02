@@ -369,6 +369,32 @@ public class Partita {
  
 	
 	}
+	 public static CartaRisorsa prendiCartaRisorsaConID(int id, Giocatore player) {
+		 List<CartaRisorsa> mazzoRisorsa = MazzoCarteRisorsa.getMazzoRisorsa();
+		    
+		 CartaRisorsa cartaR= null;
+			for(CartaRisorsa carta: mazzoRisorsa) {
+				if (carta.getId()==id) {
+					cartaR= carta;
+				
+					
+					
+				}
+			}
+		 return cartaR;
+	 }
+	 public static CartaOro prendiCartaOroConID(int id, Giocatore player) {
+	 
+		 List<CartaOro> mazzoOroOriginale = MazzoCarteOro.getMazzoOroOriginale();
+		 CartaOro cartaOro= null;
+			for(CartaOro carta: mazzoOroOriginale) {
+				if (carta.getId()==id) {
+					cartaOro= carta;
+					
+				}
+			}
+		 return cartaOro;
+	 }
 	public static Giocatore[] getGiocatore( ) {
 		return player;
 	}

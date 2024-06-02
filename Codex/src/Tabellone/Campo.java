@@ -204,12 +204,31 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 	
 	public void giocaCarta(Giocatore player) {
 		boolean esiste= false;
+		CartaOro cartaOro=null;
+		int id;
 		String red = "\033[31m";
 		 String reset = "\033[0m";
 		int x,y;
+		esiste=false;
+		do {
+		 id =esisteCarta(player);// controlla che il giocatore abbia fornito id di una carta che ha in mano
 		
-		int id =esisteCarta(player);// controlla che il giocatore abbia fornito id di una carta che ha in mano
-		
+		if (id >40) {
+			
+			
+			
+			esiste= controlloRequisiti(player,id);
+			if(esiste==false) {
+				System.out.println(red+" la carta oro non ha i requisiti per essere giocata"+reset);
+				cartaOro= Partita.prendiCartaOroConID(id, player);
+				System.out.println("i requisiti della carta oro sono: numero animali="+cartaOro.getNumeroAnimali()+"numero insetti="+cartaOro.getNumeroInsetti()+"numero funghi ="+cartaOro.getNumeroFunghi()+"numero vegetale "+cartaOro.getNumeroVegetale());
+				
+			}
+			
+		}else {
+			esiste=true;
+		}
+		}while(esiste==false);
 		Scanner sc = new Scanner(System.in);
 		do {
 
@@ -247,6 +266,10 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 		}while(esiste== false);// il ciclo finisce se la cella di coordinata x y esiste ed è libera
 		
  	
+	
+		
+	
+		
 		 System.out.println("Per giocare la carta sul fronte scrivi 1, per giocare la carta sul retro scrivi 2");
 		int verso=0;
 		 do {
@@ -444,6 +467,81 @@ public void posizionaCartaIniziale(Giocatore giocatore) {
 				
 		 
 		return esiste;
+	}
+public boolean controlloRequisiti(Giocatore player, int id) {
+	int PIUMA=0, INCHIOSTRO=0, PERGAMENA=0, ANIMALE=0, FUNGHI=0, INSETTI=0, VEGETALE=0,idC=0;
+	int condizioneA,condizioneI,condizioneF,condizioneV;
+	String condizionePunti;
+	CartaOro cartaOro, cartaOroC;
+	boolean requisiti= false;
+	 
+	StatoAngolo[] angoli=null;
+	
+ 
+	if(id!=0 &&id >40) {
+		cartaOro= Partita.prendiCartaOroConID(id, player);
+		condizionePunti=cartaOro.getCondizione();
+		condizioneA=cartaOro.getNumeroAnimali();
+		condizioneF=cartaOro.getNumeroFunghi();
+		condizioneI=cartaOro.getNumeroInsetti();
+		condizioneV=cartaOro.getNumeroVegetale();
+		
+	 
+
+		for (int i = 0; (i < SIZE-1) && requisiti==false; i++) {
+		    for (int j = 0; (j < SIZE-2) && requisiti==false; j++) {
+		        idC = tabella[i][j].getId(); // Prende id della carta
+		        if (idC != 0 && idC!= player.getCartaIniziale().getId()) {
+		            cartaOroC = Partita.prendiCartaOroConID(idC, player);
+		            System.out.println(cartaOroC.getId()) ;
+		            if (condizioneA != 0) {
+		                if (( cartaOroC.getAngoloFronteTopLeft() == StatoAngolo.ANIMALE) ||
+		                    (cartaOroC.getAngoloFronteTopRight() == StatoAngolo.ANIMALE) ||
+		                    (cartaOroC.getAngoloFronteBottomLeft() == StatoAngolo.ANIMALE) ||
+		                    ( cartaOroC.getAngoloFronteBottomRight() == StatoAngolo.ANIMALE)) {
+		                    ANIMALE++;
+		                }
+		            }
+		            
+		            if (condizioneF != 0) {
+		                if ((cartaOroC.getAngoloFronteTopLeft() == StatoAngolo.FUNGHI) ||
+		                    ( cartaOroC.getAngoloFronteTopRight() == StatoAngolo.FUNGHI) ||
+		                    ( cartaOroC.getAngoloFronteBottomLeft() == StatoAngolo.FUNGHI) ||
+		                    ( cartaOroC.getAngoloFronteBottomRight() == StatoAngolo.FUNGHI)) {
+		                    FUNGHI++;
+		                }
+		            }
+		            
+		            if (condizioneI != 0) {
+		                if (( cartaOroC.getAngoloFronteTopLeft() == StatoAngolo.INSETTI) ||
+		                    ( cartaOroC.getAngoloFronteTopRight() == StatoAngolo.INSETTI) ||
+		                    ( cartaOroC.getAngoloFronteBottomLeft() == StatoAngolo.INSETTI) ||
+		                    ( cartaOroC.getAngoloFronteBottomRight() == StatoAngolo.INSETTI)) {
+		                    INSETTI++;
+		                }
+		            }
+		            
+		            if (condizioneV != 0) {
+		                if (( cartaOroC.getAngoloFronteTopLeft() == StatoAngolo.VEGETALE) ||
+		                    ( cartaOroC.getAngoloFronteTopRight() == StatoAngolo.VEGETALE) ||
+		                    ( cartaOroC.getAngoloFronteBottomLeft() == StatoAngolo.VEGETALE) ||
+		                    (  cartaOroC.getAngoloFronteBottomRight() == StatoAngolo.VEGETALE)) {
+		                    VEGETALE++;
+		                }
+		            }
+		            
+		            if (ANIMALE == condizioneA && FUNGHI == condizioneF && INSETTI == condizioneI && VEGETALE == condizioneV) {
+		                requisiti = true;
+		            }
+		        }
+		    }
+		}
+
+		 
+	}
+	return requisiti;
+	
+		
 	}
 	
 	/*

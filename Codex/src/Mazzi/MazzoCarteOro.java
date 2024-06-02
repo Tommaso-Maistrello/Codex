@@ -65,5 +65,48 @@ public class MazzoCarteOro {
 	        Collections.shuffle(mazzoOro);    
 	    	
 	}
+    public static List<CartaOro> getMazzoOroOriginale() {
+        try {
+            File fileOro = new File("carteOro.txt");
+            Scanner leggi = new Scanner(fileOro);
+            leggi.useDelimiter(",");
+
+            while (leggi.hasNextLine()) {
+                int id = leggi.nextInt();
+                StatoAngolo fronteTopLeft = StatoAngolo.valueOf(leggi.next());
+                StatoAngolo fronteTopRight = StatoAngolo.valueOf(leggi.next());
+                StatoAngolo fronteBottomLeft = StatoAngolo.valueOf(leggi.next());
+                StatoAngolo fronteBottomRight = StatoAngolo.valueOf(leggi.next());
+                StatoAngolo retroTopLeft = StatoAngolo.VUOTO;
+                StatoAngolo retroTopRight = StatoAngolo.VUOTO;
+                StatoAngolo retroBottomLeft = StatoAngolo.VUOTO;
+                StatoAngolo retroBottomRight = StatoAngolo.VUOTO;
+                StatoAngolo risorsaRetroCentrale = StatoAngolo.valueOf(leggi.next());
+                Colore colore = Colore.valueOf(leggi.next());
+                String condizione = leggi.next();
+                String condizioneA = leggi.next();
+                int numeroAnimale = leggi.nextInt();
+                String condizioneFunghi = leggi.next();
+                int numeroF = leggi.nextInt();
+                String condizioneInsetti = leggi.next();
+                int numeroI = leggi.nextInt();
+                String condizioneVegetali = leggi.next();
+                int numeroV = leggi.nextInt();
+                leggi.nextLine(); // Move to the next line
+
+                mazzoOro.add(new CartaOro(id, fronteTopLeft, fronteTopRight, fronteBottomLeft, fronteBottomRight, 
+                                          retroTopLeft, retroTopRight, retroBottomLeft, retroBottomRight, 
+                                          risorsaRetroCentrale, colore, condizione, condizioneA, numeroAnimale, 
+                                          condizioneFunghi, numeroF, condizioneInsetti, numeroI, condizioneVegetali, 
+                                          numeroV));
+            }
+
+            leggi.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+		return mazzoOro;
+
+    }
 	
 }
