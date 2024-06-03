@@ -63,7 +63,7 @@ public class Casella {
         this.angoliToString = new String[SIZE];
         this.risorsaCentrale = cartaIniziale.getRisorsaRetroCentrale();
         this.risorsaCentraleToString = null;
-        this.colore = null; 
+        this.setColore(null); 
         this.punti = 0; 
         controlli();
     }
@@ -78,10 +78,26 @@ public class Casella {
         this.angoliToString = new String[SIZE];
         this.risorsaCentrale = cartaIniziale.getRisorsaRetroCentrale();
         this.risorsaCentraleToString = null;
-        this.colore = null; 
+        switch (this.risorsaCentrale) {
+        case VEGETALE:
+        	this.colore=Colore.VERDE;
+        	break;
+        case INSETTI:
+        	this.colore=Colore.VIOLA;
+        	break;
+        case FUNGHI:
+        	this.colore=Colore.ROSSO;
+        	break;
+        case ANIMALE:
+        	this.colore=Colore.BLU;
+        	break;
+        	
+        }
+         
         this.punti = 0; 
         controlli();
     }
+  
 
 	public Casella(CartaRisorsa cartaRisorsa) {
 		this.coordinata=null;
@@ -94,7 +110,7 @@ public class Casella {
 		this.angoliToString = new String[SIZE];
 		this.risorsaCentrale=cartaRisorsa.getRisorsaRetroCentrale();
 		this.risorsaCentraleToString=null;
-		this.colore=cartaRisorsa.getColore();
+		this.setColore(cartaRisorsa.getColore());
 		this.punti=cartaRisorsa.getPunti();
 		controlli();
 	}
@@ -109,7 +125,7 @@ public class Casella {
 			this.angoliToString = new String[SIZE];
 			this.risorsaCentrale=cartaRisorsa.getRisorsaRetroCentrale();
 			this.risorsaCentraleToString=null;
-			this.colore=cartaRisorsa.getColore();
+			this.setColore(cartaRisorsa.getColore());
 			this.punti=cartaRisorsa.getPunti();
 			controlli();
 	    }
@@ -124,7 +140,7 @@ public class Casella {
 		this.angoliToString = new String[SIZE];
 		this.risorsaCentrale=cartaOro.getRisorsaRetroCentrale();
 		this.risorsaCentraleToString=null;
-		this.colore=cartaOro.getColore();
+		this.setColore(cartaOro.getColore());
 		this.punti=-1;
 		controlli();
 	}
@@ -139,7 +155,7 @@ public class Casella {
 		this.angoliToString = new String[SIZE];
 		this.risorsaCentrale=cartaOro.getRisorsaRetroCentrale();
 		this.risorsaCentraleToString=null;
-		this.colore=cartaOro.getColore();
+		this.setColore(cartaOro.getColore());
 		this.punti=-1;
 		controlli();
 	}
@@ -346,5 +362,11 @@ public class Casella {
 	public void setAngoloBassoDx() {
 		this.angoli[3]=StatoAngolo.COPERTO;
 		controlli();
+	}
+	public Colore getColore() {
+		return colore;
+	}
+	public void setColore(Colore colore) {
+		this.colore = colore;
 	}
 }

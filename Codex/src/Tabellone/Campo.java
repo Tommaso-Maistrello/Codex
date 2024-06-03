@@ -8,8 +8,10 @@ import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 import Carte.Carta;
 import Carte.CartaIniziale;
+import Carte.CartaObiettivo;
 import Carte.CartaOro;
 import Carte.CartaRisorsa;
+import Enum.Colore;
 import Enum.StatoAngolo;
 import Gioco.Giocatore;
 import Gioco.Mano;
@@ -606,6 +608,7 @@ public boolean controlloRequisiti(Giocatore player, int id) {
 	int condizioneA,condizioneI,condizioneF,condizioneV;
 	String condizionePunti;
 	CartaOro cartaOro, cartaOroC;
+	CartaRisorsa cartaRisorsa;
 	boolean requisiti= false;
 	StatoAngolo[] angoli=null;
 
@@ -624,7 +627,7 @@ public boolean controlloRequisiti(Giocatore player, int id) {
 		for (int i = 0; (i < SIZE) && requisiti==false; i++) {
 		    for (int j = 0; (j < SIZE) && requisiti==false; j++) {
 		        idC = tabella[i][j].getId(); // Prende id della carta
-		        if (idC != 0 && idC!= player.getCartaIniziale().getId()) {
+		        if (idC != 0 && idC!= player.getCartaIniziale().getId()&&idC>40) {
 		        	
 		            cartaOroC = Partita.prendiCartaOroConID(idC);
 		            System.out.println(cartaOroC.getId()) ;
@@ -665,10 +668,59 @@ public boolean controlloRequisiti(Giocatore player, int id) {
 		            }
 
 		            
-		            if (ANIMALE == condizioneA && FUNGHI == condizioneF && INSETTI == condizioneI && VEGETALE == condizioneV) {
+		          
+		        }else if (idC != 0 && idC!= player.getCartaIniziale().getId()&&idC<40) {
+		            cartaRisorsa = Partita.prendiCartaRisorsaConID(idC);
+		            System.out.println(cartaRisorsa.getId()) ;
+		            if (condizioneA != 0) {
+		                if (( cartaRisorsa.getAngoloFronteTopLeft() == StatoAngolo.ANIMALE) ||
+		                    (cartaRisorsa.getAngoloFronteTopRight() == StatoAngolo.ANIMALE) ||
+		                    (cartaRisorsa.getAngoloFronteBottomLeft() == StatoAngolo.ANIMALE) ||
+		                    ( cartaRisorsa.getAngoloFronteBottomRight() == StatoAngolo.ANIMALE)) {
+		                    ANIMALE++;
+		                }
+		            }
+		            
+		            if (condizioneF != 0) {
+		                if ((cartaRisorsa.getAngoloFronteTopLeft() == StatoAngolo.FUNGHI) ||
+		                    ( cartaRisorsa.getAngoloFronteTopRight() == StatoAngolo.FUNGHI) ||
+		                    ( cartaRisorsa.getAngoloFronteBottomLeft() == StatoAngolo.FUNGHI) ||
+		                    ( cartaRisorsa.getAngoloFronteBottomRight() == StatoAngolo.FUNGHI)) {
+		                    FUNGHI++;
+		                }
+		            }
+		            
+		            if (condizioneI != 0) {
+		                if (( cartaRisorsa.getAngoloFronteTopLeft() == StatoAngolo.INSETTI) ||
+		                    ( cartaRisorsa.getAngoloFronteTopRight() == StatoAngolo.INSETTI) ||
+		                    ( cartaRisorsa.getAngoloFronteBottomLeft() == StatoAngolo.INSETTI) ||
+		                    ( cartaRisorsa.getAngoloFronteBottomRight() == StatoAngolo.INSETTI)) {
+		                    INSETTI++;
+		                }
+		            }
+		            
+		            if (condizioneV != 0) {
+		                if (( cartaRisorsa.getAngoloFronteTopLeft() == StatoAngolo.VEGETALE) ||
+		                    ( cartaRisorsa.getAngoloFronteTopRight() == StatoAngolo.VEGETALE) ||
+		                    ( cartaRisorsa.getAngoloFronteBottomLeft() == StatoAngolo.VEGETALE) ||
+		                    (  cartaRisorsa.getAngoloFronteBottomRight() == StatoAngolo.VEGETALE)) {
+		                    VEGETALE++;
+		                }
+		            }
+
+		        	
+		        }
+		        
+		        
+		          if (ANIMALE == condizioneA && FUNGHI == condizioneF && INSETTI == condizioneI && VEGETALE == condizioneV) {
 		                requisiti = true;
 		            }
-		        }
+		        
+		        
+		        
+		        
+		        
+		        
 		    }
 		}
 		
@@ -722,6 +774,286 @@ public boolean controlloRequisiti(Giocatore player, int id) {
 	
 		
 	}
+
+public int controllaCarteObbiettivo(Giocatore giocatore, CartaObiettivo cartaObiettivo) {
+	int piuma=0, inchistro=0, pergamena=0, animali=0, vegetali=0, insetti=0, funghi=0;
+	int piunti=0;
+	int id=cartaObiettivo.getId();
+	StatoAngolo[] angoli= new StatoAngolo[4];
+	for (int i = 0; (i < SIZE); i++) {
+	    for (int j = 0; (j < SIZE); j++) {
+	    	
+	    if (id !=0) {
+	    		 
+	    	 angoli=tabella[i][j].getAngoli();
+	    	switch (id){
+	    	case 87:
+	    		if (angoli[0] == StatoAngolo.INCHIOSTRO) {
+	    		    inchistro += 1;
+	    		}
+	    		if (angoli[1] == StatoAngolo.INCHIOSTRO) {
+	    		    inchistro += 1;
+	    		}
+	    		if (angoli[2] == StatoAngolo.INCHIOSTRO) {
+	    		    inchistro += 1;
+	    		}
+	    		if (angoli[3] == StatoAngolo.INCHIOSTRO) {
+	    		    inchistro += 1;
+	    		}
+	    		if (angoli[0] == StatoAngolo.PERGAMENA) {
+	    		    pergamena += 1;
+	    		}
+	    		if (angoli[1] == StatoAngolo.PERGAMENA) {
+	    		    pergamena += 1;
+	    		}
+	    		if (angoli[2] == StatoAngolo.PERGAMENA) {
+	    		    pergamena += 1;
+	    		}
+	    		if (angoli[3] == StatoAngolo.PERGAMENA) {
+	    		    pergamena += 1;
+	    		}
+
+	    		if (angoli[0] == StatoAngolo.PIUMA) {
+	    		    piuma += 1;
+	    		}
+	    		if (angoli[1] == StatoAngolo.PIUMA) {
+	    		    piuma += 1;
+	    		}
+	    		if (angoli[2] == StatoAngolo.PIUMA) {
+	    		    piuma += 1;
+	    		}
+	    		if (angoli[3] == StatoAngolo.PIUMA) {
+	    		    piuma += 1;
+	    		}
+
+	    		
+	    		if(piuma>0&& inchistro>0&&piuma>0) {
+	    			piunti+=3;
+	    			piuma-=1;
+	    			pergamena-=1;
+	    			piuma-=1;
+	    		}
+	    		break;
+	    		case 88:
+	    		
+	    		
+	    			if (angoli[0] == StatoAngolo.PIUMA) {
+		    		    piuma += 1;
+		    		}
+		    		if (angoli[1] == StatoAngolo.PIUMA) {
+		    		    piuma += 1;
+		    		}
+		    		if (angoli[2] == StatoAngolo.PIUMA) {
+		    		    piuma += 1;
+		    		}
+		    		if (angoli[3] == StatoAngolo.PIUMA) {
+		    		    piuma += 1;
+		    		}
+	    		
+	    		if(piuma>1) {
+	    			piunti+=2;
+	    			piuma-=2;
+	    			
+	    		}
+	    		break;
+	    		
+	    		case 89:
+	    			if (angoli[0] == StatoAngolo.INCHIOSTRO) {
+		    		    inchistro += 1;
+		    		}
+		    		if (angoli[1] == StatoAngolo.INCHIOSTRO) {
+		    		    inchistro += 1;
+		    		}
+		    		if (angoli[2] == StatoAngolo.INCHIOSTRO) {
+		    		    inchistro += 1;
+		    		}
+		    		if (angoli[3] == StatoAngolo.INCHIOSTRO) {
+		    		    inchistro += 1;
+		    		}
+		    		if(inchistro>1) {
+		    			piunti+=2;
+		    			inchistro-=2;
+		    			
+		    		}
+	    		break;
+	    		case 90:
+	    			if (angoli[0] == StatoAngolo.PERGAMENA) {
+		    		    pergamena += 1;
+		    		}
+		    		if (angoli[1] == StatoAngolo.PERGAMENA) {
+		    		    pergamena += 1;
+		    		}
+		    		if (angoli[2] == StatoAngolo.PERGAMENA) {
+		    		    pergamena += 1;
+		    		}
+		    		if (angoli[3] == StatoAngolo.PERGAMENA) {
+		    		   
+		    			 pergamena += 1;
+	    		
+		    		}
+		    		if(pergamena>1) {
+			    			piunti+=2;
+			    			pergamena-=2;
+			    			
+			    		}
+		    		break;
+	    		case 91:
+	    			if (angoli[0] == StatoAngolo.VEGETALE) {
+	    				vegetali += 1;
+		    		}
+		    		if (angoli[1] == StatoAngolo.VEGETALE) {
+		    			vegetali += 1;
+		    		}
+		    		if (angoli[2] == StatoAngolo.VEGETALE) {
+		    			vegetali += 1;
+		    		}
+		    		if (angoli[3] == StatoAngolo.VEGETALE) {
+		    		   
+		    			vegetali += 1;
+	    		
+		    		}
+		    		if(vegetali>2) {
+			    			piunti+=2;
+			    			vegetali-=3;
+			    			
+			    		}
+		    		break;
+	    		case 92:
+	    			if (tabella[i][j].getId() != 0&&tabella[i+1][j+1].getId() != 0&&tabella[i+1][j+1].getId() != 0) {
+
+	    			if (tabella[i][j].getColore()== Colore.VERDE&&tabella[i+1][j+1].getColore()== Colore.VERDE&&tabella[i+2][j+2].getColore()== Colore.VERDE) {
+	    				piunti+=2;
+	    			}
+	    			}
+	    			break;
+	    		case 93:
+	    			if (tabella[i][j].getId() != 0&&tabella[i][j+2].getId() != 0&&tabella[i-1][j+3].getId() != 0) {
+
+	    			if (tabella[i][j].getColore()== Colore.VERDE&&tabella[i][j+2].getColore()== Colore.VERDE&&tabella[i-1][j+3].getColore()== Colore.VIOLA) {
+	    				piunti+=3;
+	    			}
+	    			}
+	    			break;
+	    		case 94:
+	    			if (angoli[0] == StatoAngolo.ANIMALE) {
+	    				animali += 1;
+		    		}
+		    		if (angoli[1] == StatoAngolo.ANIMALE) {
+		    			animali += 1;
+		    		}
+		    		if (angoli[2] == StatoAngolo.ANIMALE) {
+		    			animali += 1;
+		    		}
+		    		if (angoli[3] == StatoAngolo.ANIMALE) {
+		    		   
+		    			animali += 1;
+	    		
+		    		}
+		    		if(animali>2) {
+			    			piunti+=2;
+			    			animali-=3;
+			    			
+			    		}
+		    		break;
+	    		case 95:
+	    			if (tabella[i][j].getId() != 0&&tabella[i-1][j+1].getId() != 0&&tabella[i-2][j+2].getId() != 0) {
+
+		    			if (tabella[i][j].getColore()== Colore.BLU &&tabella[i-1][j+1].getColore()== Colore.BLU&&tabella[i-2][j+2].getColore()== Colore.BLU) {
+		    				piunti+=2;
+		    			}
+		    			}
+		    		break;
+	    		case 96:
+	    			if (tabella[i][j].getId() != 0&&tabella[i][j-2].getId() != 0&&tabella[i+1][j+1].getId() != 0) {
+
+		    			if (tabella[i][j].getColore()== Colore.BLU &&tabella[i][j-2].getColore()== Colore.BLU&&tabella[+1][j+1].getColore()== Colore.ROSSO) {
+		    				piunti+=3;
+		    			}
+		    			}
+		    		break;
+	    		case 97:
+	    			if (angoli[0] == StatoAngolo.FUNGHI) {
+	    				funghi += 1;
+		    		}
+		    		if (angoli[1] == StatoAngolo.FUNGHI) {
+		    			funghi += 1;
+		    		}
+		    		if (angoli[2] == StatoAngolo.FUNGHI) {
+		    			funghi += 1;
+		    		}
+		    		if (angoli[3] == StatoAngolo.FUNGHI) {
+		    		   
+		    			funghi += 1;
+	    		
+		    		}
+		    		if(funghi>2) {
+			    			piunti+=2;
+			    			funghi-=3;
+			    			
+			    		}
+		    		break;
+	    		case 98:
+	    			if (tabella[i][j].getId() != 0&&tabella[i-1][j+1].getId() != 0&&tabella[i-2][j+2].getId() != 0) {
+
+		    			if (tabella[i][j].getColore()== Colore.ROSSO &&tabella[i-1][j+1].getColore()== Colore.ROSSO&&tabella[i-2][j+2].getColore()== Colore.ROSSO) {
+		    				piunti+=2;
+		    			}
+		    			}
+		    		break;
+	    		case 99:
+	    			if (tabella[i][j].getId() != 0&&tabella[i][j+2].getId() != 0&&tabella[i+1][j+3].getId() != 0) {
+
+		    			if (tabella[i][j].getColore()== Colore.ROSSO &&tabella[i][j+2].getColore()== Colore.ROSSO&&tabella[i+1][j+3].getColore()== Colore.VERDE) {
+		    				piunti+=3;
+		    			}
+		    			}
+		    		break;
+	    		case 100:
+	    			if (angoli[0] == StatoAngolo.INSETTI) {
+	    				insetti += 1;
+		    		}
+		    		if (angoli[1] == StatoAngolo.INSETTI) {
+		    			insetti += 1;
+		    		}
+		    		if (angoli[2] == StatoAngolo.INSETTI) {
+		    			insetti += 1;
+		    		}
+		    		if (angoli[3] == StatoAngolo.INSETTI) {
+		    		   
+		    			insetti += 1;
+	    		
+		    		}
+		    		if(insetti>2) {
+			    			piunti+=2;
+			    			insetti-=3;
+			    			
+			    		}
+		    		break;
+	    		case 101:
+	    			if (tabella[i][j].getId() != 0&&tabella[i-1][j+1].getId() != 0&&tabella[i-2][j+2].getId() != 0) {
+
+		    			if (tabella[i][j].getColore()== Colore.VIOLA &&tabella[i-1][j+1].getColore()== Colore.VIOLA&&tabella[i-2][j+2].getColore()== Colore.VIOLA) {
+		    				piunti+=2;
+		    			}
+		    			}
+		    		break;
+	    		case 102:
+	    			if (tabella[i][j].getId() != 0&&tabella[i-1][j-1].getId() != 0&&tabella[i-2][j+2].getId() != 0) {
+
+		    			if (tabella[i][j].getColore()== Colore.VIOLA &&tabella[i-1][j-1].getColore()== Colore.BLU &&tabella[i][j+2].getColore()== Colore.VIOLA) {
+		    				piunti+=3;
+		    			}
+		    			}
+		    		break;
+	    			
+	    	}
+	    	
+	    }
+	    }
+	}
+	return piunti;
+
+}
 	
 	/*
 	public void inizia() {

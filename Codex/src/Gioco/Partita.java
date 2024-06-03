@@ -25,7 +25,6 @@ public class Partita {
 
 	public void newPartita( )throws FileNotFoundException {
 		
-	
 		 Scanner sc = new Scanner(System.in);
 		
 		//costruzione mazzi  
@@ -116,6 +115,9 @@ public class Partita {
 	        	giocatore.getCampo().giocaCarta(giocatore);
 	        	System.out.println("\nPremi invio per continuare...");
 	        	sc.nextLine();
+	        	
+	        	System.out.println("il numero di punti attuale é:"+giocatore.getPunteggio());
+	        	sc.nextLine();
 	        	System.out.println("Pesca una nuova carta tra queste");
 	        	//sc.nextLine();
 	        	pescaNuovaCarta(giocatore, sc);
@@ -126,6 +128,19 @@ public class Partita {
 	        
     	}while(finito==false);
     	//AGGIUNGERE TURNO EXTRA -> VEDI REGOLE
+    	int punti=0;
+    	
+    		for(int j =0; j<player.length;j++) {
+    			punti=player[j].getPunteggio();
+    			punti+= player[j].getCampo().controllaCarteObbiettivo(player[j], carteObbiettivo[0]);
+    			punti+= player[j].getCampo().controllaCarteObbiettivo(player[j], carteObbiettivo[1]);
+    			punti+= player[j].getCampo().controllaCarteObbiettivo(player[j], player[j].getCartaObiettivo());
+    			
+    			System.out.println("il titolare dei punti del giocatore "+player[j].getUsername()+"è "+punti);
+    		}
+    		System.out.println("il giocatore con il numero di punti maggiore ha vinto la partita ");
+    		
+    	
 	}
 	public static void assegnaCarteIniziali( Giocatore[] giocatori,CartaIniziale[] cartaIniziale) {
 		 
@@ -394,7 +409,7 @@ public class Partita {
 			for(CartaOro carta: mazzoOroOriginale) {
 				if (carta.getId()==id) {
 					cartaOro= carta;
-					
+					break;
 				}
 			}
 		 return cartaOro;
