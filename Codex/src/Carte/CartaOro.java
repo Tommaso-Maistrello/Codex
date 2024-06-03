@@ -1,14 +1,8 @@
 package Carte;
 
-import java.io.File;
-
-import java.io.FileNotFoundException;
-import java.util.Random;
-import java.util.Scanner;
 
 import Enum.Colore;
 import Enum.StatoAngolo;
-import Gioco.Partita;
 
 
 

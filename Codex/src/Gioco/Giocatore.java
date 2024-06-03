@@ -1,19 +1,11 @@
 package Gioco;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
 import Carte.CartaIniziale;
 import Carte.CartaObiettivo;
-import Carte.CartaOro;
-import Carte.CartaRisorsa;
 import Enum.ColoreSegnalino;
-import Mazzi.MazzoCarteOro;
-import Mazzi.MazzoCarteRisorsa;
 import Tabellone.Campo;
 
 public class Giocatore {
@@ -37,6 +29,9 @@ public class Giocatore {
 		this.setCartaIniziale(null);		
 		this.campo=new Campo();
 		
+	}
+	public Giocatore() {
+		this.punteggio=0;
 	}
 	public void setCampo(Campo campo) {
 		this.campo = campo;
@@ -78,13 +73,6 @@ public class Giocatore {
 		
 		int numGiocatori=0;
 				
-		/*do {
-			System.out.print("Inserisci il numero di giocatori: ");
-			numGiocatori=sc.nextInt();
-			if(numGiocatori<2 || numGiocatori>4) {
-				System.out.println("Numero dei giocatori inseriti non valido");
-			}
-		}while(numGiocatori<2 || numGiocatori>4);*/
 		do {
             System.out.print("Inserisci il numero di giocatori: ");
             while (!sc.hasNextInt()) {
@@ -106,42 +94,29 @@ public class Giocatore {
 		{
 			int j=i+1;
 			//DO-WHILE ERRORE STATIC
-			//do {
+			String username="";
+			do {
 				System.out.print("Inserisci lo username del giocatore numero "+ j+": ");
-				String username=sc.nextLine();
+				username=sc.nextLine();
 				if(username.trim().isEmpty()) {
 					System.out.println("Username inserito non valido");
 				}
-			//}while(username.trim().isEmpty());
+			}while(username.trim().isEmpty());
 			giocatori[i]=new Giocatore(username);
 		}
-		//sc.close();
 		 
 		return giocatori;
 		}
 	
 	
 	
-	
-	/*
-	public static void creaGiocatori() {
-		
-		Giocatore[] giocatori = disordinaGiocatori();
-		for(int i=0; i<giocatori.length; i++)
-		{
-			 int j=i+1;
-			 System.out.println("Il giocatore che giocherà per "+j+"° è "+giocatori[i].getUsername()+" e ha segnalino "+ giocatori[i].getColoreSegnalino().toString().toLowerCase()+".");
-			 
-		}
-	}
-	*/
 
     public static Giocatore[] getGiocatori() {
        
         return giocatori;
     }
-public static void  disordinaGiocatori( Giocatore[] giocatori) {
-	 
+    
+    public static void  disordinaGiocatori( Giocatore[] giocatori) {
 		
 		Random rnd = new Random();
 		for (int i = 0; i < giocatori.length; i++) {

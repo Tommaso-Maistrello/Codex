@@ -94,31 +94,8 @@ public class Tavolo {
         int id1 = obiettiviComuni[1].getId();
         System.out.println("Secondo obiettivo comune: ");
         visualizzaCaso(id1);
-        
-        
-        /*
-        Scanner leggi = new Scanner(id0);
-	    leggi.useDelimiter("x");
-	    leggi.hasNextLine();
-	    int punti=leggi.nextInt();
-	    System.out.println(punti);
-        String stringa=leggi.next();
-        System.out.println(stringa);
-        System.out.println("Primo obiettivo comune: " + RequisitiPunti0);
-	
-        String RequisitiPunti1 = obiettiviComuni[1].getRequisitiPunti();
-        System.out.println("Secondo obiettivo comune: " + RequisitiPunti1);		*/
+        System.out.println();
+        Partita.setCarteObbiettivo(obiettiviComuni);
     }
-	
-
-	
-		/*
-	public static void main(String[] args) throws FileNotFoundException {
-		
-		CartaObiettivo[] estratte = CartaObiettivo.carteObiettivoEstratte(CartaObiettivo.mescolaMazzo());
-		Tavolo tavolo = new Tavolo(estratte);
-		tavolo.visualizzaObiettiviComuni();
-		
-	}*/
 
 }

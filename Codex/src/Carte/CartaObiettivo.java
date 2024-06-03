@@ -1,14 +1,9 @@
 package Carte;
 
 import java.io.File;
-
 import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Scanner;
-
-import Enum.Colore;
-import Enum.StatoAngolo;
-
 
 
 public class CartaObiettivo {
@@ -67,17 +62,6 @@ public class CartaObiettivo {
 		return mazzo; 
 	}
 	
-	/*
-	public static void main(String[] args) throws FileNotFoundException {
-		CartaObiettivo[] mazzo = new CartaObiettivo[17];  
-		mazzo = mescolaMazzo();
-		
-		for (int j = 1; j<mazzo.length-1; j++) {
-			System.out.println( +mazzo[j].getId()+" "+mazzo[j].getRequisitiPunti());
-		}
-		
-		
-	}*/
 	
 	public static CartaObiettivo[] carteObiettivoEstratte(CartaObiettivo[] mazzo) {
 		CartaObiettivo[] estratte=new CartaObiettivo[2];

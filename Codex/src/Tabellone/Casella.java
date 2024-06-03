@@ -1,6 +1,5 @@
 package Tabellone;
 
-import java.util.Formatter;
 import java.util.List;
 
 import Carte.CartaIniziale;
@@ -22,32 +21,13 @@ public class Casella {
 	private String risorsaCentraleToString;
 	private Colore colore;
 	private int punti;
-	//private String condizione;
 
 	//2 costruttori diversi per carta oro e carta obiettivo e carta iniziale
 	
 	protected Casella(Coordinata coordinata) {
-		/*cancellato per prova sotto
+		
 		this.coordinata = coordinata;
 		this.id=0;
-		this.angoli = null;
-		this.risorsaCentrale = null;
-		this.colore = null;
-		this.punti=0;*/
-		//per prova
-		this.coordinata = coordinata;
-		/*this.id=9;		
-		this.angoli = new StatoAngolo[Casella.SIZE];
-		this.angoliToString = new String[SIZE];
-		this.angoli[1] = StatoAngolo.VEGETALE;
-		this.angoli[0] = StatoAngolo.INSETTI;
-		this.angoli[3] = StatoAngolo.NULL;
-		this.angoli[2] = StatoAngolo.INCHIOSTRO;
-		this.risorsaCentrale = StatoAngolo.FUNGHI;
-		this.colore = Colore.VERDE;
-		this.punti=2;
-		this.risorsaCentraleToString=null;*/
-		
 		controlli();
 		
 	}
@@ -56,10 +36,10 @@ public class Casella {
         this.id = -1;
         this.coordinata=new Coordinata(); 
         this.angoli = new StatoAngolo[SIZE];
-        angoli[0] = cartaIniziale.getAngoloFronteTopLeft();
-        angoli[1] = cartaIniziale.getAngoloFronteTopRight();
-        angoli[2] = cartaIniziale.getAngoloFronteBottomLeft();
-        angoli[3] = cartaIniziale.getAngoloFronteBottomRight();
+        this.angoli[0] = cartaIniziale.getAngoloFronteTopLeft();
+        this.angoli[1] = cartaIniziale.getAngoloFronteTopRight();
+        this.angoli[2] = cartaIniziale.getAngoloFronteBottomLeft();
+        this.angoli[3] = cartaIniziale.getAngoloFronteBottomRight();
         this.angoliToString = new String[SIZE];
         this.risorsaCentrale = cartaIniziale.getRisorsaRetroCentrale();
         this.risorsaCentraleToString = null;
@@ -133,10 +113,10 @@ public class Casella {
 		this.coordinata=null;
 		this.id=cartaOro.getId();
 		this.angoli = new StatoAngolo[SIZE];
-		angoli[0]=cartaOro.getAngoloFronteTopLeft();
-		angoli[1]=cartaOro.getAngoloFronteTopRight();
-		angoli[2]=cartaOro.getAngoloFronteBottomLeft();
-		angoli[3]=cartaOro.getAngoloFronteBottomRight();
+		this.angoli[0]=cartaOro.getAngoloFronteTopLeft();
+		this.angoli[1]=cartaOro.getAngoloFronteTopRight();
+		this.angoli[2]=cartaOro.getAngoloFronteBottomLeft();
+		this.angoli[3]=cartaOro.getAngoloFronteBottomRight();
 		this.angoliToString = new String[SIZE];
 		this.risorsaCentrale=cartaOro.getRisorsaRetroCentrale();
 		this.risorsaCentraleToString=null;
@@ -148,10 +128,10 @@ public class Casella {
 		this.coordinata=null;
 		this.id = cartaOro.getId();
 		this.angoli = new StatoAngolo[SIZE];
-		angoli[0]=cartaOro.getAngoloFronteTopLeft();
-		angoli[1]=cartaOro.getAngoloFronteTopRight();
-		angoli[2]=cartaOro.getAngoloFronteBottomLeft();
-		angoli[3]=cartaOro.getAngoloFronteBottomRight();
+		this.angoli[0]=cartaOro.getAngoloFronteTopLeft();
+		this.angoli[1]=cartaOro.getAngoloFronteTopRight();
+		this.angoli[2]=cartaOro.getAngoloFronteBottomLeft();
+		this.angoli[3]=cartaOro.getAngoloFronteBottomRight();
 		this.angoliToString = new String[SIZE];
 		this.risorsaCentrale=cartaOro.getRisorsaRetroCentrale();
 		this.risorsaCentraleToString=null;
@@ -337,14 +317,15 @@ public class Casella {
 			else System.out.println(cartaOro.getNumeroVegetale()+" vegetali visibili ");
 		}
 		System.out.println();
+		System.out.println("I requisiti della carta oro "+cartaOro.getId()+" sono: numero animali = "+cartaOro.getNumeroAnimali()+", numero insetti = "+cartaOro.getNumeroInsetti()+", numero funghi = "+cartaOro.getNumeroFunghi()+", numero vegetale = "+cartaOro.getNumeroVegetale());
+		System.out.println();
 	}
 	public void setCartaIniziale(int id) {
 		this.id = id;
 		this.coordinata=new Coordinata(SIZE/2,SIZE/2);
 	}
-	//private StatoAngolo[] angoli;
 	public StatoAngolo[] getAngoli() {
-		return angoli;
+		return this.angoli;
 		
 	}
 	public void setAngoloAltoSx() {

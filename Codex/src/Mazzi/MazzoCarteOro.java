@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import Carte.CartaOro;
-import Carte.CartaRisorsa;
 import Enum.Colore;
 import Enum.StatoAngolo;
 

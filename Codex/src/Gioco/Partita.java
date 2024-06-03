@@ -3,25 +3,25 @@ package Gioco;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 import Carte.CartaIniziale;
 import Carte.CartaObiettivo;
 import Carte.CartaOro;
 import Carte.CartaRisorsa;
+import Enum.StatoAngolo;
 import Mazzi.MazzoCarteOro;
 import Mazzi.MazzoCarteRisorsa;
 import Tabellone.Campo;
 import Tabellone.Casella;
 
 public class Partita {
-	private static List<CartaRisorsa> mazzoRisorse = new ArrayList<>();
-	  private static List<CartaOro> mazzoOro = new ArrayList<>();
-	  private static List<CartaRisorsa> mazzoRisorsaOrigianle = new ArrayList<>();
-	  private static List<CartaOro> mazzoOroOriginale = new ArrayList<>();
-	  public static CartaObiettivo[] carteObbiettivo;
-	  private static Giocatore[] player;
+		private static List<CartaRisorsa> mazzoRisorse = new ArrayList<>();
+		private static List<CartaOro> mazzoOro = new ArrayList<>();
+		private static List<CartaRisorsa> mazzoRisorsaOrigianle = new ArrayList<>();
+		private static List<CartaOro> mazzoOroOriginale = new ArrayList<>();
+		public static CartaObiettivo[] carteObbiettivo; 
+		private static Giocatore[] player;
 
 	public void newPartita( )throws FileNotFoundException {
 		
@@ -40,7 +40,6 @@ public class Partita {
         
         //Crea giocatori
         player = Giocatore.setGiocatori();
-        //Giocatore.disordinaGiocatori(player);
         
         assegnaCarteIniziali(player, carteIniziali);
         
@@ -85,74 +84,113 @@ public class Partita {
     	estraiObbiettivi();
      
     
-    	 //mostraManoGiocatore(player[0]);
-    	 //mostraManoGiocatore(player[1]);
         //Per visualizzare il campo di un giocatore usare:
     	for (Giocatore giocatore : player) {
     	        giocatore.getCampo().posizionaCartaIniziale(giocatore); // Aggiungi questa riga
-    	        //mostraManoGiocatore(giocatore);
-    	        //giocatore.getCampo().visualizzaCampo();
     	    }
     	
     	System.out.println("INIZIA IL GIOCO");
     	//CICLO GIOCO
-    	//verificare che quando un giocatore arriva a venti, acnhe gli altri finiscano il turno
-    	//altrimenti creare una nuova variabile Giocatore a cui viene attribuito il numero del giocatore che ha finito, poi fare un for da quell'indice alla fine
     	boolean finito=false;
     	
     	do {
     		
 	        for(Giocatore giocatore: player) {
-	        	System.out.println("\n-------------------------------------------------------------"  );
+	        	System.out.println("\n-------------------------------------------------------------\n"  );
+	        	System.out.println("È IL TURNO DEL GIOCATORE "+giocatore.getUsername());
 	        	System.out.println("\nPremi invio per continuare...");
 	        	sc.nextLine();
 	        	giocatore.getCampo().visualizzaCampo();
-	        	System.out.println("È il turno del giocatore "+giocatore.getUsername());
-	        	System.out.println("\nPremi invio per continuare...");
-	        	sc.nextLine();
 	        	mostraManoGiocatore(giocatore);
 	        	giocatore.getCampo().casellaSpecifica();
 	        	giocatore.getCampo().giocaCarta(giocatore);
 	        	System.out.println("\nPremi invio per continuare...");
 	        	sc.nextLine();
 	        	
-	        	System.out.println("il numero di punti attuale é:"+giocatore.getPunteggio());
+	        	System.out.println("Il numero di punti attuale é: "+giocatore.getPunteggio());
+	        	System.out.println("\n-------------------------------------------------------------"  );
+	        	System.out.println("\nPremi invio per continuare...");
 	        	sc.nextLine();
-	        	System.out.println("Pesca una nuova carta tra queste");
+	        	System.out.println("Pesca una nuova carta tra queste:\n");
 	        	//sc.nextLine();
 	        	pescaNuovaCarta(giocatore, sc);
-	        	giocatore.getCampo().visualizzaCampo();
 	        	if(giocatore.getPunteggio()>=20) finito=true;
-	        	
+	        	sc.nextLine();
 	        }
 	        
     	}while(finito==false);
-    	//AGGIUNGERE TURNO EXTRA -> VEDI REGOLE
-    	int punti=0;
+    	//AGGIUNGERE TURNO EXTRA 
+    	System.out.println("\n-------------------------------------------------------------"  );
+    	System.out.println("\nAVETE RAGGIUNTO 20 PUNTI, QUINDI ORA FARETE L'ULTIMO TURNO");
     	
-    		for(int j =0; j<player.length;j++) {
-    			punti=player[j].getPunteggio();
-    			punti+= player[j].getCampo().controllaCarteObbiettivo(player[j], carteObbiettivo[0]);
-    			punti+= player[j].getCampo().controllaCarteObbiettivo(player[j], carteObbiettivo[1]);
-    			punti+= player[j].getCampo().controllaCarteObbiettivo(player[j], player[j].getCartaObiettivo());
-    			
-    			System.out.println("il titolare dei punti del giocatore "+player[j].getUsername()+"è "+punti);
-    		}
-    		System.out.println("il giocatore con il numero di punti maggiore ha vinto la partita ");
+    	for(Giocatore giocatore: player) {
+        	System.out.println("\n-------------------------------------------------------------\n"  );
+        	System.out.println("È IL TURNO DEL GIOCATORE "+giocatore.getUsername());
+        	System.out.println("\nPremi invio per continuare...");
+        	sc.nextLine();
+        	giocatore.getCampo().visualizzaCampo();
+        	mostraManoGiocatore(giocatore);
+        	giocatore.getCampo().casellaSpecifica();
+        	giocatore.getCampo().giocaCarta(giocatore);
+        	System.out.println("\nPremi invio per continuare...");
+        	sc.nextLine();
+        	
+        	System.out.println("Il numero di punti attuale é: "+giocatore.getPunteggio());
+        	System.out.println("\n-------------------------------------------------------------"  );
+        	System.out.println("\nPremi invio per continuare...");
+        	sc.nextLine();
+        	System.out.println("Pesca una nuova carta tra queste:\n");
+        	//sc.nextLine();
+        	pescaNuovaCarta(giocatore, sc);
+        	sc.nextLine();
+        }
+    	//FINE PARTITA
+    	System.out.println("\n-------------------------------------------------------------"  );
+    	System.out.println("\nLA PARTITA È FINITA");
+    	System.out.println("\n-------------------------------------------------------------\n"  );
+    	int punti=0;
+    	Giocatore vincitore=new Giocatore();
+    	vincitore=player[0];
+		for(int j =0; j<player.length;j++) {
+			punti=player[j].getPunteggio();
+			punti+= player[j].getCampo().controllaCarteObbiettivo(player[j], carteObbiettivo[0]);
+			punti+= player[j].getCampo().controllaCarteObbiettivo(player[j], carteObbiettivo[1]);
+			punti+= player[j].getCampo().controllaCarteObbiettivo(player[j], player[j].getCartaObiettivo());
+			if(punti>vincitore.getPunteggio()) vincitore=player[j];
+			System.out.println(player[j].getUsername()+" ha raggiunto "+punti+ " punti.");
+		}
+		System.out.println();
+		System.out.println(vincitore.getUsername()+ " HAI VINTO!");
     		
     	
 	}
 	public static void assegnaCarteIniziali( Giocatore[] giocatori,CartaIniziale[] cartaIniziale) {
-		 
-
-		System.out.println("Sono state assegnate le carte inziali");
+		Scanner sc=new Scanner(System.in);
+		System.out.println("\n-------------------------------------------------------------\n"  );
 		for (int i = 0; i < giocatori.length; i++) {
 			giocatori[i].setCartaIniziale(cartaIniziale[i]);
-			System.out.println("Il giocatore "+giocatori[i].getUsername()+" ha la carta con id: "+cartaIniziale[i].getId());
+			System.out.println("Il giocatore "+giocatori[i].getUsername()+" ha la carta iniziale con id: "+cartaIniziale[i].getId());
+		
+		System.out.println("Per giocare la carta sul fronte scrivi 1, per giocare la carta sul retro scrivi 2");
+		int verso=0;
+		 do {
+			 System.out.println("fornisci un input valido per il verso della carta");
+			verso=sc.nextInt();
+		}while(verso!=1 && verso!=2 );
+		if (verso==2) {
+			cartaIniziale[i].setAngoloFronteBottomLeft(StatoAngolo.VUOTO);
+			cartaIniziale[i].setAngoloFronteBottomRight(StatoAngolo.VUOTO);
+			cartaIniziale[i].setAngoloFronteTopLeft(StatoAngolo.VUOTO);
+			cartaIniziale[i].setAngoloFronteTopRight(StatoAngolo.VUOTO);
+		}
+		player[i].setCartaIniziale(cartaIniziale[i]);
+		 System.out.println("\nHai giocato la carta inziale sul fronte\n");
 		}
 		
+		System.out.println("Sono state assegnate le carte inziali\n");
 	}
 	public void pescaNuovaCarta(Giocatore player, Scanner sc) {
+		
 		//importo i mazzi
 		List<CartaRisorsa> mazzoRisorsa = MazzoCarteRisorsa.getMazzoRisorsa();
 	    List<CartaOro> mazzoOro = MazzoCarteOro.getMazzoOro();
@@ -162,7 +200,7 @@ public class Partita {
 	    CartaRisorsa cartaRisorsa3 = mazzoRisorsa.get(2);
 	    Casella casellaRisorsa1=new Casella(mazzoRisorsa.get(0));
 	    Casella casellaRisorsa2=new Casella(mazzoRisorsa.get(1));
-	    //System.out.println("Scegli una carta tra le carte risorsa "); 
+	    Casella casellaRisorsa3=new Casella(mazzoRisorsa.get(2));
 	    System.out.println("La seguente carta risorsa ha id "+casellaRisorsa1.getId());
 		casellaRisorsa1.visualizzaCasella();
 		System.out.println("La seguente carta risorsa ha id "+casellaRisorsa2.getId());
@@ -171,9 +209,9 @@ public class Partita {
 		CartaOro cartaOro1 = mazzoOro.get(0);
 		CartaOro cartaOro2 = mazzoOro.get(1);
 		CartaOro cartaOro3 = mazzoOro.get(2);
-		//System.out.println("Scegli una carta tra le carte oro "); 
 		Casella casellaOro1=new Casella(mazzoOro.get(0));
 		Casella casellaOro2=new Casella(mazzoOro.get(1));
+		Casella casellaOro3=new Casella(mazzoOro.get(2));
 		System.out.println("La seguente carta oro ha id "+casellaOro1.getId());
 		casellaOro1.visualizzaCasellaOro(mazzoOro.get(0));
 		System.out.println("La seguente carta oro ha id "+casellaOro2.getId());
@@ -224,19 +262,27 @@ public class Partita {
 					mazzoOro.remove(1);
 				}
 			}
+			
 			//TOLTA CARTA DAL MAZZO
 		} else {
 				do {
-					System.out.println("Inserisci 1 se vuoi pescare dal mazzo risorsa e 2 se vuoi pescare dal mazzo oro: ");
+					System.out.print("Inserisci 1 se vuoi pescare dal mazzo risorsa e 2 se vuoi pescare dal mazzo oro: ");
 					mazzoScelto=sc.nextInt();
 				}while(mazzoScelto!=1 && mazzoScelto!=2);
 				
 				if(mazzoScelto==1) {
 					player.getMano().addCartaRisorsa(player, cartaRisorsa3);
+					mazzoRisorsa.remove(2);
+					System.out.println("\nHai pescato la carta risorsa con id "+casellaRisorsa3.getId());
+					casellaRisorsa3.visualizzaCasella();
 				} else {
 					player.getMano().addCartaOro(player, cartaOro3);
+					mazzoOro.remove(2);
+					System.out.println("\nHai pescato la carta oro con id "+casellaOro3.getId());
+					casellaOro3.visualizzaCasellaOro(mazzoOro.get(2));
 				}
 		}
+		
 			
 	}
 	public Mano pescaCarte() {
@@ -268,7 +314,6 @@ public class Partita {
 				 
 				System.out.println(" la carta ha id "+player[i].getMano().getManoRisorsa().get(j).getId());
 				cartaRisorsa=player[i].getMano().getManoRisorsa().get(j);
-			//Mano.visualizzaCartaRisorsa(cartaRisorsa);
 			Casella casellaRisorsa=new Casella(cartaRisorsa);
 			casellaRisorsa.visualizzaCasella();
 			
@@ -278,7 +323,6 @@ public class Partita {
 				 
 				System.out.println(" la carta ha id "+player[i].getMano().getManoOro().get(j).getId());
 				cartaOro=player[i].getMano().getManoOro().get(j);
-				//Mano.visualizzaCartaOro(cartaOro);
 				Casella casellaRisorsa=new Casella(cartaOro);
 				casellaRisorsa.visualizzaCasellaOro(cartaOro);
 			
@@ -295,15 +339,13 @@ public class Partita {
 			CartaOro cartaOro;
 			int lunghezza;
 			
-				System.out.println("È il turno del giocatore : "+ player.getUsername() );
-	    		System.out.println(" in mano ha le carte:" );
+	    		System.out.println("In mano ha le carte:\n" );
 	    		
 	    		 
 				for(int j =0; j<player.getMano().getManoRisorsa().size(); j++) {
 					 
-					System.out.println(" la carta ha id "+player.getMano().getManoRisorsa().get(j).getId());
+					System.out.println("La carta risorsa con id "+player.getMano().getManoRisorsa().get(j).getId());
 					cartaRisorsa=player.getMano().getManoRisorsa().get(j);
-				//Mano.visualizzaCartaRisorsa(cartaRisorsa);
 				Casella casellaRisorsa=new Casella(cartaRisorsa);
 				casellaRisorsa.visualizzaCasella();
 				
@@ -311,14 +353,13 @@ public class Partita {
 				
 				for(int j =0; j<player.getMano().getManoOro().size(); j++) {
 					 
-					System.out.println(" la carta ha id "+player.getMano().getManoOro().get(j).getId());
+					System.out.println("La carta oro con id "+player.getMano().getManoOro().get(j).getId());
 					cartaOro=player.getMano().getManoOro().get(j);
-					//Mano.visualizzaCartaOro(cartaOro);
 					Casella casellaRisorsa=new Casella(cartaOro);
 					casellaRisorsa.visualizzaCasellaOro(cartaOro);
 				
 				}
-				System.out.println("Premi Invio per continuare...");
+				System.out.println("Premi invio per continuare...");
 		    	sc.nextLine();
 	    		
 	    		
@@ -336,7 +377,7 @@ public class Partita {
 		Tavolo tavolo = new Tavolo(estratte);
 		tavolo.visualizzaObiettiviComuni();
 		System.out.println("-------------------------------------------------------------"  );
-		System.out.println("\nPremi Invio per continuare...");
+		System.out.println("\nPremi invio per continuare...");
     	sc.nextLine();
 		System.out.println("Ora ogni giocatore deve scegliere il proprio obiettivo segreto\n"  );
 		
@@ -349,15 +390,16 @@ public class Partita {
                
 
             
-            System.out.println(player[i].getUsername() + " può scegliere tra le carte:");
+            System.out.println(player[i].getUsername() + " può scegliere tra le carte:\n");
             System.out.println("1) obiettivo con id " + mazzoObbiettivo[id].getId()+": ");
             tavolo.visualizzaCaso(mazzoObbiettivo[id].getId());
             id++;
+            System.out.println();
             System.out.println("2) obiettivo con id " + mazzoObbiettivo[id].getId()+": ");
             tavolo.visualizzaCaso(mazzoObbiettivo[id].getId());
             id++;
             do { 
-            	System.out.print("Scegli la carta (1 o 2): ");
+            	System.out.print("\nScegli la carta (1 o 2): ");
              
                 scelta=sc.nextInt();
                 
@@ -417,7 +459,10 @@ public class Partita {
 	public static Giocatore[] getGiocatore( ) {
 		return player;
 	}
-
+	public static void setCarteObbiettivo(CartaObiettivo[] carteObbiettivo) {
+		Partita.carteObbiettivo = carteObbiettivo;
+	}
+	
 	
 	
 }

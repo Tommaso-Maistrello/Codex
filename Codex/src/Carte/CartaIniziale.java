@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Scanner;
-
 import Enum.StatoAngolo;
 
 
@@ -71,13 +70,4 @@ public class CartaIniziale extends Carta {
 		return mazzo;
 	}
 	
-	/*
-	public static void main(String[] args) throws FileNotFoundException {
-		CartaIniziale[] mazzo = new CartaIniziale[7];  
-		mazzo = mescolaMazzo();
-		
-		for (int j = 1; j<mazzo.length-1; j++) {
-			System.out.println( +mazzo[j].getId()+" "+mazzo[j].getAngoloFronteTopLeft());
-		}
-	}*/
 }
